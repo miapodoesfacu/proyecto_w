@@ -1,6 +1,6 @@
 ﻿namespace proyecto_w.ABM_Afiliado
 {
-    partial class Form1
+    partial class ABMAfiliadoForm
     {
         /// <summary>
         /// Required designer variable.
