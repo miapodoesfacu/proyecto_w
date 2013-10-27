@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace proyecto_w.ABM_Afiliado
 {
-    public partial class ABMAfiliadoForm : Form
+    public partial class frmABMAfialiado : Form
     {
-        public ABMAfiliadoForm()
+        public frmABMAfialiado()
         {
             InitializeComponent();
         }
