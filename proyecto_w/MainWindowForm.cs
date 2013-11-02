@@ -19,10 +19,11 @@ namespace proyecto_w
 
         public void setFunctions(List<String> functionList) 
         {
-            //TODO: Hacer visible los botones en base a las funcionabilidades que tengo en la lista
+            //TODO: Hacer visible los botones en base a las funcionabilidades que tengo en la 
+            if(functionList.IndexOf("ABM Afiliado") != -1) btnABMAfiliado.Show();
         }
 
-        private void btnABMRol_Click(object sender, EventArgs e)
+        private void btnABMAfiliado_Click(object sender, EventArgs e)
         {
             this.Hide();
             frmABMAfiliado afiliadoForm = new frmABMAfiliado();

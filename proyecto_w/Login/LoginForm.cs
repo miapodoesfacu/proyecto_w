@@ -25,43 +25,74 @@ namespace proyecto_w
             ConexionSQL connectionSQL = ConexionSQL.Instance;
             string username = txtUsername.Text;
             string password = txtPassword.Text;
-            queryLogin = string.Format("SELECT UsuarioID, Username, Password FROM Usuario WHERE Username='{0}' AND Password='{1}'", username, password);
+            queryLogin = string.Format("SELECT usu_password, usu_estado, usu_cant_intentos FROM PROYECTO_W.Usuario WHERE usu_username='{0}'", username);
             DataTable users = connectionSQL.ejecutarQuery(queryLogin);
             if (users.Rows.Count == 1)
-            {
-                queryLogin = string.Format("SELECT R.RolID, R.Nombre FROM Rol AS R, UsuarioRol AS UR WHERE UR.UsuarioID={0} AND UR.RolID=R.RolID", users.Rows[0][0]);
-                DataTable rols = connectionSQL.ejecutarQuery(queryLogin);
-                /*TODO: Debo cargar el formulario que elije el rol en caso de tener mas de un rol*/
-                this.Hide();
-                if (rols.Rows.Count > 1)
+            {          
+                if (users.Rows[0]["usu_estado"].ToString() == "D")
                 {
-                    List<String> rols_strings = new List<string>();
-
-                    for (int i = 0; i < rols.Rows.Count; i++)
+                    MessageBox.Show("Usuario Deshabilitado. Hable con el Administrador para solucionar el problema");
+                }
+                else if (users.Rows[0]["usu_password"].ToString() != password)
+                {
+                    queryLogin = string.Format("UPDATE PROYECTO_W.Usuario SET usu_cant_intentos=usu_cant_intentos+1 WHERE usu_username='{0}'", username);
+                    connectionSQL.ejecutarQuery(queryLogin);
+                    queryLogin = string.Format("SELECT usu_cant_intentos FROM PROYECTO_W.Usuario WHERE usu_username='{0}'", username);
+                    int cant_intentos = Int32.Parse(connectionSQL.ejecutarQuery(queryLogin).Rows[0]["usu_cant_intentos"].ToString());
+                    if (cant_intentos >= 3)
                     {
-                        rols_strings.Add(rols.Rows[i]["nombre"].ToString());
+                        queryLogin = string.Format("UPDATE PROYECTO_W.Usuario SET usu_estado='D' WHERE usu_username='{0}'", username);
+                        connectionSQL.ejecutarQuery(queryLogin);
+                        MessageBox.Show("Usuario Deshabilitado. D.O.S");
+                        txtUsername.Text = "";
                     }
-                    frmRols rolsForm = new frmRols();
-                    rolsForm.setRoles(rols_strings);
-                    rolsForm.ShowDialog();
-                    this.rolSelected = rolsForm.rolSelected;
+                    else
+                    {
+                        MessageBox.Show("Credenciales Incorrectas. Porfavor intene nuevamente");
+                        txtUsername.Text = "";
+                    }
                 }
                 else
                 {
-                    this.rolSelected = rols.Rows[0]["Nombre"].ToString();
-                }
-                querySQL = string.Format("SELECT F.Nombre FROM Funcionabilidad AS F JOIN RolFuncionabilidad AS RF ON RF.FuncionabilidadID=F.FuncionabilidadID JOIN Rol AS R ON R.RolID=RF.RolID WHERE R.Nombre='{0}'", rolSelected);
-                DataTable functions = connectionSQL.ejecutarQuery(querySQL);
+                    queryLogin = string.Format("SELECT R.rol_cod, R.rol_nombre FROM PROYECTO_W.Rol AS R, PROYECTO_W.RolPorUsuario AS RU WHERE RU.rolxusu_username='{0}' AND RU.rolxusu_rol_cod=R.rol_cod", username);
+                    DataTable rols = connectionSQL.ejecutarQuery(queryLogin);
+                    /*TODO: Debo cargar el formulario que elije el rol en caso de tener mas de un rol*/
+                    this.Hide();
+                    if (rols.Rows.Count > 1)
+                    {
+                        List<String> rols_strings = new List<string>();
 
-                List<String> functionsStrings = new List<string>();
-                for (int i = 0; i < functions.Rows.Count; i++)
-                {
-                    functionsStrings.Add(functions.Rows[i]["Nombre"].ToString());
-                }
+                        for (int i = 0; i < rols.Rows.Count; i++)
+                        {
+                            rols_strings.Add(rols.Rows[i]["rol_nombre"].ToString());
+                        }
+                        frmRols rolsForm = new frmRols();
+                        rolsForm.setRoles(rols_strings);
+                        rolsForm.ShowDialog();
+                        this.rolSelected = rolsForm.rolSelected;
+                    }
+                    else
+                    {
+                        this.rolSelected = rols.Rows[0]["rol_nombre"].ToString();
+                    }
+                    querySQL = string.Format("SELECT F.func_nombre FROM PROYECTO_W.Funcionalidad AS F JOIN PROYECTO_W.FuncionalidadPorRol AS FR ON FR.funcxrol_func_cod=F.func_cod JOIN PROYECTO_W.Rol AS R ON R.rol_cod=fr.funcxrol_rol_cod WHERE R.rol_nombre='{0}'", rolSelected);
+                    DataTable functions = connectionSQL.ejecutarQuery(querySQL);
 
-                MainWindowForm mainWindow = new MainWindowForm();
-                mainWindow.setFunctions(functionsStrings);
-                mainWindow.Show();
+                    if (functions.Rows.Count == 0)
+                    {
+                        MessageBox.Show("No tiene funcionalidades Habilitadas. Cerrando Softguare");
+                        this.Close();
+                    }
+                    List<String> functionsStrings = new List<string>();
+                    for (int i = 0; i < functions.Rows.Count; i++)
+                    {
+                        functionsStrings.Add(functions.Rows[i]["func_nombre"].ToString());
+                    }
+
+                    MainWindowForm mainWindow = new MainWindowForm();
+                    mainWindow.setFunctions(functionsStrings);
+                    mainWindow.Show();
+                }
             }
             else
             {
