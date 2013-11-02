@@ -65,8 +65,8 @@ namespace proyecto_w
             }
             else
             {
-                MessageBox.Show("Credenciales Incorrectas. Porfavor intene nuevamente");
-                txtUsername.Text = "";
+              MessageBox.Show("Credenciales Incorrectas. Porfavor intene nuevamente");
+              txtUsername.Text = "";
             }
         }
 

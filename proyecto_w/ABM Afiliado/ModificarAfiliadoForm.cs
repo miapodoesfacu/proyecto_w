@@ -9,18 +9,11 @@ using System.Windows.Forms;
 
 namespace proyecto_w.ABM_Afiliado
 {
-    public partial class frmABMAfiliado : Form
+    public partial class ModificarAfiliadoForm : Form
     {
-        public frmABMAfiliado()
+        public ModificarAfiliadoForm()
         {
             InitializeComponent();
         }
-
-        private void btnAlta_Click(object sender, EventArgs e)
-        {
-            AltaAfiliadoForm frm = new AltaAfiliadoForm();
-            frm.ShowDialog();
-        }
-
     }
 }

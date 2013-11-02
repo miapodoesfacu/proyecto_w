@@ -37,8 +37,9 @@
             this.btnABMRol.Name = "btnABMRol";
             this.btnABMRol.Size = new System.Drawing.Size(75, 23);
             this.btnABMRol.TabIndex = 0;
-            this.btnABMRol.Text = "ABMRol";
+            this.btnABMRol.Text = "ABMAfiliados";
             this.btnABMRol.UseVisualStyleBackColor = true;
+            this.btnABMRol.Click += new System.EventHandler(this.btnABMRol_Click);
             // 
             // MainWindowForm
             // 
