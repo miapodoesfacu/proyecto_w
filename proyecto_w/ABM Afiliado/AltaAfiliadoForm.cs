@@ -95,5 +95,10 @@ namespace proyecto_w.ABM_Afiliado
             return false;
         }
 
+        private bool validarCamposTipos()
+        {
+            if txtNombre.GetType(
+        }
+
     }
 }
