@@ -31,7 +31,7 @@ namespace proyecto_w.Utilities.Conexion
                                 "password=gd2013;" +
                                 "server=.\\SQLSERVER2008;" +
                                 "Trusted_Connection=yes;" +
-                                "database=DBTest;";
+                                "database=GD2C2013;";
             this.Conn = new SqlConnection(strConn);
             this.Conn.Open();
         }

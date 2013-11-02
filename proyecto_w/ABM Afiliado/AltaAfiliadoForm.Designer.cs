@@ -224,7 +224,7 @@
             // cbxSexo
             // 
             this.cbxSexo.FormattingEnabled = true;
-            this.cbxSexo.Location = new System.Drawing.Point(170, 259);
+            this.cbxSexo.Location = new System.Drawing.Point(170, 256);
             this.cbxSexo.Name = "cbxSexo";
             this.cbxSexo.Size = new System.Drawing.Size(121, 21);
             this.cbxSexo.TabIndex = 21;
@@ -261,6 +261,7 @@
             this.btnRegistrar.TabIndex = 25;
             this.btnRegistrar.Text = "Registrar";
             this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
             // AltaAfiliadoForm
             // 
