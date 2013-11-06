@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using proyecto_w.Utilities.Conexion;
 
 namespace proyecto_w.ABM_Afiliado
 {
@@ -26,7 +27,34 @@ namespace proyecto_w.ABM_Afiliado
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            string queryAlta;
+            ConexionSQL connectionSQL = ConexionSQL.Instance;
+            /* Begin - Declaracion de variables para cada campo en el form Alta */
+            string nombre = txtNombre.Text;
+            string apellido = txtApellido.Text;
+            string tipodoc = cbxTipoDoc.Text;
+            string nrodoc = txtNroDoc.Text;
+            string direccion = txtDireccion.Text;
+            string telefono = txtTelefono.Text;
+            string mail = txtMail.Text;
+            //DateTime fechanac = dtmFechaNac.ToString;
+            string sexo = cbxSexo.Text;
+            string estadocivil = cbxEstadoCivil.Text;
+            string cantfamiliares = txtCantFamiliares.Text;
+            string plan = cbxPlanMedico.Text;
+            /* End - Declaracion de variables para cada campo en el form Alta */
+
             if (validarCamposVacios()) return;
+
+          //if (validarCamposTipos()) return;
+          //Hacer el insert del afiliado
+          //Si el afiliado tiene como estado civil 'casado' o 'en concubinato' mostrar una pantalla
+          //de alta.
+          //Una vez registrado el conyugue, hacer un for por la cantidad de hijos y preguntar
+          //por cada uno si lo quiere afiliar, y abrir una pantalla de alta.
+
+            queryAlta = string.Format("INSERT INTO PROYECTO_W.Afiliado (afil_nombre, afil_apellido, afil_doc_tipo, afil_doc_nro, afil_direccion, afil_telefono, afil_sexo, afil_plan_cod, afil_cant_pers_a_cargo, afil_estado_civil, afil_mail) VALUES(nombre, apellido, tipodoc, nrodoc, direccion, telefono, sexo, plan, cantfamiliares, estadocivil, mail)");
+            DataTable afiliado = connectionSQL.ejecutarQuery(queryAlta);
         }
 
         private bool validarCamposVacios()
