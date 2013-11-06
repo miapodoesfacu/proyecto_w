@@ -30,5 +30,5 @@ namespace proyecto_w
             afiliadoForm.ShowDialog();
             this.Show();
         }
-    }
+
 }
