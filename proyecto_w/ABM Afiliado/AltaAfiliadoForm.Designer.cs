@@ -247,6 +247,7 @@
             // 
             // dtmFechaNac
             // 
+            this.dtmFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtmFechaNac.Location = new System.Drawing.Point(170, 226);
             this.dtmFechaNac.Name = "dtmFechaNac";
             this.dtmFechaNac.Size = new System.Drawing.Size(204, 20);

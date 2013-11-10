@@ -17,18 +17,26 @@ namespace proyecto_w
             InitializeComponent();
         }
 
-        public void setFunctions(List<String> functionList) 
+        public void setFunctions(List<String> functionList)
         {
             //TODO: Hacer visible los botones en base a las funcionabilidades que tengo en la 
-            if(functionList.IndexOf("ABM Afiliado") != -1) btnABMAfiliado.Show();
+            if (functionList.IndexOf("ABMAfiliado") != -1) btnABMAfiliado.Show();
         }
 
-        private void btnABMAfiliado_Click(object sender, EventArgs e)
+        //private void btnABMAfiliado_Click(object sender, EventArgs e)
+        //{
+        //    this.Hide();
+        //    frmABMAfiliado afiliadoForm = new frmABMAfiliado();
+        //    afiliadoForm.ShowDialog();
+        //    this.Show();
+        //}
+
+        private void btnABMAfiliado_Click_1(object sender, EventArgs e)
         {
             this.Hide();
             frmABMAfiliado afiliadoForm = new frmABMAfiliado();
             afiliadoForm.ShowDialog();
             this.Show();
         }
-
+    }
 }

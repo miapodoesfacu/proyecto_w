@@ -40,6 +40,7 @@
             this.btnABMAfiliado.Text = "ABMAfiliados";
             this.btnABMAfiliado.UseVisualStyleBackColor = true;
             this.btnABMAfiliado.Visible = false;
+            this.btnABMAfiliado.Click += new System.EventHandler(this.btnABMAfiliado_Click_1);
             // 
             // MainWindowForm
             // 

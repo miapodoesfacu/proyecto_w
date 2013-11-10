@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using proyecto_w.Utilities.Conexion;
+using proyecto_w.Login;
+using proyecto_w.ABM_Afiliado;
 
 namespace proyecto_w.ABM_Afiliado
 {
@@ -15,14 +17,19 @@ namespace proyecto_w.ABM_Afiliado
         public AltaAfiliadoForm()
         {
             InitializeComponent();
+            cargarComboBox("Proyecto_W.Afiliado", "afil_doc_tipo", cbxTipoDoc);
             cbxTipoDoc.Items.Add("DNI");
-            cbxSexo.Items.Add("Femenino");
-            cbxSexo.Items.Add("Masculino");
-            cbxEstadoCivil.Items.Add("Soltero/a");
-            cbxEstadoCivil.Items.Add("Casado/a");
-            cbxEstadoCivil.Items.Add("Viudo/a");
-            cbxEstadoCivil.Items.Add("Concubinato");
-            cbxEstadoCivil.Items.Add("Divorciado/a");
+            cargarComboBox("Proyecto_W.Afiliado", "afil_sexo", cbxSexo);
+            cbxSexo.Items.Add("F");
+            cbxSexo.Items.Add("M");
+            cargarComboBox("Proyecto_W.Afiliado", "afil_estado_civil", cbxEstadoCivil);
+            cbxEstadoCivil.Items.Add("S");
+            cbxEstadoCivil.Items.Add("Ca");
+            cbxEstadoCivil.Items.Add("V");
+            cbxEstadoCivil.Items.Add("Co");
+            cbxEstadoCivil.Items.Add("D");
+            cargarComboBox("Proyecto_W.Afiliado", "afil_plan_cod", cbxPlanMedico);
+            cbxPlanMedico.Items.Add(555555);
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
@@ -37,24 +44,31 @@ namespace proyecto_w.ABM_Afiliado
             string direccion = txtDireccion.Text;
             string telefono = txtTelefono.Text;
             string mail = txtMail.Text;
-            //DateTime fechanac = dtmFechaNac.ToString;
+            string fechanac = dtmFechaNac.Text;
             string sexo = cbxSexo.Text;
             string estadocivil = cbxEstadoCivil.Text;
             string cantfamiliares = txtCantFamiliares.Text;
-            string plan = cbxPlanMedico.Text;
+            string planmed = cbxPlanMedico.Text;
             /* End - Declaracion de variables para cada campo en el form Alta */
 
             if (validarCamposVacios()) return;
 
           //if (validarCamposTipos()) return;
-          //Hacer el insert del afiliado
+
+          //Hacer el insert del afiliado - HECHO
           //Si el afiliado tiene como estado civil 'casado' o 'en concubinato' mostrar una pantalla
-          //de alta.
+          //de alta. Se deberá crear otro form tanto para conyugues como hijos que sea COPIA EXACTA del form
+          // Alta Afiliado pero sin preguntar por conyugue o hijo.
           //Una vez registrado el conyugue, hacer un for por la cantidad de hijos y preguntar
           //por cada uno si lo quiere afiliar, y abrir una pantalla de alta.
 
-            queryAlta = string.Format("INSERT INTO PROYECTO_W.Afiliado (afil_nombre, afil_apellido, afil_doc_tipo, afil_doc_nro, afil_direccion, afil_telefono, afil_sexo, afil_plan_cod, afil_cant_pers_a_cargo, afil_estado_civil, afil_mail) VALUES(nombre, apellido, tipodoc, nrodoc, direccion, telefono, sexo, plan, cantfamiliares, estadocivil, mail)");
-            DataTable afiliado = connectionSQL.ejecutarQuery(queryAlta);
+            queryAlta = string.Format("INSERT INTO PROYECTO_W.Afiliado (afil_nombre, afil_apellido, afil_doc_tipo, afil_doc_nro, afil_direccion, afil_telefono, afil_sexo, afil_plan_cod, afil_cant_pers_a_cargo, afil_estado_civil, afil_mail, afil_fecha_nac) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", nombre, apellido, tipodoc, nrodoc, direccion, telefono, sexo, planmed, cantfamiliares, estadocivil, mail, fechanac);
+            connectionSQL.ejecutarQuery(queryAlta);
+            MessageBox.Show("Afiliado dado de alta");
+            this.Close();
+            //Esta parte debe estar dentro de una verificacion por conyuge
+          
+            //Esta parte debe estar dentro de una verificacion por conyuge
         }
 
         private bool validarCamposVacios()
@@ -121,6 +135,24 @@ namespace proyecto_w.ABM_Afiliado
             }
 
             return false;
+        }
+
+        public void cargarComboBox(string tabla, string campo, ComboBox comboBox)
+        {
+            ConexionSQL connectionSQL = ConexionSQL.Instance;
+
+            string query = "SELECT DISTINCT ";
+            query += campo;
+            query += " FROM ";
+            query += tabla;
+            DataTable items = connectionSQL.ejecutarQuery(query);
+            comboBox.Items.Clear();
+            foreach (DataRow fila in items.Rows)
+            {
+                comboBox.Items.Add(fila[0]);
+            }
+
+
         }
 
         //private bool validarCamposTipos()
