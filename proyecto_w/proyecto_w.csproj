@@ -60,6 +60,12 @@
     <Compile Include="ABM Afiliado\AltaAfiliadoForm.Designer.cs">
       <DependentUpon>AltaAfiliadoForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM Afiliado\AltaFamiliarForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM Afiliado\AltaFamiliarForm.Designer.cs">
+      <DependentUpon>AltaFamiliarForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM Afiliado\BajaAfiliadoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Afiliado\AltaAfiliadoForm.resx">
       <DependentUpon>AltaAfiliadoForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Afiliado\AltaFamiliarForm.resx">
+      <DependentUpon>AltaFamiliarForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Afiliado\BajaAfiliadoForm.resx">
       <DependentUpon>BajaAfiliadoForm.cs</DependentUpon>

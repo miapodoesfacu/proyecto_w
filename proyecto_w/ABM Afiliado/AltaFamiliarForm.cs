@@ -12,9 +12,9 @@ using proyecto_w.ABM_Afiliado;
 
 namespace proyecto_w.ABM_Afiliado
 {
-    public partial class AltaAfiliadoForm : Form
+    public partial class AltaFamiliarForm : Form
     {
-        public AltaAfiliadoForm()
+        public AltaFamiliarForm()
         {
             InitializeComponent();
             cargarComboBox("Proyecto_W.Afiliado", "afil_doc_tipo", cbxTipoDoc);
@@ -30,6 +30,7 @@ namespace proyecto_w.ABM_Afiliado
             cbxEstadoCivil.Items.Add("D");
             cargarComboBox("Proyecto_W.Afiliado", "afil_plan_cod", cbxPlanMedico);
             cbxPlanMedico.Items.Add(555555);
+
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
@@ -53,50 +54,12 @@ namespace proyecto_w.ABM_Afiliado
 
             if (validarCamposVacios()) return;
 
-          //if (validarCamposTipos()) return;
-
-          //Hacer el insert del afiliado - HECHO
-          //Si el afiliado tiene como estado civil 'casado' o 'en concubinato' mostrar una pantalla
-          //de alta. Se deberá crear otro form tanto para conyugues como hijos que sea COPIA EXACTA del form
-          // Alta Afiliado pero sin preguntar por conyugue o hijo.
-          //Una vez registrado el conyugue, hacer un for por la cantidad de hijos y preguntar
-          //por cada uno si lo quiere afiliar, y abrir una pantalla de alta.
-
             queryAlta = string.Format("INSERT INTO PROYECTO_W.Afiliado (afil_nombre, afil_apellido, afil_doc_tipo, afil_doc_nro, afil_direccion, afil_telefono, afil_sexo, afil_plan_cod, afil_cant_pers_a_cargo, afil_estado_civil, afil_mail, afil_fecha_nac) VALUES('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}')", nombre, apellido, tipodoc, nrodoc, direccion, telefono, sexo, planmed, cantfamiliares, estadocivil, mail, fechanac);
             connectionSQL.ejecutarQuery(queryAlta);
             MessageBox.Show("Afiliado dado de alta");
             this.Close();
 
-            //verificacion por conyuge
-            if (estadocivil.Equals("Ca") || estadocivil.Equals("Co"))
-            {
-                var win_conyugue = MessageBox.Show("¿Desea afiliar a su conyugue?","Atención", MessageBoxButtons.YesNo);
-                if (win_conyugue == DialogResult.No)
-                    this.Close();
-                else
-                {
-                    AltaFamiliarForm frm = new AltaFamiliarForm();
-                    frm.ShowDialog();
-                    this.Close();
-                }
 
-            }
-            //verificacion por conyuge
-
-            //verificacion por hijo o familiares a cargo
-            for (int i = 0; i < Convert.ToInt16(txtCantFamiliares.Text); i++)
-            {
-                var win_familiar = MessageBox.Show("¿Desea afiliar a otro familiar?", "Atención", MessageBoxButtons.YesNo);
-                if (win_familiar == DialogResult.No)
-                    this.Close();
-                else
-                {
-                    AltaFamiliarForm frm = new AltaFamiliarForm();
-                    frm.ShowDialog();
-                    this.Hide();
-                }
-            }
-            //verificacion por hijo o familiares a cargo
         }
 
         private bool validarCamposVacios()
@@ -182,12 +145,6 @@ namespace proyecto_w.ABM_Afiliado
 
 
         }
-
-
-        //private bool validarCamposTipos()
-        //{
-        //    if txtNombre.GetType()
-        //}
 
     }
 }
