@@ -174,7 +174,7 @@ CREATE TABLE [PROYECTO_W].[Afiliado]
 	FOREIGN KEY([afil_username]) REFERENCES [PROYECTO_W].[Usuario] ([usu_username])
 		ON UPDATE CASCADE,
 --	UNIQUE (afil_doc_tipo, afil_doc_nro, afil_sexo), --no sabemos sexo, asique unique no
-	UNIQUE (afil_username), --SI VA A ESTAR TAMBIEN EN PROFESIONAL, VER QUE SEA LA MISMA PERSONA
+--	UNIQUE (afil_username), --SI VA A ESTAR TAMBIEN EN PROFESIONAL, VER QUE SEA LA MISMA PERSONA
 	PRIMARY KEY (afil_nro)
 )
 GO
@@ -266,7 +266,7 @@ CREATE TABLE [PROYECTO_W].[Profesional]
 	[prof_cod] [bigint] IDENTITY(1,1) NOT NULL,
 	FOREIGN KEY([prof_username]) REFERENCES [PROYECTO_W].[Usuario] ([usu_username])
 		ON UPDATE CASCADE,
-	UNIQUE (prof_username),
+--	UNIQUE (prof_username),
 	PRIMARY KEY (prof_cod)
 )
 GO
