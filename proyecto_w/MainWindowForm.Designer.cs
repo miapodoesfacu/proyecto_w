@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.btnABMAfiliado = new System.Windows.Forms.Button();
+            this.btnABMRol = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnABMAfiliado
@@ -42,11 +43,22 @@
             this.btnABMAfiliado.Visible = false;
             this.btnABMAfiliado.Click += new System.EventHandler(this.btnABMAfiliado_Click_1);
             // 
+            // btnABMRol
+            // 
+            this.btnABMRol.Location = new System.Drawing.Point(146, 53);
+            this.btnABMRol.Name = "btnABMRol";
+            this.btnABMRol.Size = new System.Drawing.Size(75, 23);
+            this.btnABMRol.TabIndex = 1;
+            this.btnABMRol.Text = "ABMRol";
+            this.btnABMRol.UseVisualStyleBackColor = true;
+            this.btnABMRol.Click += new System.EventHandler(this.btnABMRol_Click);
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 289);
+            this.Controls.Add(this.btnABMRol);
             this.Controls.Add(this.btnABMAfiliado);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -60,5 +72,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnABMAfiliado;
+        private System.Windows.Forms.Button btnABMRol;
     }
 }

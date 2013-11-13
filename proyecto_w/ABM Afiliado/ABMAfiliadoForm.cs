@@ -21,6 +21,5 @@ namespace proyecto_w.ABM_Afiliado
             AltaAfiliadoForm frm = new AltaAfiliadoForm();
             frm.ShowDialog();
         }
-
     }
 }
