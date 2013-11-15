@@ -13,13 +13,17 @@ namespace proyecto_w.ABM_Rol
 {
     public partial class frmABMRol : Form
     {
-        public frmABMRol()
+        private ConexionSQL connectionSQL = ConexionSQL.Instance;
+        private void reloadRoles()
         {
-            InitializeComponent();
-            ConexionSQL connectionSQL = ConexionSQL.Instance;
             string queryString = string.Format("SELECT R.rol_nombre FROM PROYECTO_W.Rol AS R");
             DataTable roles = connectionSQL.ejecutarQuery(queryString);
             this.grdRoles.DataSource = roles;
+        }
+        public frmABMRol()
+        {
+            InitializeComponent();
+            this.reloadRoles();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -38,7 +42,15 @@ namespace proyecto_w.ABM_Rol
             frmModificarRol formFuncs = new frmModificarRol(funciones, rol);
             formFuncs.ShowDialog();
             this.Show();
+        }
 
+        private void btnAltaRol_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmModificarRol formAlta = new frmModificarRol();
+            formAlta.ShowDialog();
+            this.reloadRoles();
+            this.Show();
         }
     }
 }

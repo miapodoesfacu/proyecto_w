@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnAltaRol = new System.Windows.Forms.Button();
-            this.btnBaja = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.grdRoles = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.grdRoles)).BeginInit();
@@ -37,29 +36,21 @@
             // 
             // btnAltaRol
             // 
-            this.btnAltaRol.Location = new System.Drawing.Point(66, 46);
+            this.btnAltaRol.Location = new System.Drawing.Point(170, 12);
             this.btnAltaRol.Name = "btnAltaRol";
             this.btnAltaRol.Size = new System.Drawing.Size(75, 23);
             this.btnAltaRol.TabIndex = 1;
             this.btnAltaRol.Text = "Alta";
             this.btnAltaRol.UseVisualStyleBackColor = true;
-            // 
-            // btnBaja
-            // 
-            this.btnBaja.Location = new System.Drawing.Point(205, 104);
-            this.btnBaja.Name = "btnBaja";
-            this.btnBaja.Size = new System.Drawing.Size(75, 23);
-            this.btnBaja.TabIndex = 2;
-            this.btnBaja.Text = "Baja";
-            this.btnBaja.UseVisualStyleBackColor = true;
+            this.btnAltaRol.Click += new System.EventHandler(this.btnAltaRol_Click);
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(205, 75);
+            this.btnModificar.Location = new System.Drawing.Point(170, 41);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.Size = new System.Drawing.Size(110, 23);
             this.btnModificar.TabIndex = 3;
-            this.btnModificar.Text = "Modificar";
+            this.btnModificar.Text = "Modificar/Baja";
             this.btnModificar.UseVisualStyleBackColor = true;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
@@ -73,7 +64,7 @@
             this.grdRoles.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.grdRoles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdRoles.ColumnHeadersVisible = false;
-            this.grdRoles.Location = new System.Drawing.Point(47, 75);
+            this.grdRoles.Location = new System.Drawing.Point(12, 12);
             this.grdRoles.MultiSelect = false;
             this.grdRoles.Name = "grdRoles";
             this.grdRoles.ReadOnly = true;
@@ -81,7 +72,7 @@
             this.grdRoles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
             this.grdRoles.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.grdRoles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.grdRoles.Size = new System.Drawing.Size(152, 166);
+            this.grdRoles.Size = new System.Drawing.Size(152, 229);
             this.grdRoles.TabIndex = 4;
             // 
             // frmABMRol
@@ -91,7 +82,6 @@
             this.ClientSize = new System.Drawing.Size(292, 266);
             this.Controls.Add(this.grdRoles);
             this.Controls.Add(this.btnModificar);
-            this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnAltaRol);
             this.Name = "frmABMRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -104,7 +94,6 @@
         #endregion
 
         private System.Windows.Forms.Button btnAltaRol;
-        private System.Windows.Forms.Button btnBaja;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.DataGridView grdRoles;
     }

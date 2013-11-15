@@ -86,13 +86,16 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(197, 275);
+            this.ControlBox = false;
             this.Controls.Add(this.chkEnable);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNombreRol);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lstFuncionalidad);
+            this.MaximizeBox = false;
             this.Name = "frmModificarRol";
-            this.Text = "Modicar Funcionalidad";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Modicacion/Baja";
             this.ResumeLayout(false);
             this.PerformLayout();
 
