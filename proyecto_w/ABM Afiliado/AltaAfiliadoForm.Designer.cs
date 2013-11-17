@@ -183,6 +183,7 @@
             this.txtNroDoc.Name = "txtNroDoc";
             this.txtNroDoc.Size = new System.Drawing.Size(121, 20);
             this.txtNroDoc.TabIndex = 14;
+            this.txtNroDoc.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNroDoc_KeyPress);
             // 
             // txtDireccion
             // 
@@ -197,6 +198,7 @@
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(121, 20);
             this.txtTelefono.TabIndex = 16;
+            this.txtTelefono.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtTelefono_KeyPress);
             // 
             // txtMail
             // 
@@ -210,8 +212,9 @@
             this.txtCantFamiliares.Location = new System.Drawing.Point(179, 313);
             this.txtCantFamiliares.MaxLength = 2;
             this.txtCantFamiliares.Name = "txtCantFamiliares";
-            this.txtCantFamiliares.Size = new System.Drawing.Size(21, 20);
+            this.txtCantFamiliares.Size = new System.Drawing.Size(31, 20);
             this.txtCantFamiliares.TabIndex = 18;
+            this.txtCantFamiliares.Text = "0";
             this.txtCantFamiliares.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantFamiliares_KeyPress);
             // 
             // cbxTipoDoc
