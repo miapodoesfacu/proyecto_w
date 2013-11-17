@@ -14,22 +14,37 @@ namespace proyecto_w.ABM_Afiliado
 {
     public partial class AltaAfiliadoForm : Form
     {
+        private ConexionSQL connectionSQL = ConexionSQL.Instance;
         public AltaAfiliadoForm()
         {
             InitializeComponent();
-            cargarComboBox("Proyecto_W.Afiliado", "afil_doc_tipo", cbxTipoDoc);
+           // cargarComboBox("Proyecto_W.Afiliado", "afil_doc_tipo", cbxTipoDoc);
+           // cargarComboBox("Proyecto_W.Afiliado", "afil_sexo", cbxSexo);
             cbxTipoDoc.Items.Add("DNI");
-            cargarComboBox("Proyecto_W.Afiliado", "afil_sexo", cbxSexo);
-            cbxSexo.Items.Add("F");
-            cbxSexo.Items.Add("M");
-            cargarComboBox("Proyecto_W.Afiliado", "afil_estado_civil", cbxEstadoCivil);
-            cbxEstadoCivil.Items.Add("S");
-            cbxEstadoCivil.Items.Add("Ca");
-            cbxEstadoCivil.Items.Add("V");
-            cbxEstadoCivil.Items.Add("Co");
-            cbxEstadoCivil.Items.Add("D");
-            cargarComboBox("Proyecto_W.Afiliado", "afil_plan_cod", cbxPlanMedico);
-            cbxPlanMedico.Items.Add(555555);
+            cbxTipoDoc.SelectedIndex = 0;
+
+            cbxSexo.Items.Add("No determinado"); //Null
+            cbxSexo.Items.Add("Femenino"); //F
+            cbxSexo.Items.Add("Masculino"); //M
+            cbxSexo.SelectedIndex = 0;
+//            cargarComboBox("Proyecto_W.Afiliado", "afil_estado_civil", cbxEstadoCivil);
+
+            cbxEstadoCivil.Items.Add("No determinado");
+            cbxEstadoCivil.Items.Add("Soltero"); //S
+            cbxEstadoCivil.Items.Add("Casado"); //Ca
+            cbxEstadoCivil.Items.Add("Viudo"); //V
+            cbxEstadoCivil.Items.Add("Concubinato"); //Co
+            cbxEstadoCivil.Items.Add("Divorsiado"); //D
+            cbxEstadoCivil.SelectedIndex = 0;
+
+            string query = string.Format("SELECT plan_descripcion FROM [GD2C2013].[PROYECTO_W].[Plan]");
+            DataRowCollection planes = this.connectionSQL.ejecutarQuery(query).Rows;
+
+            foreach (DataRow row in planes) 
+                cbxPlanMedico.Items.Add(row["plan_descripcion"]);
+
+            cbxPlanMedico.SelectedIndex = 0;
+
         }
 
         private void btnRegistrar_Click(object sender, EventArgs e)
@@ -167,13 +182,8 @@ namespace proyecto_w.ABM_Afiliado
 
         public void cargarComboBox(string tabla, string campo, ComboBox comboBox)
         {
-            ConexionSQL connectionSQL = ConexionSQL.Instance;
-
-            string query = "SELECT DISTINCT ";
-            query += campo;
-            query += " FROM ";
-            query += tabla;
-            DataTable items = connectionSQL.ejecutarQuery(query);
+            string query = string.Format("SELECT DISTINCT {0} FROM {1}", campo, tabla);
+            DataTable items = this.connectionSQL.ejecutarQuery(query);
             comboBox.Items.Clear();
             foreach (DataRow fila in items.Rows)
             {
@@ -183,6 +193,11 @@ namespace proyecto_w.ABM_Afiliado
 
         }
 
+        private void txtCantFamiliares_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsControl(e.KeyChar) && !Char.IsNumber(e.KeyChar))
+                e.Handled = true;
+        }
 
         //private bool validarCamposTipos()
         //{

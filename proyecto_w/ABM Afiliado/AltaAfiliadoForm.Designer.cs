@@ -165,44 +165,44 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(170, 28);
+            this.txtNombre.Location = new System.Drawing.Point(179, 28);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
             this.txtNombre.TabIndex = 12;
             // 
             // txtApellido
             // 
-            this.txtApellido.Location = new System.Drawing.Point(170, 59);
+            this.txtApellido.Location = new System.Drawing.Point(179, 59);
             this.txtApellido.Name = "txtApellido";
             this.txtApellido.Size = new System.Drawing.Size(100, 20);
             this.txtApellido.TabIndex = 13;
             // 
             // txtNroDoc
             // 
-            this.txtNroDoc.Location = new System.Drawing.Point(170, 111);
+            this.txtNroDoc.Location = new System.Drawing.Point(179, 111);
             this.txtNroDoc.Name = "txtNroDoc";
-            this.txtNroDoc.Size = new System.Drawing.Size(100, 20);
+            this.txtNroDoc.Size = new System.Drawing.Size(121, 20);
             this.txtNroDoc.TabIndex = 14;
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Location = new System.Drawing.Point(170, 139);
+            this.txtDireccion.Location = new System.Drawing.Point(179, 139);
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(100, 20);
+            this.txtDireccion.Size = new System.Drawing.Size(121, 20);
             this.txtDireccion.TabIndex = 15;
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Location = new System.Drawing.Point(170, 170);
+            this.txtTelefono.Location = new System.Drawing.Point(179, 170);
             this.txtTelefono.Name = "txtTelefono";
-            this.txtTelefono.Size = new System.Drawing.Size(100, 20);
+            this.txtTelefono.Size = new System.Drawing.Size(121, 20);
             this.txtTelefono.TabIndex = 16;
             // 
             // txtMail
             // 
-            this.txtMail.Location = new System.Drawing.Point(170, 200);
+            this.txtMail.Location = new System.Drawing.Point(179, 200);
             this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(100, 20);
+            this.txtMail.Size = new System.Drawing.Size(121, 20);
             this.txtMail.TabIndex = 17;
             // 
             // txtCantFamiliares
@@ -212,11 +212,12 @@
             this.txtCantFamiliares.Name = "txtCantFamiliares";
             this.txtCantFamiliares.Size = new System.Drawing.Size(21, 20);
             this.txtCantFamiliares.TabIndex = 18;
+            this.txtCantFamiliares.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCantFamiliares_KeyPress);
             // 
             // cbxTipoDoc
             // 
             this.cbxTipoDoc.FormattingEnabled = true;
-            this.cbxTipoDoc.Location = new System.Drawing.Point(170, 86);
+            this.cbxTipoDoc.Location = new System.Drawing.Point(179, 84);
             this.cbxTipoDoc.Name = "cbxTipoDoc";
             this.cbxTipoDoc.Size = new System.Drawing.Size(121, 21);
             this.cbxTipoDoc.TabIndex = 19;
@@ -224,7 +225,7 @@
             // cbxSexo
             // 
             this.cbxSexo.FormattingEnabled = true;
-            this.cbxSexo.Location = new System.Drawing.Point(170, 256);
+            this.cbxSexo.Location = new System.Drawing.Point(179, 256);
             this.cbxSexo.Name = "cbxSexo";
             this.cbxSexo.Size = new System.Drawing.Size(121, 21);
             this.cbxSexo.TabIndex = 21;
@@ -232,7 +233,7 @@
             // cbxEstadoCivil
             // 
             this.cbxEstadoCivil.FormattingEnabled = true;
-            this.cbxEstadoCivil.Location = new System.Drawing.Point(170, 282);
+            this.cbxEstadoCivil.Location = new System.Drawing.Point(179, 283);
             this.cbxEstadoCivil.Name = "cbxEstadoCivil";
             this.cbxEstadoCivil.Size = new System.Drawing.Size(121, 21);
             this.cbxEstadoCivil.TabIndex = 22;
@@ -240,7 +241,7 @@
             // cbxPlanMedico
             // 
             this.cbxPlanMedico.FormattingEnabled = true;
-            this.cbxPlanMedico.Location = new System.Drawing.Point(170, 340);
+            this.cbxPlanMedico.Location = new System.Drawing.Point(179, 339);
             this.cbxPlanMedico.Name = "cbxPlanMedico";
             this.cbxPlanMedico.Size = new System.Drawing.Size(121, 21);
             this.cbxPlanMedico.TabIndex = 23;
@@ -248,9 +249,9 @@
             // dtmFechaNac
             // 
             this.dtmFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtmFechaNac.Location = new System.Drawing.Point(170, 226);
+            this.dtmFechaNac.Location = new System.Drawing.Point(179, 226);
             this.dtmFechaNac.Name = "dtmFechaNac";
-            this.dtmFechaNac.Size = new System.Drawing.Size(204, 20);
+            this.dtmFechaNac.Size = new System.Drawing.Size(121, 20);
             this.dtmFechaNac.TabIndex = 24;
             this.dtmFechaNac.Value = new System.DateTime(1810, 5, 25, 0, 0, 0, 0);
             // 

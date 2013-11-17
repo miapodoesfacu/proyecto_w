@@ -40,7 +40,7 @@
             // 
             // btnAlta
             // 
-            this.btnAlta.Location = new System.Drawing.Point(12, 12);
+            this.btnAlta.Location = new System.Drawing.Point(752, 14);
             this.btnAlta.Name = "btnAlta";
             this.btnAlta.Size = new System.Drawing.Size(75, 23);
             this.btnAlta.TabIndex = 0;
@@ -50,7 +50,7 @@
             // 
             // btnBaja
             // 
-            this.btnBaja.Location = new System.Drawing.Point(149, 12);
+            this.btnBaja.Location = new System.Drawing.Point(914, 14);
             this.btnBaja.Name = "btnBaja";
             this.btnBaja.Size = new System.Drawing.Size(75, 23);
             this.btnBaja.TabIndex = 1;
@@ -59,7 +59,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(283, 12);
+            this.btnModificar.Location = new System.Drawing.Point(833, 14);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 2;
@@ -68,16 +68,28 @@
             // 
             // grdConsulta
             // 
+            this.grdConsulta.AllowUserToAddRows = false;
+            this.grdConsulta.AllowUserToDeleteRows = false;
+            this.grdConsulta.AllowUserToResizeColumns = false;
+            this.grdConsulta.AllowUserToResizeRows = false;
+            this.grdConsulta.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.grdConsulta.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.grdConsulta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdConsulta.Location = new System.Drawing.Point(12, 126);
+            this.grdConsulta.ColumnHeadersVisible = false;
+            this.grdConsulta.Location = new System.Drawing.Point(12, 49);
+            this.grdConsulta.MultiSelect = false;
             this.grdConsulta.Name = "grdConsulta";
-            this.grdConsulta.Size = new System.Drawing.Size(346, 297);
+            this.grdConsulta.ReadOnly = true;
+            this.grdConsulta.RowHeadersVisible = false;
+            this.grdConsulta.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.grdConsulta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.grdConsulta.Size = new System.Drawing.Size(1172, 376);
             this.grdConsulta.TabIndex = 3;
             // 
             // lblFiltro
             // 
             this.lblFiltro.AutoSize = true;
-            this.lblFiltro.Location = new System.Drawing.Point(13, 91);
+            this.lblFiltro.Location = new System.Drawing.Point(13, 19);
             this.lblFiltro.Name = "lblFiltro";
             this.lblFiltro.Size = new System.Drawing.Size(59, 13);
             this.lblFiltro.TabIndex = 4;
@@ -85,14 +97,14 @@
             // 
             // txtFiltro
             // 
-            this.txtFiltro.Location = new System.Drawing.Point(78, 88);
+            this.txtFiltro.Location = new System.Drawing.Point(78, 16);
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(100, 20);
             this.txtFiltro.TabIndex = 5;
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Location = new System.Drawing.Point(185, 88);
+            this.btnConsultar.Location = new System.Drawing.Point(184, 14);
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(75, 23);
             this.btnConsultar.TabIndex = 6;
@@ -103,7 +115,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(370, 435);
+            this.ClientSize = new System.Drawing.Size(1196, 437);
             this.Controls.Add(this.btnConsultar);
             this.Controls.Add(this.txtFiltro);
             this.Controls.Add(this.lblFiltro);
@@ -112,6 +124,7 @@
             this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnAlta);
             this.Name = "frmABMAfiliado";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABMAfiliadosForm";
             ((System.ComponentModel.ISupportInitialize)(this.grdConsulta)).EndInit();
             this.ResumeLayout(false);
