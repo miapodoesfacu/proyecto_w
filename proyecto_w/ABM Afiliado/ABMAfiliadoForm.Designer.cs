@@ -56,6 +56,7 @@
             this.btnBaja.TabIndex = 1;
             this.btnBaja.Text = "Baja";
             this.btnBaja.UseVisualStyleBackColor = true;
+            this.btnBaja.Click += new System.EventHandler(this.btnBaja_Click);
             // 
             // btnModificar
             // 
@@ -65,6 +66,7 @@
             this.btnModificar.TabIndex = 2;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // grdConsulta
             // 
@@ -82,7 +84,7 @@
             this.grdConsulta.ReadOnly = true;
             this.grdConsulta.RowHeadersVisible = false;
             this.grdConsulta.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.grdConsulta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.grdConsulta.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdConsulta.Size = new System.Drawing.Size(1172, 376);
             this.grdConsulta.TabIndex = 3;
             // 
@@ -98,9 +100,11 @@
             // txtFiltro
             // 
             this.txtFiltro.Location = new System.Drawing.Point(78, 16);
+            this.txtFiltro.MaxLength = 8;
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(100, 20);
             this.txtFiltro.TabIndex = 5;
+            this.txtFiltro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFiltro_KeyPress);
             // 
             // btnConsultar
             // 
@@ -110,6 +114,7 @@
             this.btnConsultar.TabIndex = 6;
             this.btnConsultar.Text = "Consultar";
             this.btnConsultar.UseVisualStyleBackColor = true;
+            this.btnConsultar.Click += new System.EventHandler(this.btnConsultar_Click);
             // 
             // frmABMAfiliado
             // 

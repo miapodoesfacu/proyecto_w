@@ -53,6 +53,7 @@
             this.cbxPlanMedico = new System.Windows.Forms.ComboBox();
             this.dtmFechaNac = new System.Windows.Forms.DateTimePicker();
             this.btnRegistrar = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -256,7 +257,7 @@
             this.dtmFechaNac.Name = "dtmFechaNac";
             this.dtmFechaNac.Size = new System.Drawing.Size(121, 20);
             this.dtmFechaNac.TabIndex = 24;
-            this.dtmFechaNac.Value = new System.DateTime(1810, 5, 25, 0, 0, 0, 0);
+            this.dtmFechaNac.Value = new System.DateTime(2013, 11, 18, 0, 0, 0, 0);
             // 
             // btnRegistrar
             // 
@@ -268,11 +269,22 @@
             this.btnRegistrar.UseVisualStyleBackColor = true;
             this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(306, 389);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 26;
+            this.btnCancel.Text = "Cancelar";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // AltaAfiliadoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 433);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.dtmFechaNac);
             this.Controls.Add(this.cbxPlanMedico);
@@ -333,5 +345,6 @@
         private System.Windows.Forms.ComboBox cbxPlanMedico;
         private System.Windows.Forms.DateTimePicker dtmFechaNac;
         private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.Button btnCancel;
     }
 }
