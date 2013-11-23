@@ -131,6 +131,7 @@
             this.Name = "frmABMAfiliado";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABMAfiliadosForm";
+            this.Load += new System.EventHandler(this.frmABMAfiliado_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdConsulta)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

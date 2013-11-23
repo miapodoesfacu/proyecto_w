@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using proyecto_w.ABM_Afiliado;
 using proyecto_w.ABM_Rol;
+using proyecto_w.ABM_Profesional;
 
 namespace proyecto_w
 {
@@ -48,6 +49,15 @@ namespace proyecto_w
             frmABMRol rolForm = new frmABMRol();
             rolForm.ShowDialog();
             this.Show();
+        }
+
+        private void btnABMProfesional_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmABMProfesional profesionalForm = new frmABMProfesional();
+            profesionalForm.ShowDialog();
+            this.Show();
+
         }
     }
 }

@@ -151,14 +151,14 @@ namespace proyecto_w.ABM_Afiliado
             if (this.modifyAfil)
             {
                 string query = string.Format("UPDATE PROYECTO_W.Afiliado SET afil_direccion='{0}', afil_telefono={1}, afil_mail='{2}', afil_cant_pers_a_cargo={3}, ", this.txtDireccion.Text, this.txtTelefono.Text, this.txtMail.Text, this.txtCantFamiliares.Text);
-
-                if (this.cbxSexo.SelectedItem.ToString() == "No Determinado")
-                    query += "afil_sexo=NULLL, ";
+               
+                if (this.cbxSexo.SelectedItem.ToString() == "No determinado")
+                    query += "afil_sexo=NULL, ";
                 else
                     query += string.Format("afil_sexo='{0}', ", this.cbxSexo.SelectedItem.ToString()[0]);
 
-                if (this.cbxEstadoCivil.SelectedItem.ToString() == "No Determinado")
-                    query += "afil_estado_civil=NULLL, ";
+                if (this.cbxEstadoCivil.SelectedItem.ToString() == "No determinado")
+                    query += "afil_estado_civil=NULL, ";
                 else
                     query += string.Format("afil_estado_civil='{0}', ", this.estadoCivilMap[this.cbxEstadoCivil.SelectedItem.ToString()]);
 

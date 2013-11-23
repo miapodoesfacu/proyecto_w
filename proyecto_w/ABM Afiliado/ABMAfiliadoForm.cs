@@ -80,5 +80,10 @@ namespace proyecto_w.ABM_Afiliado
             this.Show();
             
         }
+
+        private void frmABMAfiliado_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -30,11 +30,12 @@
         {
             this.btnABMAfiliado = new System.Windows.Forms.Button();
             this.btnABMRol = new System.Windows.Forms.Button();
+            this.btnABMProfesional = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnABMAfiliado
             // 
-            this.btnABMAfiliado.Location = new System.Drawing.Point(49, 54);
+            this.btnABMAfiliado.Location = new System.Drawing.Point(27, 53);
             this.btnABMAfiliado.Name = "btnABMAfiliado";
             this.btnABMAfiliado.Size = new System.Drawing.Size(75, 23);
             this.btnABMAfiliado.TabIndex = 0;
@@ -45,7 +46,7 @@
             // 
             // btnABMRol
             // 
-            this.btnABMRol.Location = new System.Drawing.Point(146, 53);
+            this.btnABMRol.Location = new System.Drawing.Point(125, 53);
             this.btnABMRol.Name = "btnABMRol";
             this.btnABMRol.Size = new System.Drawing.Size(75, 23);
             this.btnABMRol.TabIndex = 1;
@@ -53,11 +54,22 @@
             this.btnABMRol.UseVisualStyleBackColor = true;
             this.btnABMRol.Click += new System.EventHandler(this.btnABMRol_Click);
             // 
+            // btnABMProfesional
+            // 
+            this.btnABMProfesional.Location = new System.Drawing.Point(220, 53);
+            this.btnABMProfesional.Name = "btnABMProfesional";
+            this.btnABMProfesional.Size = new System.Drawing.Size(93, 23);
+            this.btnABMProfesional.TabIndex = 2;
+            this.btnABMProfesional.Text = "ABMProfesional";
+            this.btnABMProfesional.UseVisualStyleBackColor = true;
+            this.btnABMProfesional.Click += new System.EventHandler(this.btnABMProfesional_Click);
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 289);
+            this.Controls.Add(this.btnABMProfesional);
             this.Controls.Add(this.btnABMRol);
             this.Controls.Add(this.btnABMAfiliado);
             this.MaximizeBox = false;
@@ -73,5 +85,6 @@
 
         private System.Windows.Forms.Button btnABMAfiliado;
         private System.Windows.Forms.Button btnABMRol;
+        private System.Windows.Forms.Button btnABMProfesional;
     }
 }
