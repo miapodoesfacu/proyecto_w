@@ -78,6 +78,12 @@
     <Compile Include="ABM Profesional\ABMProfesionalForm.Designer.cs">
       <DependentUpon>ABMProfesionalForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ABM Profesional\AltaProfesionalForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ABM Profesional\AltaProfesionalForm.Designer.cs">
+      <DependentUpon>AltaProfesionalForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ABM Rol\ABMRolFrom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -124,6 +130,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Profesional\ABMProfesionalForm.resx">
       <DependentUpon>ABMProfesionalForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ABM Profesional\AltaProfesionalForm.resx">
+      <DependentUpon>AltaProfesionalForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\ABMRolFrom.resx">
       <DependentUpon>ABMRolFrom.cs</DependentUpon>

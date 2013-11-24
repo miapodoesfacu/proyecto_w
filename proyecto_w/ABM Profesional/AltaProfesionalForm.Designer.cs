@@ -1,0 +1,319 @@
+﻿namespace proyecto_w.ABM_Profesional
+{
+    partial class AltaProfesionalForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.btnRegistrar = new System.Windows.Forms.Button();
+            this.dtmFechaNac = new System.Windows.Forms.DateTimePicker();
+            this.cbxSexo = new System.Windows.Forms.ComboBox();
+            this.cbxTipoDoc = new System.Windows.Forms.ComboBox();
+            this.txtMail = new System.Windows.Forms.TextBox();
+            this.txtTelefono = new System.Windows.Forms.TextBox();
+            this.txtDireccion = new System.Windows.Forms.TextBox();
+            this.txtNroDoc = new System.Windows.Forms.TextBox();
+            this.txtApellido = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.lblEspecialidades = new System.Windows.Forms.Label();
+            this.lblMatricula = new System.Windows.Forms.Label();
+            this.lblSexo = new System.Windows.Forms.Label();
+            this.lblFechaNac = new System.Windows.Forms.Label();
+            this.lblMail = new System.Windows.Forms.Label();
+            this.lblTelefono = new System.Windows.Forms.Label();
+            this.lblDireccion = new System.Windows.Forms.Label();
+            this.lblNroDoc = new System.Windows.Forms.Label();
+            this.lblTipoDoc = new System.Windows.Forms.Label();
+            this.lblApellido = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.lstEspecialidades = new System.Windows.Forms.ListBox();
+            this.SuspendLayout();
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Location = new System.Drawing.Point(295, 383);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(75, 23);
+            this.btnCancel.TabIndex = 52;
+            this.btnCancel.Text = "Cancelar";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            // 
+            // btnRegistrar
+            // 
+            this.btnRegistrar.Location = new System.Drawing.Point(132, 383);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(127, 23);
+            this.btnRegistrar.TabIndex = 51;
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.UseVisualStyleBackColor = true;
+            // 
+            // dtmFechaNac
+            // 
+            this.dtmFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtmFechaNac.Location = new System.Drawing.Point(168, 220);
+            this.dtmFechaNac.Name = "dtmFechaNac";
+            this.dtmFechaNac.Size = new System.Drawing.Size(121, 20);
+            this.dtmFechaNac.TabIndex = 50;
+            this.dtmFechaNac.Value = new System.DateTime(2013, 11, 18, 0, 0, 0, 0);
+            // 
+            // cbxSexo
+            // 
+            this.cbxSexo.FormattingEnabled = true;
+            this.cbxSexo.Location = new System.Drawing.Point(168, 250);
+            this.cbxSexo.Name = "cbxSexo";
+            this.cbxSexo.Size = new System.Drawing.Size(121, 21);
+            this.cbxSexo.TabIndex = 47;
+            // 
+            // cbxTipoDoc
+            // 
+            this.cbxTipoDoc.FormattingEnabled = true;
+            this.cbxTipoDoc.Location = new System.Drawing.Point(168, 78);
+            this.cbxTipoDoc.Name = "cbxTipoDoc";
+            this.cbxTipoDoc.Size = new System.Drawing.Size(121, 21);
+            this.cbxTipoDoc.TabIndex = 46;
+            // 
+            // txtMail
+            // 
+            this.txtMail.Location = new System.Drawing.Point(168, 194);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(121, 20);
+            this.txtMail.TabIndex = 44;
+            // 
+            // txtTelefono
+            // 
+            this.txtTelefono.Location = new System.Drawing.Point(168, 164);
+            this.txtTelefono.Name = "txtTelefono";
+            this.txtTelefono.Size = new System.Drawing.Size(121, 20);
+            this.txtTelefono.TabIndex = 43;
+            // 
+            // txtDireccion
+            // 
+            this.txtDireccion.Location = new System.Drawing.Point(168, 133);
+            this.txtDireccion.Name = "txtDireccion";
+            this.txtDireccion.Size = new System.Drawing.Size(121, 20);
+            this.txtDireccion.TabIndex = 42;
+            // 
+            // txtNroDoc
+            // 
+            this.txtNroDoc.Location = new System.Drawing.Point(168, 105);
+            this.txtNroDoc.Name = "txtNroDoc";
+            this.txtNroDoc.Size = new System.Drawing.Size(121, 20);
+            this.txtNroDoc.TabIndex = 41;
+            // 
+            // txtApellido
+            // 
+            this.txtApellido.Location = new System.Drawing.Point(168, 53);
+            this.txtApellido.Name = "txtApellido";
+            this.txtApellido.Size = new System.Drawing.Size(100, 20);
+            this.txtApellido.TabIndex = 40;
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(168, 22);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtNombre.TabIndex = 39;
+            // 
+            // lblEspecialidades
+            // 
+            this.lblEspecialidades.AutoSize = true;
+            this.lblEspecialidades.Location = new System.Drawing.Point(35, 311);
+            this.lblEspecialidades.Name = "lblEspecialidades";
+            this.lblEspecialidades.Size = new System.Drawing.Size(78, 13);
+            this.lblEspecialidades.TabIndex = 38;
+            this.lblEspecialidades.Text = "Especialidades";
+            // 
+            // lblMatricula
+            // 
+            this.lblMatricula.AutoSize = true;
+            this.lblMatricula.Location = new System.Drawing.Point(36, 280);
+            this.lblMatricula.Name = "lblMatricula";
+            this.lblMatricula.Size = new System.Drawing.Size(65, 13);
+            this.lblMatricula.TabIndex = 36;
+            this.lblMatricula.Text = "N° Matricula";
+            // 
+            // lblSexo
+            // 
+            this.lblSexo.AutoSize = true;
+            this.lblSexo.Location = new System.Drawing.Point(36, 253);
+            this.lblSexo.Name = "lblSexo";
+            this.lblSexo.Size = new System.Drawing.Size(31, 13);
+            this.lblSexo.TabIndex = 35;
+            this.lblSexo.Text = "Sexo";
+            // 
+            // lblFechaNac
+            // 
+            this.lblFechaNac.AutoSize = true;
+            this.lblFechaNac.Location = new System.Drawing.Point(36, 224);
+            this.lblFechaNac.Name = "lblFechaNac";
+            this.lblFechaNac.Size = new System.Drawing.Size(93, 13);
+            this.lblFechaNac.TabIndex = 34;
+            this.lblFechaNac.Text = "Fecha Nacimiento";
+            // 
+            // lblMail
+            // 
+            this.lblMail.AutoSize = true;
+            this.lblMail.Location = new System.Drawing.Point(36, 194);
+            this.lblMail.Name = "lblMail";
+            this.lblMail.Size = new System.Drawing.Size(26, 13);
+            this.lblMail.TabIndex = 33;
+            this.lblMail.Text = "Mail";
+            // 
+            // lblTelefono
+            // 
+            this.lblTelefono.AutoSize = true;
+            this.lblTelefono.Location = new System.Drawing.Point(36, 164);
+            this.lblTelefono.Name = "lblTelefono";
+            this.lblTelefono.Size = new System.Drawing.Size(49, 13);
+            this.lblTelefono.TabIndex = 32;
+            this.lblTelefono.Text = "Teléfono";
+            // 
+            // lblDireccion
+            // 
+            this.lblDireccion.AutoSize = true;
+            this.lblDireccion.Location = new System.Drawing.Point(36, 136);
+            this.lblDireccion.Name = "lblDireccion";
+            this.lblDireccion.Size = new System.Drawing.Size(52, 13);
+            this.lblDireccion.TabIndex = 31;
+            this.lblDireccion.Text = "Dirección";
+            // 
+            // lblNroDoc
+            // 
+            this.lblNroDoc.AutoSize = true;
+            this.lblNroDoc.Location = new System.Drawing.Point(36, 108);
+            this.lblNroDoc.Name = "lblNroDoc";
+            this.lblNroDoc.Size = new System.Drawing.Size(82, 13);
+            this.lblNroDoc.TabIndex = 30;
+            this.lblNroDoc.Text = "Nro Documento";
+            // 
+            // lblTipoDoc
+            // 
+            this.lblTipoDoc.AutoSize = true;
+            this.lblTipoDoc.Location = new System.Drawing.Point(36, 79);
+            this.lblTipoDoc.Name = "lblTipoDoc";
+            this.lblTipoDoc.Size = new System.Drawing.Size(86, 13);
+            this.lblTipoDoc.TabIndex = 29;
+            this.lblTipoDoc.Text = "Tipo Documento";
+            // 
+            // lblApellido
+            // 
+            this.lblApellido.AutoSize = true;
+            this.lblApellido.Location = new System.Drawing.Point(36, 53);
+            this.lblApellido.Name = "lblApellido";
+            this.lblApellido.Size = new System.Drawing.Size(44, 13);
+            this.lblApellido.TabIndex = 28;
+            this.lblApellido.Text = "Apellido";
+            // 
+            // lblNombre
+            // 
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(36, 22);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(44, 13);
+            this.lblNombre.TabIndex = 27;
+            this.lblNombre.Text = "Nombre";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(168, 277);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(121, 20);
+            this.textBox1.TabIndex = 53;
+            // 
+            // lstEspecialidades
+            // 
+            this.lstEspecialidades.FormattingEnabled = true;
+            this.lstEspecialidades.Location = new System.Drawing.Point(168, 311);
+            this.lstEspecialidades.Name = "lstEspecialidades";
+            this.lstEspecialidades.Size = new System.Drawing.Size(120, 69);
+            this.lstEspecialidades.TabIndex = 54;
+            // 
+            // AltaProfesionalForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(406, 428);
+            this.Controls.Add(this.lstEspecialidades);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnRegistrar);
+            this.Controls.Add(this.dtmFechaNac);
+            this.Controls.Add(this.cbxSexo);
+            this.Controls.Add(this.cbxTipoDoc);
+            this.Controls.Add(this.txtMail);
+            this.Controls.Add(this.txtTelefono);
+            this.Controls.Add(this.txtDireccion);
+            this.Controls.Add(this.txtNroDoc);
+            this.Controls.Add(this.txtApellido);
+            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.lblEspecialidades);
+            this.Controls.Add(this.lblMatricula);
+            this.Controls.Add(this.lblSexo);
+            this.Controls.Add(this.lblFechaNac);
+            this.Controls.Add(this.lblMail);
+            this.Controls.Add(this.lblTelefono);
+            this.Controls.Add(this.lblDireccion);
+            this.Controls.Add(this.lblNroDoc);
+            this.Controls.Add(this.lblTipoDoc);
+            this.Controls.Add(this.lblApellido);
+            this.Controls.Add(this.lblNombre);
+            this.Name = "AltaProfesionalForm";
+            this.Text = "AltaProfesionalForm";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.DateTimePicker dtmFechaNac;
+        private System.Windows.Forms.ComboBox cbxSexo;
+        private System.Windows.Forms.ComboBox cbxTipoDoc;
+        private System.Windows.Forms.TextBox txtMail;
+        private System.Windows.Forms.TextBox txtTelefono;
+        private System.Windows.Forms.TextBox txtDireccion;
+        private System.Windows.Forms.TextBox txtNroDoc;
+        private System.Windows.Forms.TextBox txtApellido;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Label lblEspecialidades;
+        private System.Windows.Forms.Label lblMatricula;
+        private System.Windows.Forms.Label lblSexo;
+        private System.Windows.Forms.Label lblFechaNac;
+        private System.Windows.Forms.Label lblMail;
+        private System.Windows.Forms.Label lblTelefono;
+        private System.Windows.Forms.Label lblDireccion;
+        private System.Windows.Forms.Label lblNroDoc;
+        private System.Windows.Forms.Label lblTipoDoc;
+        private System.Windows.Forms.Label lblApellido;
+        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListBox lstEspecialidades;
+    }
+}

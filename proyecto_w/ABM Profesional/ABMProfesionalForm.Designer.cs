@@ -41,7 +41,7 @@
             // 
             // btnConsultar
             // 
-            this.btnConsultar.Location = new System.Drawing.Point(276, 33);
+            this.btnConsultar.Location = new System.Drawing.Point(241, 13);
             this.btnConsultar.Name = "btnConsultar";
             this.btnConsultar.Size = new System.Drawing.Size(75, 23);
             this.btnConsultar.TabIndex = 13;
@@ -51,7 +51,7 @@
             // 
             // txtFiltro
             // 
-            this.txtFiltro.Location = new System.Drawing.Point(127, 35);
+            this.txtFiltro.Location = new System.Drawing.Point(115, 15);
             this.txtFiltro.MaxLength = 8;
             this.txtFiltro.Name = "txtFiltro";
             this.txtFiltro.Size = new System.Drawing.Size(100, 20);
@@ -68,7 +68,7 @@
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(737, 33);
+            this.btnModificar.Location = new System.Drawing.Point(737, 13);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(75, 23);
             this.btnModificar.TabIndex = 9;
@@ -77,7 +77,7 @@
             // 
             // btnBaja
             // 
-            this.btnBaja.Location = new System.Drawing.Point(818, 33);
+            this.btnBaja.Location = new System.Drawing.Point(818, 13);
             this.btnBaja.Name = "btnBaja";
             this.btnBaja.Size = new System.Drawing.Size(75, 23);
             this.btnBaja.TabIndex = 8;
@@ -86,7 +86,7 @@
             // 
             // btnAlta
             // 
-            this.btnAlta.Location = new System.Drawing.Point(656, 33);
+            this.btnAlta.Location = new System.Drawing.Point(656, 13);
             this.btnAlta.Name = "btnAlta";
             this.btnAlta.Size = new System.Drawing.Size(75, 23);
             this.btnAlta.TabIndex = 7;
@@ -96,7 +96,7 @@
             // lblNro
             // 
             this.lblNro.AutoSize = true;
-            this.lblNro.Location = new System.Drawing.Point(38, 38);
+            this.lblNro.Location = new System.Drawing.Point(21, 18);
             this.lblNro.Name = "lblNro";
             this.lblNro.Size = new System.Drawing.Size(74, 13);
             this.lblNro.TabIndex = 14;
@@ -105,16 +105,16 @@
             // grdConsulta
             // 
             this.grdConsulta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdConsulta.Location = new System.Drawing.Point(12, 92);
+            this.grdConsulta.Location = new System.Drawing.Point(12, 53);
             this.grdConsulta.Name = "grdConsulta";
-            this.grdConsulta.Size = new System.Drawing.Size(881, 336);
+            this.grdConsulta.Size = new System.Drawing.Size(881, 383);
             this.grdConsulta.TabIndex = 15;
             // 
-            // ABMProfesionalForm
+            // frmABMProfesional
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(913, 476);
+            this.ClientSize = new System.Drawing.Size(913, 451);
             this.Controls.Add(this.grdConsulta);
             this.Controls.Add(this.lblNro);
             this.Controls.Add(this.btnConsultar);
@@ -123,7 +123,7 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnAlta);
-            this.Name = "ABMProfesionalForm";
+            this.Name = "frmABMProfesional";
             this.Text = "ABMProfesionalForm";
             ((System.ComponentModel.ISupportInitialize)(this.grdConsulta)).EndInit();
             this.ResumeLayout(false);

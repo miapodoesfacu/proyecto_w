@@ -25,6 +25,7 @@ namespace proyecto_w
             System.Console.Write(functionList.ToString());
             if (functionList.IndexOf("ABM_AFILIADO") != -1) btnABMAfiliado.Show();
             if (functionList.IndexOf("ABM_ROL") != -1) btnABMRol.Show();
+            if (functionList.IndexOf("ABM_PROFESIONAL") != -1) btnABMProfesional.Show();
         }
 
         //private void btnABMAfiliado_Click(object sender, EventArgs e)
