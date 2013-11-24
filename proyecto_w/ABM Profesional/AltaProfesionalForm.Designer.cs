@@ -79,7 +79,7 @@
             this.dtmFechaNac.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtmFechaNac.Location = new System.Drawing.Point(168, 220);
             this.dtmFechaNac.MaxDate = new System.DateTime(1999, 12, 31, 0, 0, 0, 0);
-            this.dtmFechaNac.MinDate = new System.DateTime(1930, 1, 1, 0, 0, 0, 0);
+            this.dtmFechaNac.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtmFechaNac.Name = "dtmFechaNac";
             this.dtmFechaNac.Size = new System.Drawing.Size(88, 20);
             this.dtmFechaNac.TabIndex = 46;
@@ -301,7 +301,10 @@
             this.Controls.Add(this.lblTipoDoc);
             this.Controls.Add(this.lblApellido);
             this.Controls.Add(this.lblNombre);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AltaProfesionalForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AltaProfesionalForm";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -118,5 +118,18 @@ namespace proyecto_w.ABM_Profesional
                 }
             }
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            int selectedrowindex = this.grdConsulta.SelectedCells[0].RowIndex;
+            DataGridViewRow selectedRow = this.grdConsulta.Rows[selectedrowindex];
+            string prof_cod = Convert.ToString(selectedRow.Cells["Codigo"].Value);
+
+            AltaProfesionalForm modifProf = new AltaProfesionalForm(prof_cod);
+            this.Hide();
+            modifProf.ShowDialog();
+            this.getProfesionalGrid();
+            this.Show();
+        }
     }
 }

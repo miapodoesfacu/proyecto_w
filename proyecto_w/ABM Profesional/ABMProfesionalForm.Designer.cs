@@ -88,6 +88,7 @@
             this.btnModificar.TabIndex = 9;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
+            this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
             // 
             // btnBaja
             // 
@@ -282,7 +283,10 @@
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnBaja);
             this.Controls.Add(this.btnAlta);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmABMProfesional";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABMProfesionalForm";
             ((System.ComponentModel.ISupportInitialize)(this.grdConsulta)).EndInit();
             this.ResumeLayout(false);
