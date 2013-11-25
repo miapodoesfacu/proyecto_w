@@ -353,6 +353,7 @@ CREATE TABLE [PROYECTO_W].[TurnoLlegada]
         [turlle_bonocons_cod] [bigint] NOT NULL,
         FOREIGN KEY([turlle_bonocons_cod]) REFERENCES [PROYECTO_W].[BonoConsulta] ([bonocons_cod]),
         FOREIGN KEY([turlle_turno_nro]) REFERENCES [PROYECTO_W].[Turno] ([turno_nro]),
+        UNIQUE(turlle_turno_nro,turlle_bonocons_cod),
         PRIMARY KEY(turlle_turno_nro)
 )
 GO
@@ -890,6 +891,9 @@ BEGIN -- UN DIA ANTES, EXISTE EL TURNO
 				JOIN PROYECTO_W.TurnoLlegada AS TL ON TL.turlle_turno_nro = @TURNO_NRO
 				WHERE BC.bonocons_cod = TL.turlle_bonocons_cod
 				-- no se si borrar el registro del bono que usaba y se le devolvio
+				-- se lo dejo borrado por ahora
+				DELETE FROM PROYECTO_W.TurnoLlegada
+				WHERE turlle_turno_nro = @TURNO_NRO
 			END
 		END ELSE RAISERROR('LAS CANCELACIONES SON CON UN DIA DE ANTELACION',16,1)
 	END ELSE RAISERROR('NO EXISTE EL NUMERO DE TURNO',16,1)
