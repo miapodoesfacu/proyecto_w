@@ -718,7 +718,7 @@ WHERE ROL.rol_nombre = 'ADMINISTRADOR'
 GO
         -- INSERT DE USUARIO ADMIN,,, PONER PASSWORD BIEN DESPUES CON SHA256 Y ESO TODO
 INSERT INTO PROYECTO_W.Usuario (usu_username,usu_password) -- cant intentos cero por defaul, etado 'H' po defol
-VALUES ('admin','w23e')
+VALUES ('admin','E6B87050BFCB8143FCB8DB0170A4DC9ED00D904DDD3E2A4AD1B1E8DC0FDC9BE7')
 GO
         -- INSERT DE ROL ADMINISTRADOR PARA USER ADMIN
 INSERT INTO PROYECTO_W.RolPorUsuario (rolxusu_rol_cod,rolxusu_username)
