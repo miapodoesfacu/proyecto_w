@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using proyecto_w.Utilities.Conexion;
 using proyecto_w.Login;
+using System.Security.Cryptography;
 
 namespace proyecto_w
 {
@@ -17,6 +18,22 @@ namespace proyecto_w
         public frmLogin()
         {
             InitializeComponent();
+        }
+
+        public class Hash
+        {
+            public static string getHashSha256(string text)
+            {
+                byte[] bytes = Encoding.UTF8.GetBytes(text);
+                SHA256Managed hashstring = new SHA256Managed();
+                byte[] hash = hashstring.ComputeHash(bytes);
+                string hashString = string.Empty;
+                foreach (byte x in hash)
+                {
+                    hashString += String.Format("{0:x2}", x);
+                }
+                return hashString;
+            }
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -32,8 +49,8 @@ namespace proyecto_w
                 if (users.Rows[0]["usu_estado"].ToString() == "D")
                 {
                     MessageBox.Show("Usuario Deshabilitado. Hable con el Administrador para solucionar el problema");
-                }
-                else if (users.Rows[0]["usu_password"].ToString() != password)
+                } 
+                else if (users.Rows[0]["usu_password"].ToString() != (Hash.getHashSha256(password)).ToUpper())
                 {
                     queryLogin = string.Format("UPDATE PROYECTO_W.Usuario SET usu_cant_intentos=usu_cant_intentos+1 WHERE usu_username='{0}'", username);
                     connectionSQL.ejecutarQuery(queryLogin);
