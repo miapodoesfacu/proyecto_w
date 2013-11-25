@@ -266,7 +266,7 @@ CREATE TABLE [PROYECTO_W].[Profesional]
         [prof_cod] [bigint] IDENTITY(1,1) NOT NULL,
         FOREIGN KEY([prof_username]) REFERENCES [PROYECTO_W].[Usuario] ([usu_username])
                 ON UPDATE CASCADE,
---        UNIQUE (prof_username),
+        UNIQUE (prof_doc_nro,prof_nombre),
         PRIMARY KEY (prof_cod)
 )
 GO
@@ -726,5 +726,30 @@ SELECT ROL.rol_cod,USUA.usu_username
 FROM PROYECTO_W.Rol AS ROL, PROYECTO_W.Usuario AS USUA
 WHERE ROL.rol_nombre = 'ADMINISTRADOR' AND USUA.usu_username = 'admin'
 GO
+
+--#-#-# TRIGGERS
+		-- MATRICULA DEBE SER NULL O UNICA; SINO NO SE INSERTA Y DA ERROR
+CREATE TRIGGER TR_PROFESIONAL_MATRICULA
+ON PROYECTO_W.Profesional
+INSTEAD OF INSERT
+AS
+IF EXISTS 
+(
+SELECT * FROM inserted AS INS 
+JOIN PROYECTO_W.Profesional AS PRO ON PRO.prof_matricula = INS.prof_matricula
+WHERE INS.prof_matricula IS NOT NULL
+)
+BEGIN
+RAISERROR('NO SE REALIZA INSERT CON MATRICULAS EXISTENTES',16,1)
+END
+ELSE
+BEGIN
+INSERT INTO PROYECTO_W.Profesional 
+(prof_apellido,prof_direccion,prof_doc_nro,prof_doc_tipo,prof_estado,prof_fecha_nac,prof_mail
+,prof_matricula,prof_nombre,prof_sexo,prof_telefono,prof_username)
+SELECT prof_apellido,prof_direccion,prof_doc_nro,prof_doc_tipo,prof_estado,prof_fecha_nac,prof_mail
+,prof_matricula,prof_nombre,prof_sexo,prof_telefono,prof_username FROM INSERTED
+END
+
 -- HABRIA QUE PONER RESTRICCIONES, QUE UN ADMIN NO SE PUEDA ASIGNAR A USUARIOS AFILIADOS Y PROFESIONALES
 -- QUE UN USERNAME NO PUEDA SER DE USUARIO Y PROF DISTINTOS A LA VEZ,, ETC
