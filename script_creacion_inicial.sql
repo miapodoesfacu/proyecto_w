@@ -3,6 +3,8 @@ GO
 
 IF SCHEMA_ID('PROYECTO_W') IS NOT NULL
 BEGIN
+		IF OBJECT_ID('PROYECTO_W.SP_COMPRABONOADMIN') IS NOT NULL
+				DROP PROCEDURE PROYECTO_W.SP_COMPRABONOADMIN;
         IF OBJECT_ID('[PROYECTO_W].[TurnoCancelacion]') IS NOT NULL
                 DROP TABLE [PROYECTO_W].[TurnoCancelacion] ;
 
@@ -677,7 +679,7 @@ FROM gd_esquema.Maestra A, PROYECTO_W.Profesional B
 WHERE A.Turno_Numero IS NOT NULL AND A.Bono_Consulta_Numero IS NULL AND A.Medico_Dni = B.prof_doc_nro
 GO
 
--- LO QUE HACE A LO ULTIMO
+-- LO QUE HACE DESPUES DE MIGRAR
 ALTER TABLE [PROYECTO_W].[TurnoConcretado]
 ADD CONSTRAINT FK_TurnoConcretado_turconcr_receta_cod
 FOREIGN KEY([turconcr_receta_cod]) REFERENCES [PROYECTO_W].[Receta] ([receta_cod])
@@ -687,6 +689,8 @@ ALTER TABLE [PROYECTO_W].[BonoPorReceta]
 ADD CONSTRAINT FK_BonoPorReceta_bonoxreceta_receta_cod
 FOREIGN KEY([bonoxreceta_receta_cod]) REFERENCES [PROYECTO_W].[Receta] ([receta_cod])
 GO
+
+
 
 SET IDENTITY_INSERT [PROYECTO_W].[Receta] ON
 GO
@@ -750,6 +754,108 @@ INSERT INTO PROYECTO_W.Profesional
 SELECT prof_apellido,prof_direccion,prof_doc_nro,prof_doc_tipo,prof_estado,prof_fecha_nac,prof_mail
 ,prof_matricula,prof_nombre,prof_sexo,prof_telefono,prof_username FROM INSERTED
 END
+GO
+
+		-- GENERA CODIGO DE BONO CONSULTA
+CREATE TRIGGER TR_BONOCONS_COD
+ON PROYECTO_W.BonoConsulta
+INSTEAD OF INSERT 
+AS
+BEGIN
+INSERT INTO PROYECTO_W.BonoConsulta
+(bonocons_bonadq_cod,bonocons_cod,bonocons_estado)
+SELECT bonocons_bonadq_cod,
+(SELECT TOP 1 bonocons_cod FROM PROYECTO_W.BonoConsulta ORDER BY bonocons_cod DESC) + 1,
+bonocons_estado
+FROM INSERTED
+END
+GO
+
+	-- GENERA BONOFARM_COD
+CREATE TRIGGER TR_BONOFARM_COD
+ON PROYECTO_W.BonoFarmacia
+INSTEAD OF INSERT 
+AS
+BEGIN
+INSERT INTO PROYECTO_W.BonoFarmacia
+(bonofarm_bonadq_cod,bonofarm_cod,bonofarm_estado,bonofarm_fecha_venc)
+SELECT bonofarm_bonadq_cod,
+(SELECT TOP 1 bonofarm_cod FROM PROYECTO_W.BonoFarmacia ORDER BY bonofarm_cod DESC) + 1,
+bonofarm_estado, bonofarm_fecha_venc
+FROM INSERTED
+END
+GO
+
+--#-#-#		STOCK PROCEDURES
+	-- COMPRA BONO ADMIN
+CREATE PROCEDURE [PROYECTO_W].[SP_COMPRABONOADMIN]
+@afil_nro bigint, @tipo_bono varchar(255), @cantidad bigint, @fechaSys datetime -- viene de la aplicacion
+AS
+IF (EXISTS (SELECT afil_nro FROM PROYECTO_W.Afiliado WHERE afil_estado = 'H' AND @afil_nro = afil_nro)
+AND (@tipo_bono = 'Farmacia' OR @tipo_bono = 'Consulta')) -- chequeo innecesario, pero de recordatorio
+BEGIN
+DECLARE @PLANCOD NUMERIC(18,0) =
+(
+SELECT PL.plan_cod 
+FROM [GD2C2013].[PROYECTO_W].[Plan] AS PL 
+JOIN PROYECTO_W.Afiliado AS AFIL ON (AFIL.afil_nro = @afil_nro AND AFIL.afil_plan_cod = PL.plan_cod)
+)
+
+DECLARE @PRECIO SMALLMONEY
+
+IF (@tipo_bono='Consulta')
+begin
+SET @PRECIO = 
+(
+SELECT PL.plan_precio_bono_consulta 
+FROM [GD2C2013].[PROYECTO_W].[Plan] AS PL 
+JOIN PROYECTO_W.Afiliado AS AFIL ON (AFIL.afil_nro = @afil_nro AND AFIL.afil_plan_cod = PL.plan_cod))
+
+INSERT INTO PROYECTO_W.BonoAdquirido
+(bonadq_tipo_bono, bonadq_fecha_compra, bonadq_fecha_impresion, bonadq_cantidad_comprada,
+bonadq_afil_nro, bonadq_plan_cod, bonadq_suma_pagada)
+VALUES (@tipo_bono, @fechaSys, @fechaSys, @cantidad, @afil_nro, @PLANCOD, @cantidad*@PRECIO)
+
+WHILE (@cantidad > 0)
+BEGIN
+INSERT INTO PROYECTO_W.BonoConsulta
+(bonocons_bonadq_cod,bonocons_estado)
+VALUES
+((SELECT TOP 1 bonadq_cod FROM PROYECTO_W.BonoAdquirido ORDER BY bonadq_cod DESC), 'S')
+SET @cantidad = @cantidad - 1
+END
+
+end
+else -- es farmacia tonce
+begin
+SET @PRECIO = 
+(
+SELECT PL.plan_precio_bono_farmacia 
+FROM [GD2C2013].[PROYECTO_W].[Plan] AS PL 
+JOIN PROYECTO_W.Afiliado AS AFIL ON (AFIL.afil_nro = @afil_nro AND AFIL.afil_plan_cod = PL.plan_cod) )
+
+INSERT INTO PROYECTO_W.BonoAdquirido
+(bonadq_tipo_bono, bonadq_fecha_compra, bonadq_fecha_impresion, bonadq_cantidad_comprada,
+bonadq_afil_nro, bonadq_plan_cod, bonadq_suma_pagada)
+VALUES (@tipo_bono, @fechaSys, @fechaSys, @cantidad, @afil_nro, @PLANCOD, @cantidad*@PRECIO)
+
+WHILE (@cantidad > 0)
+BEGIN
+INSERT INTO PROYECTO_W.BonoFarmacia
+(bonofarm_bonadq_cod,bonofarm_estado,bonofarm_fecha_venc)
+VALUES
+((SELECT TOP 1 bonadq_cod FROM PROYECTO_W.BonoAdquirido ORDER BY bonadq_cod DESC), 'S', @fechaSys + 60)
+SET @cantidad -= 1
+END
+END
+-- COMPRÓ EL BONO
+END
+ELSE
+BEGIN
+RAISERROR('NO PUEDE COMPRAR, AFILIADO DESHABILITADO',16,1)
+-- NO PUEDE COMPRAR 
+END
+GO
 
 -- HABRIA QUE PONER RESTRICCIONES, QUE UN ADMIN NO SE PUEDA ASIGNAR A USUARIOS AFILIADOS Y PROFESIONALES
 -- QUE UN USERNAME NO PUEDA SER DE USUARIO Y PROF DISTINTOS A LA VEZ,, ETC

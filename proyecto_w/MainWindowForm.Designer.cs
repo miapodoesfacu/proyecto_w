@@ -31,6 +31,7 @@
             this.btnABMAfiliado = new System.Windows.Forms.Button();
             this.btnABMRol = new System.Windows.Forms.Button();
             this.btnABMProfesional = new System.Windows.Forms.Button();
+            this.btnABMCompraDeBono = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnABMAfiliado
@@ -64,11 +65,22 @@
             this.btnABMProfesional.UseVisualStyleBackColor = true;
             this.btnABMProfesional.Click += new System.EventHandler(this.btnABMProfesional_Click);
             // 
+            // btnABMCompraDeBono
+            // 
+            this.btnABMCompraDeBono.Location = new System.Drawing.Point(27, 107);
+            this.btnABMCompraDeBono.Name = "btnABMCompraDeBono";
+            this.btnABMCompraDeBono.Size = new System.Drawing.Size(121, 23);
+            this.btnABMCompraDeBono.TabIndex = 3;
+            this.btnABMCompraDeBono.Text = "ABMCompraDeBono";
+            this.btnABMCompraDeBono.UseVisualStyleBackColor = true;
+            this.btnABMCompraDeBono.Click += new System.EventHandler(this.btnABMCompraDeBono_Click);
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 289);
+            this.Controls.Add(this.btnABMCompraDeBono);
             this.Controls.Add(this.btnABMProfesional);
             this.Controls.Add(this.btnABMRol);
             this.Controls.Add(this.btnABMAfiliado);
@@ -86,5 +98,6 @@
         private System.Windows.Forms.Button btnABMAfiliado;
         private System.Windows.Forms.Button btnABMRol;
         private System.Windows.Forms.Button btnABMProfesional;
+        private System.Windows.Forms.Button btnABMCompraDeBono;
     }
 }

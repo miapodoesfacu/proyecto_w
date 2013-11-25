@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using proyecto_w.ABM_Afiliado;
 using proyecto_w.ABM_Rol;
 using proyecto_w.ABM_Profesional;
+using proyecto_w.ABM_Compra_de_Bono;
 
 namespace proyecto_w
 {
@@ -60,5 +61,14 @@ namespace proyecto_w
             this.Show();
 
         }
+
+        private void btnABMCompraDeBono_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmCompraDeBono compraBonoForm = new frmCompraDeBono();
+            compraBonoForm.ShowDialog();
+            this.Show();
+        }
+       
     }
 }
