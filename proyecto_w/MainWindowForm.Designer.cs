@@ -73,6 +73,7 @@
             this.btnCompraDeBono.TabIndex = 3;
             this.btnCompraDeBono.Text = "Compra de Bono";
             this.btnCompraDeBono.UseVisualStyleBackColor = true;
+            this.btnCompraDeBono.Click += new System.EventHandler(this.btnCompraDeBono_Click);
             // 
             // MainWindowForm
             // 

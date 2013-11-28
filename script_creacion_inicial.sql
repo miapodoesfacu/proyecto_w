@@ -797,67 +797,65 @@ CREATE PROCEDURE [PROYECTO_W].[SP_COMPRABONOADMIN]
 @afil_nro bigint, @tipo_bono varchar(255), @cantidad bigint, @fechaSys datetime -- viene de la aplicacion
 AS
 IF (EXISTS (SELECT afil_nro FROM PROYECTO_W.Afiliado WHERE afil_estado = 'H' AND @afil_nro = afil_nro)
-AND (@tipo_bono = 'Farmacia' OR @tipo_bono = 'Consulta')) -- chequeo innecesario, pero de recordatorio
+	AND (@tipo_bono = 'Farmacia' OR @tipo_bono = 'Consulta') AND @cantidad > 0)
 BEGIN
-DECLARE @PLANCOD NUMERIC(18,0) =
-(
-SELECT PL.plan_cod 
-FROM [GD2C2013].[PROYECTO_W].[Plan] AS PL 
-JOIN PROYECTO_W.Afiliado AS AFIL ON (AFIL.afil_nro = @afil_nro AND AFIL.afil_plan_cod = PL.plan_cod)
-)
+	DECLARE @PLANCOD NUMERIC(18,0) =
+	(
+	SELECT PL.plan_cod 
+	FROM [GD2C2013].[PROYECTO_W].[Plan] AS PL 
+	JOIN PROYECTO_W.Afiliado AS AFIL ON (AFIL.afil_nro = @afil_nro AND AFIL.afil_plan_cod = PL.plan_cod)
+	)
 
-DECLARE @PRECIO SMALLMONEY
+	DECLARE @PRECIO SMALLMONEY
 
-IF (@tipo_bono='Consulta')
-begin
-SET @PRECIO = 
-(
-SELECT PL.plan_precio_bono_consulta 
-FROM [GD2C2013].[PROYECTO_W].[Plan] AS PL 
-JOIN PROYECTO_W.Afiliado AS AFIL ON (AFIL.afil_nro = @afil_nro AND AFIL.afil_plan_cod = PL.plan_cod))
+	IF (@tipo_bono='Consulta')
+	BEGIN
+		SET @PRECIO = 
+		(
+		SELECT PL.plan_precio_bono_consulta 
+		FROM [GD2C2013].[PROYECTO_W].[Plan] AS PL 
+		JOIN PROYECTO_W.Afiliado AS AFIL ON (AFIL.afil_nro = @afil_nro AND AFIL.afil_plan_cod = PL.plan_cod))
 
-INSERT INTO PROYECTO_W.BonoAdquirido
-(bonadq_tipo_bono, bonadq_fecha_compra, bonadq_fecha_impresion, bonadq_cantidad_comprada,
-bonadq_afil_nro, bonadq_plan_cod, bonadq_suma_pagada)
-VALUES (@tipo_bono, @fechaSys, @fechaSys, @cantidad, @afil_nro, @PLANCOD, @cantidad*@PRECIO)
+		INSERT INTO PROYECTO_W.BonoAdquirido
+		(bonadq_tipo_bono, bonadq_fecha_compra, bonadq_fecha_impresion, bonadq_cantidad_comprada,
+		bonadq_afil_nro, bonadq_plan_cod, bonadq_suma_pagada)
+		VALUES (@tipo_bono, @fechaSys, @fechaSys, @cantidad, @afil_nro, @PLANCOD, @cantidad*@PRECIO)
 
-WHILE (@cantidad > 0)
-BEGIN
-INSERT INTO PROYECTO_W.BonoConsulta
-(bonocons_bonadq_cod,bonocons_estado)
-VALUES
-((SELECT TOP 1 bonadq_cod FROM PROYECTO_W.BonoAdquirido ORDER BY bonadq_cod DESC), 'S')
-SET @cantidad = @cantidad - 1
-END
+		WHILE (@cantidad > 0)
+		BEGIN
+			INSERT INTO PROYECTO_W.BonoConsulta
+			(bonocons_bonadq_cod,bonocons_estado)
+			VALUES
+			((SELECT TOP 1 bonadq_cod FROM PROYECTO_W.BonoAdquirido ORDER BY bonadq_cod DESC), 'S')
+			SET @cantidad = @cantidad - 1
+		END
+	END
+	ELSE -- es farmacia tonce
+	BEGIN
+		SET @PRECIO = 
+		(SELECT PL.plan_precio_bono_farmacia 
+		FROM [GD2C2013].[PROYECTO_W].[Plan] AS PL 
+		JOIN PROYECTO_W.Afiliado AS AFIL ON (AFIL.afil_nro = @afil_nro AND AFIL.afil_plan_cod = PL.plan_cod) )
 
-end
-else -- es farmacia tonce
-begin
-SET @PRECIO = 
-(
-SELECT PL.plan_precio_bono_farmacia 
-FROM [GD2C2013].[PROYECTO_W].[Plan] AS PL 
-JOIN PROYECTO_W.Afiliado AS AFIL ON (AFIL.afil_nro = @afil_nro AND AFIL.afil_plan_cod = PL.plan_cod) )
+		INSERT INTO PROYECTO_W.BonoAdquirido
+		(bonadq_tipo_bono, bonadq_fecha_compra, bonadq_fecha_impresion, bonadq_cantidad_comprada,
+		bonadq_afil_nro, bonadq_plan_cod, bonadq_suma_pagada)
+		VALUES (@tipo_bono, @fechaSys, @fechaSys, @cantidad, @afil_nro, @PLANCOD, @cantidad*@PRECIO)
 
-INSERT INTO PROYECTO_W.BonoAdquirido
-(bonadq_tipo_bono, bonadq_fecha_compra, bonadq_fecha_impresion, bonadq_cantidad_comprada,
-bonadq_afil_nro, bonadq_plan_cod, bonadq_suma_pagada)
-VALUES (@tipo_bono, @fechaSys, @fechaSys, @cantidad, @afil_nro, @PLANCOD, @cantidad*@PRECIO)
-
-WHILE (@cantidad > 0)
-BEGIN
-INSERT INTO PROYECTO_W.BonoFarmacia
-(bonofarm_bonadq_cod,bonofarm_estado,bonofarm_fecha_venc)
-VALUES
-((SELECT TOP 1 bonadq_cod FROM PROYECTO_W.BonoAdquirido ORDER BY bonadq_cod DESC), 'S', @fechaSys + 60)
-SET @cantidad -= 1
-END
-END
+		WHILE (@cantidad > 0)
+		BEGIN
+			INSERT INTO PROYECTO_W.BonoFarmacia
+			(bonofarm_bonadq_cod,bonofarm_estado,bonofarm_fecha_venc)
+			VALUES
+			((SELECT TOP 1 bonadq_cod FROM PROYECTO_W.BonoAdquirido ORDER BY bonadq_cod DESC), 'S', @fechaSys + 60)
+			SET @cantidad -= 1
+		END
+	END
 -- COMPRÓ EL BONO
 END
 ELSE
 BEGIN
-RAISERROR('NO PUEDE COMPRAR, AFILIADO DESHABILITADO',16,1)
+RAISERROR('NO PUEDE COMPRAR, AFILIADO DESHABILITADO O DATOS INVALIDOS',16,1) -- o no existe
 -- NO PUEDE COMPRAR 
 END
 GO
