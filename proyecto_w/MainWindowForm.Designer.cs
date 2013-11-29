@@ -32,6 +32,7 @@
             this.btnABMRol = new System.Windows.Forms.Button();
             this.btnABMProfesional = new System.Windows.Forms.Button();
             this.btnCompraDeBono = new System.Windows.Forms.Button();
+            this.btnRegistrarLlegada = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnABMAfiliado
@@ -47,7 +48,7 @@
             // 
             // btnABMRol
             // 
-            this.btnABMRol.Location = new System.Drawing.Point(127, 12);
+            this.btnABMRol.Location = new System.Drawing.Point(126, 12);
             this.btnABMRol.Name = "btnABMRol";
             this.btnABMRol.Size = new System.Drawing.Size(75, 23);
             this.btnABMRol.TabIndex = 1;
@@ -57,7 +58,7 @@
             // 
             // btnABMProfesional
             // 
-            this.btnABMProfesional.Location = new System.Drawing.Point(241, 12);
+            this.btnABMProfesional.Location = new System.Drawing.Point(240, 12);
             this.btnABMProfesional.Name = "btnABMProfesional";
             this.btnABMProfesional.Size = new System.Drawing.Size(93, 23);
             this.btnABMProfesional.TabIndex = 2;
@@ -67,18 +68,30 @@
             // 
             // btnCompraDeBono
             // 
-            this.btnCompraDeBono.Location = new System.Drawing.Point(12, 52);
+            this.btnCompraDeBono.Location = new System.Drawing.Point(12, 44);
             this.btnCompraDeBono.Name = "btnCompraDeBono";
             this.btnCompraDeBono.Size = new System.Drawing.Size(121, 23);
             this.btnCompraDeBono.TabIndex = 3;
             this.btnCompraDeBono.Text = "Compra de Bono";
             this.btnCompraDeBono.UseVisualStyleBackColor = true;
+            this.btnCompraDeBono.Click += new System.EventHandler(this.btnCompraDeBono_Click_1);
+            // 
+            // btnRegistrarLlegada
+            // 
+            this.btnRegistrarLlegada.Location = new System.Drawing.Point(12, 75);
+            this.btnRegistrarLlegada.Name = "btnRegistrarLlegada";
+            this.btnRegistrarLlegada.Size = new System.Drawing.Size(99, 23);
+            this.btnRegistrarLlegada.TabIndex = 4;
+            this.btnRegistrarLlegada.Text = "Registrar Llegada";
+            this.btnRegistrarLlegada.UseVisualStyleBackColor = true;
+            this.btnRegistrarLlegada.Click += new System.EventHandler(this.btnRegistrarLlegada_Click);
             // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 289);
+            this.Controls.Add(this.btnRegistrarLlegada);
             this.Controls.Add(this.btnCompraDeBono);
             this.Controls.Add(this.btnABMProfesional);
             this.Controls.Add(this.btnABMRol);
@@ -98,5 +111,6 @@
         private System.Windows.Forms.Button btnABMRol;
         private System.Windows.Forms.Button btnABMProfesional;
         private System.Windows.Forms.Button btnCompraDeBono;
+        private System.Windows.Forms.Button btnRegistrarLlegada;
     }
 }

@@ -10,6 +10,7 @@ using proyecto_w.ABM_Afiliado;
 using proyecto_w.ABM_Rol;
 using proyecto_w.ABM_Profesional;
 using proyecto_w.Compra_de_Bono;
+using proyecto_w.Registro_de_Llegada;
 
 namespace proyecto_w
 {
@@ -68,6 +69,20 @@ namespace proyecto_w
             frmCompra_de_Bono compraDeBonoForm = new frmCompra_de_Bono();
             compraDeBonoForm.ShowDialog();
             this.Show();
+        }
+
+        private void btnCompraDeBono_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnRegistrarLlegada_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmRegistrarLlegada llegadaForm = new frmRegistrarLlegada();
+            llegadaForm.ShowDialog();
+            this.Show();
+
         }
        
     }
