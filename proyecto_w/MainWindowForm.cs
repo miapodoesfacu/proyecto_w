@@ -66,11 +66,12 @@ namespace proyecto_w
         private void btnCompraDeBono_Click(object sender, EventArgs e)
         {
             this.Hide();
-            frmCompra_de_Bono compraDeBonoForm = new frmCompra_de_Bono();
-            compraDeBonoForm.ShowDialog();
+            frmCompra_de_Bono compraBonoForm = new frmCompra_de_Bono();
+            compraBonoForm.ShowDialog();
             this.Show();
         }
 
+<<<<<<< HEAD
         private void btnCompraDeBono_Click_1(object sender, EventArgs e)
         {
 
@@ -85,5 +86,7 @@ namespace proyecto_w
 
         }
        
+=======
+>>>>>>> d52cd523849312cad650d091e7e1f3c1292727d8
     }
 }

@@ -74,6 +74,7 @@
             this.btnCompraDeBono.TabIndex = 3;
             this.btnCompraDeBono.Text = "Compra de Bono";
             this.btnCompraDeBono.UseVisualStyleBackColor = true;
+<<<<<<< HEAD
             this.btnCompraDeBono.Click += new System.EventHandler(this.btnCompraDeBono_Click_1);
             // 
             // btnRegistrarLlegada
@@ -85,6 +86,9 @@
             this.btnRegistrarLlegada.Text = "Registrar Llegada";
             this.btnRegistrarLlegada.UseVisualStyleBackColor = true;
             this.btnRegistrarLlegada.Click += new System.EventHandler(this.btnRegistrarLlegada_Click);
+=======
+            this.btnCompraDeBono.Click += new System.EventHandler(this.btnCompraDeBono_Click);
+>>>>>>> d52cd523849312cad650d091e7e1f3c1292727d8
             // 
             // MainWindowForm
             // 
