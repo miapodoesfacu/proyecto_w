@@ -45,12 +45,12 @@ namespace proyecto_w
             queryLogin = string.Format("SELECT usu_password, usu_estado, usu_cant_intentos FROM PROYECTO_W.Usuario WHERE usu_username='{0}'", username);
             DataTable users = connectionSQL.ejecutarQuery(queryLogin);
             if (users.Rows.Count == 1)
-            {          
+            {
                 if (users.Rows[0]["usu_estado"].ToString() == "D")
                 {
                     MessageBox.Show("Usuario Deshabilitado. Hable con el Administrador para solucionar el problema");
                 } 
-                else if (users.Rows[0]["usu_password"].ToString() != (Hash.getHashSha256(password)).ToUpper())
+                else if (users.Rows[0]["usu_password"].ToString().ToUpper() != (Hash.getHashSha256(password)).ToUpper())
                 {
                     queryLogin = string.Format("UPDATE PROYECTO_W.Usuario SET usu_cant_intentos=usu_cant_intentos+1 WHERE usu_username='{0}'", username);
                     connectionSQL.ejecutarQuery(queryLogin);
@@ -73,7 +73,6 @@ namespace proyecto_w
                 {
                     queryLogin = string.Format("SELECT R.rol_cod, R.rol_nombre FROM PROYECTO_W.Rol AS R, PROYECTO_W.RolPorUsuario AS RU WHERE RU.rolxusu_username='{0}' AND RU.rolxusu_rol_cod=R.rol_cod", username);
                     DataTable rols = connectionSQL.ejecutarQuery(queryLogin);
-                    /*TODO: Debo cargar el formulario que elije el rol en caso de tener mas de un rol*/
                     this.Hide();
                     if (rols.Rows.Count > 1)
                     {
