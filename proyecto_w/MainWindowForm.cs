@@ -71,7 +71,6 @@ namespace proyecto_w
             this.Show();
         }
 
-<<<<<<< HEAD
         private void btnCompraDeBono_Click_1(object sender, EventArgs e)
         {
 
@@ -85,8 +84,5 @@ namespace proyecto_w
             this.Show();
 
         }
-       
-=======
->>>>>>> d52cd523849312cad650d091e7e1f3c1292727d8
     }
 }
