@@ -123,7 +123,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(792, 153);
+            this.ClientSize = new System.Drawing.Size(792, 172);
             this.Controls.Add(this.lblCDB_Status);
             this.Controls.Add(this.lblCDB_CantPagar);
             this.Controls.Add(this.btnCDB_RealizarCompra);

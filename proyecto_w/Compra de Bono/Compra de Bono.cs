@@ -31,10 +31,13 @@ namespace proyecto_w.Compra_de_Bono
             // CHEQUEAR AFIL_NRO, CANTIDAD > 0 , ANTES DE ENVIAR LA QUERY
             lblCDB_Status.Text = "HACIENDO";
             ConexionSQL connectionSQL = ConexionSQL.Instance;
+            uint PLAN_COD, SUMA;
+
+            DateTime fecha = new DateTime(2014,9,9); //Fecha del sys
                                    
             String queryCompra = string.Format("exec PROYECTO_W.SP_COMPRABONOADMIN {0},'{1}',{2},'2014-9-9'",
                 txtCDB_AfilNro.Text, cmbCDB_Tipo.Text, txtCDB_Cantidad.Text);
-            String querySuma = string.Format("SELECT PROYECTO_W.F_COMPRABONO_SUMA_ULTIMA ({0},'{1}',{2},'2014-9-9')",
+            String queryDatos = string.Format("SELECT * FROM PROYECTO_W.F_COMPRABONO_DATOS ({0},'{1}',{2},'2014-9-9')",
                 txtCDB_AfilNro.Text, cmbCDB_Tipo.Text, txtCDB_Cantidad.Text);
             // TENDRIA QUE ENVIARSE LA FECHA ACTUAL, PERO ESTAMO PROBANDO NOMA
             
@@ -49,8 +52,11 @@ namespace proyecto_w.Compra_de_Bono
              }
             if (lblCDB_Status.Text != "Datos no validos")
             {
-                DataTable suma = connectionSQL.ejecutarQuery(querySuma);
-                lblCDB_Status.Text = "Compra realizada, suma a pagar: " + suma.Rows[0][0].ToString();
+                DataTable datosCompra = connectionSQL.ejecutarQuery(queryDatos);
+                lblCDB_Status.Text = "Compra realizada, suma a pagar: " + datosCompra.Rows[0][0].ToString() + 
+                        ". Plan: " + datosCompra.Rows[0][1].ToString();
+                if (cmbCDB_Tipo.Text == "Farmacia")
+                    lblCDB_Status.Text = lblCDB_Status.Text + ". \nFecha vencimiento: " + fecha.AddDays(60).ToString();
             }
             
         }
