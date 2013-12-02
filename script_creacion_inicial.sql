@@ -502,7 +502,30 @@ FROM gd_esquema.Maestra
 WHERE Especialidad_Codigo IS NOT NULL
 GO
 
--- MIGRACION TURNOS PEDIDOS PACIENTE
+-- MIGRACION AGENDA
+INSERT INTO PROYECTO_W.AgendaProfesional
+SELECT prof_cod
+FROM PROYECTO_W.Profesional
+GO
+
+-- MIGRACION FECHA
+DECLARE @FECHA_ACTUAL DATETIME = '2013-01-01 00:00:00.00'	-- fecha , esa que saldria de config
+INSERT INTO PROYECTO_W.Fecha (fecha_agen_cod, fecha_fecha)
+SELECT DISTINCT agen_cod, CAST(Turno_Fecha AS DATE) AS Dia
+FROM gd_esquema.Maestra, PROYECTO_W.Profesional, PROYECTO_W.AgendaProfesional
+WHERE prof_doc_nro = Medico_Dni AND prof_cod = agen_prof_cod AND Bono_Consulta_Numero IS NULL AND Turno_Numero IS NOT NULL AND Turno_Fecha > @FECHA_ACTUAL
+GO
+
+-- MIGRACION RANGOHORARIO
+DECLARE @FECHA_ACTUAL DATETIME = '2013-01-01 00:00:00.00'	-- fecha , esa que saldria de config
+INSERT INTO PROYECTO_W.RangoHorario (hora_agen_cod, hora_fecha, hora_inicio, hora_fin)
+SELECT agen_cod, CAST(Turno_Fecha AS DATE) AS Dia, MIN(Turno_Fecha) AS Primer_Consulta, MAX(Turno_Fecha) AS Ultima_Consulta
+FROM gd_esquema.Maestra, PROYECTO_W.AgendaProfesional, PROYECTO_W.Profesional
+WHERE Medico_Dni = prof_doc_nro AND agen_prof_cod = prof_cod AND Bono_Consulta_Numero IS NULL AND Turno_Numero IS NOT NULL AND Turno_Fecha > @FECHA_ACTUAL
+GROUP BY agen_cod, CAST(Turno_Fecha AS DATE)
+GO
+
+-- MIGRACION TURNOS
 INSERT INTO [PROYECTO_W].[Turno] (turno_nro, turno_afil_nro, turno_fecha, turno_prof_cod,turno_esp_cod) 
 SELECT DISTINCT MAE.Turno_Numero, AFI.afil_nro, MAE.Turno_Fecha, PRO.prof_cod, MAE.Especialidad_Codigo
 FROM gd_esquema.Maestra AS MAE
@@ -511,7 +534,7 @@ JOIN PROYECTO_W.Profesional AS PRO ON MAE.Medico_Dni = PRO.prof_doc_nro
 WHERE MAE.Turno_Numero IS NOT NULL
 GO -- PEDIDOS ES EL ESTADO POR DEFAULT
 
-DECLARE @FECHA_ACTUAL DATETIME = '2014-01-01 00:00:00.00'	-- fecha , esa que saldria de config
+DECLARE @FECHA_ACTUAL DATETIME = '2013-01-01 00:00:00.00'	-- fecha , esa que saldria de config
 UPDATE [PROYECTO_W].[Turno] SET turno_estado='N'			-- Turnos antes de la fecha que no fueron atendidos (No se presento)
 WHERE Turno_Fecha <= @FECHA_ACTUAL AND turno_nro NOT IN
 (
