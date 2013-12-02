@@ -354,9 +354,11 @@ CREATE TABLE [PROYECTO_W].[Turno]
         [turno_fecha] [datetime] NOT NULL,
         [turno_prof_cod] [bigint] NOT NULL,
         [turno_esp_cod] [numeric](18, 0) NOT NULL,
+        [turno_agen_cod] [bigint] NOT NULL,
         FOREIGN KEY([turno_afil_nro]) REFERENCES [PROYECTO_W].[Afiliado] ([afil_nro]),
         FOREIGN KEY([turno_prof_cod]) REFERENCES [PROYECTO_W].[Profesional] ([prof_cod]),
         FOREIGN KEY([turno_esp_cod]) REFERENCES [PROYECTO_W].[Especialidad] ([esp_cod]),
+        FOREIGN KEY ([turno_agen_cod]) REFERENCES [PROYECTO_W].[AgendaProfesional],
         UNIQUE (turno_fecha, turno_prof_cod), --no puede estar en dos lugares a la vez el profesional
         PRIMARY KEY (turno_nro)
 )
@@ -526,11 +528,12 @@ GROUP BY agen_cod, CAST(Turno_Fecha AS DATE)
 GO
 
 -- MIGRACION TURNOS
-INSERT INTO [PROYECTO_W].[Turno] (turno_nro, turno_afil_nro, turno_fecha, turno_prof_cod,turno_esp_cod) 
-SELECT DISTINCT MAE.Turno_Numero, AFI.afil_nro, MAE.Turno_Fecha, PRO.prof_cod, MAE.Especialidad_Codigo
+INSERT INTO [PROYECTO_W].[Turno] (turno_nro, turno_afil_nro, turno_fecha, turno_prof_cod,turno_esp_cod, turno_agen_cod) 
+SELECT DISTINCT MAE.Turno_Numero, AFI.afil_nro, MAE.Turno_Fecha, PRO.prof_cod, MAE.Especialidad_Codigo, AGEN.agen_cod
 FROM gd_esquema.Maestra AS MAE
 JOIN PROYECTO_W.Afiliado AS AFI ON MAE.Paciente_Dni = AFI.afil_doc_nro
 JOIN PROYECTO_W.Profesional AS PRO ON MAE.Medico_Dni = PRO.prof_doc_nro
+JOIN PROYECTO_W.AgendaProfesional AS AGEN ON AGEN.agen_prof_cod = PRO.prof_cod
 WHERE MAE.Turno_Numero IS NOT NULL
 GO -- PEDIDOS ES EL ESTADO POR DEFAULT
 
