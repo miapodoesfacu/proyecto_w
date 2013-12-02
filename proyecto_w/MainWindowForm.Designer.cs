@@ -33,6 +33,7 @@
             this.btnABMProfesional = new System.Windows.Forms.Button();
             this.btnCompraDeBono = new System.Windows.Forms.Button();
             this.btnRegistrarLlegada = new System.Windows.Forms.Button();
+            this.btnCancelarAtencion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnABMAfiliado
@@ -86,11 +87,22 @@
             this.btnRegistrarLlegada.UseVisualStyleBackColor = true;
             this.btnRegistrarLlegada.Click += new System.EventHandler(this.btnRegistrarLlegada_Click);
             // 
+            // btnCancelarAtencion
+            // 
+            this.btnCancelarAtencion.Location = new System.Drawing.Point(12, 114);
+            this.btnCancelarAtencion.Name = "btnCancelarAtencion";
+            this.btnCancelarAtencion.Size = new System.Drawing.Size(121, 23);
+            this.btnCancelarAtencion.TabIndex = 5;
+            this.btnCancelarAtencion.Text = "Cancelar Atencion";
+            this.btnCancelarAtencion.UseVisualStyleBackColor = true;
+            this.btnCancelarAtencion.Click += new System.EventHandler(this.btnCancelarAtencion_Click);
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 289);
+            this.Controls.Add(this.btnCancelarAtencion);
             this.Controls.Add(this.btnRegistrarLlegada);
             this.Controls.Add(this.btnCompraDeBono);
             this.Controls.Add(this.btnABMProfesional);
@@ -112,5 +124,6 @@
         private System.Windows.Forms.Button btnABMProfesional;
         private System.Windows.Forms.Button btnCompraDeBono;
         private System.Windows.Forms.Button btnRegistrarLlegada;
+        private System.Windows.Forms.Button btnCancelarAtencion;
     }
 }

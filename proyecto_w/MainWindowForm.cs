@@ -11,6 +11,7 @@ using proyecto_w.ABM_Rol;
 using proyecto_w.ABM_Profesional;
 using proyecto_w.Compra_de_Bono;
 using proyecto_w.Registro_de_Llegada;
+using proyecto_w.Cancelar_Atencion;
 
 namespace proyecto_w
 {
@@ -83,6 +84,14 @@ namespace proyecto_w
             llegadaForm.ShowDialog();
             this.Show();
 
+        }
+
+        private void btnCancelarAtencion_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmCancelarAtencion cancelarAtencionForm = new frmCancelarAtencion();
+            cancelarAtencionForm.ShowDialog();
+            this.Show();
         }
     }
 }

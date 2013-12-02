@@ -84,6 +84,12 @@
     <Compile Include="ABM Rol\ModificarRolForm.Designer.cs">
       <DependentUpon>ModificarRolForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cancelar Atencion\cancelarAtencion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cancelar Atencion\cancelarAtencion.Designer.cs">
+      <DependentUpon>cancelarAtencion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Compra de Bono\Compra de Bono.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,6 +133,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ABM Rol\ModificarRolForm.resx">
       <DependentUpon>ModificarRolForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cancelar Atencion\cancelarAtencion.resx">
+      <DependentUpon>cancelarAtencion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Compra de Bono\Compra de Bono.resx">
       <DependentUpon>Compra de Bono.cs</DependentUpon>
