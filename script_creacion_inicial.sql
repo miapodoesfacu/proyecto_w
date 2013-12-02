@@ -41,7 +41,13 @@ BEGIN
 
         IF OBJECT_ID('[PROYECTO_W].[TipoEspecialidad]') IS NOT NULL
                 DROP TABLE [PROYECTO_W].[TipoEspecialidad] ;
+       
+        IF OBJECT_ID('[PROYECTO_W].[RangoHorario]') IS NOT NULL
+                DROP TABLE [PROYECTO_W].[RangoHorario] ;
 
+        IF OBJECT_ID('[PROYECTO_W].[Fecha]') IS NOT NULL
+                DROP TABLE [PROYECTO_W].[Fecha] ;
+                
         IF OBJECT_ID('[PROYECTO_W].[DiaDisponible]') IS NOT NULL
                 DROP TABLE [PROYECTO_W].[DiaDisponible] ;
 
@@ -55,7 +61,7 @@ BEGIN
                 DROP TABLE [PROYECTO_W].[MedicamentoPorBonoFarmacia] ;
                 
         IF OBJECT_ID('[PROYECTO_W].[Medicamento]') IS NOT NULL
-        DROP TABLE [PROYECTO_W].[Medicamento] ;
+				DROP TABLE [PROYECTO_W].[Medicamento] ;
 
         IF OBJECT_ID('[PROYECTO_W].[BonoFarmacia]') IS NOT NULL
                 DROP TABLE [PROYECTO_W].[BonoFarmacia] ;
@@ -284,22 +290,29 @@ CREATE TABLE [PROYECTO_W].[AgendaProfesional]
 (
         [agen_cod] [bigint] IDENTITY(1,1) NOT NULL,
         [agen_prof_cod] [bigint] NOT NULL,
-        [agen_fecha_inicio] [datetime] NOT NULL,
-        [agen_fecha_fin] [datetime] NOT NULL,
-        [agen_hora_inicio] [time] NOT NULL,
-        [agen_hora_fin] [time] NOT NULL,
         FOREIGN KEY([agen_prof_cod]) REFERENCES [PROYECTO_W].[Profesional] ([prof_cod]),
         PRIMARY KEY(agen_cod)
 )
 GO
 -- TODO controlar fechas y horas, que sean validas, con un trigger o algo en lo insert, o algo hacer
 
-CREATE TABLE [PROYECTO_W].[DiaDisponible]
+CREATE TABLE [PROYECTO_W].[Fecha]
 (
-        [diadisp_dia] [int] NOT NULL,
-        [diadisp_agen_cod] [bigint] NOT NULL,
-        FOREIGN KEY([diadisp_agen_cod]) REFERENCES [PROYECTO_W].[AgendaProfesional] ([agen_cod]),
-        PRIMARY KEY(diadisp_dia, diadisp_agen_cod)
+        [fecha_fecha] [date] NOT NULL,
+        [fecha_agen_cod] [bigint] NOT NULL,
+        FOREIGN KEY([fecha_agen_cod]) REFERENCES [PROYECTO_W].[AgendaProfesional] ([agen_cod]),
+        PRIMARY KEY(fecha_fecha, fecha_agen_cod)
+)
+GO
+
+CREATE TABLE [PROYECTO_W].[RangoHorario]
+(
+        [hora_inicio] [time] NOT NULL,
+        [hora_fin] [time] NOT NULL,
+        [hora_fecha] [date] NOT NULL,
+        [hora_agen_cod] [bigint] NOT NULL,
+        FOREIGN KEY([hora_fecha], [hora_agen_cod]) REFERENCES [PROYECTO_W].[Fecha] ([fecha_fecha], [fecha_agen_cod]),
+        PRIMARY KEY(hora_inicio, hora_fin, hora_fecha, hora_agen_cod)
 )
 GO
 
@@ -498,18 +511,16 @@ JOIN PROYECTO_W.Profesional AS PRO ON MAE.Medico_Dni = PRO.prof_doc_nro
 WHERE MAE.Turno_Numero IS NOT NULL
 GO -- PEDIDOS ES EL ESTADO POR DEFAULT
 
-DECLARE @FECHA_ACTUAL DATETIME = '2013-14-04'  -- fecha , esa que saldria de config
-UPDATE TUR SET turno_estado='N' -- Ni se registraron, pasó la fecha y no hay ninguna fila que diga que utilizaron bono consulta
-FROM [PROYECTO_W].[Turno] AS TUR
-WHERE NOT EXISTS
+DECLARE @FECHA_ACTUAL DATETIME = '2014-01-01 00:00:00.00'	-- fecha , esa que saldria de config
+UPDATE [PROYECTO_W].[Turno] SET turno_estado='N'			-- Turnos antes de la fecha que no fueron atendidos (No se presento)
+WHERE Turno_Fecha <= @FECHA_ACTUAL AND turno_nro NOT IN
 (
-SELECT turno_nro
-FROM gd_esquema.Maestra as MAE
-WHERE MAE.Turno_Numero = TUR.turno_nro
-AND MAE.Turno_Fecha <= @FECHA_ACTUAL AND MAE.Bono_Consulta_Numero IS NOT NULL
+SELECT Turno_Numero
+FROM gd_esquema.Maestra
+WHERE Turno_Numero IS NOT NULL AND Bono_Consulta_Numero IS NOT NULL
 )
 
-UPDATE TUR SET turno_estado='P' -- Pedido, fecha en futuro, no existe ninguna fila que diga que se registraron
+UPDATE TUR SET turno_estado='P' -- Turno despues de la fecha que no fueron atendidos pero se puede dar un alta de concretado (Pedido)
 FROM [PROYECTO_W].[Turno] AS TUR
 WHERE TUR.turno_fecha > @FECHA_ACTUAL AND NOT EXISTS
 (
@@ -518,14 +529,13 @@ FROM gd_esquema.Maestra as MAE
 WHERE MAE.Turno_Numero = TUR.turno_nro AND MAE.Bono_Consulta_Numero IS NOT NULL
 )
 
-UPDATE TUR SET turno_estado='A' -- se Atendieron, independientemente de la fecha, figuran atendidos
+UPDATE TUR SET turno_estado='A' -- Turno concretado independientemente de la fecha (Atendido)
 FROM [PROYECTO_W].[Turno] AS TUR
 WHERE EXISTS
 (
 SELECT turno_nro
 FROM gd_esquema.Maestra as MAE
-WHERE MAE.Turno_Numero = TUR.turno_nro
-AND MAE.Bono_Consulta_Numero IS NOT NULL AND MAE.Consulta_Sintomas IS NOT NULL
+WHERE MAE.Turno_Numero = TUR.turno_nro AND MAE.Bono_Consulta_Numero IS NOT NULL
 )
 GO
 
