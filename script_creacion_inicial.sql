@@ -9,6 +9,9 @@ BEGIN
 		IF OBJECT_ID('PROYECTO_W.SP_COMPRABONOADMIN') IS NOT NULL
 				DROP PROCEDURE PROYECTO_W.SP_COMPRABONOADMIN;
 				
+		IF OBJECT_ID('dbo.F_FECHA_CONFIG') IS NOT NULL
+			DROP FUNCTION dbo.F_FECHA_CONFIG;
+				
 		IF OBJECT_ID('PROYECTO_W.SP_CANCELAR') IS NOT NULL
 				DROP PROCEDURE PROYECTO_W.SP_CANCELAR;
 				
@@ -95,6 +98,9 @@ BEGIN
 
         IF OBJECT_ID('[PROYECTO_W].[Usuario]') IS NOT NULL
                 DROP TABLE [PROYECTO_W].[Usuario] ;
+                
+        IF OBJECT_ID('[PROYECTO_W].[FechaConfig]') IS NOT NULL
+                DROP TABLE [PROYECTO_W].[FechaConfig] ;
                 
         DROP SCHEMA [PROYECTO_W] ;
 END
@@ -430,6 +436,29 @@ CREATE TABLE [PROYECTO_W].[TurnoCancelacion]
 )
 GO
 
+CREATE TABLE [PROYECTO_W].[FechaConfig]
+(
+		[fechaconfig] [datetime] NOT NULL
+)
+GO
+
+--###################################INSERT-FECHA-CONFIG(DESPUES SACAR)###########################
+INSERT INTO PROYECTO_W.FechaConfig (fechaconfig)
+VALUES ('2014-01-01 00:00:00.00')
+GO
+
+--###################################FUNCION-FECHA-CONFIG#########################################
+CREATE FUNCTION F_FECHA_CONFIG()
+RETURNS DATETIME
+AS
+BEGIN
+	DECLARE @FECHA_CONFIG DATETIME
+	SET @FECHA_CONFIG = (SELECT TOP 1 fechaconfig FROM [PROYECTO_W].[FechaConfig])
+	RETURN @FECHA_CONFIG
+END
+GO
+
+
 --###################################MIGRACION####################################################
 
 USE GD2C2013
@@ -511,21 +540,21 @@ FROM PROYECTO_W.Profesional
 GO
 
 -- MIGRACION FECHA
-DECLARE @FECHA_ACTUAL DATETIME = '2013-01-01 00:00:00.00'	-- fecha , esa que saldria de config
 INSERT INTO PROYECTO_W.Fecha (fecha_agen_cod, fecha_fecha)
 SELECT DISTINCT agen_cod, CAST(Turno_Fecha AS DATE) AS Dia
 FROM gd_esquema.Maestra, PROYECTO_W.Profesional, PROYECTO_W.AgendaProfesional
-WHERE prof_doc_nro = Medico_Dni AND prof_cod = agen_prof_cod AND Bono_Consulta_Numero IS NULL AND Turno_Numero IS NOT NULL AND Turno_Fecha > @FECHA_ACTUAL
+WHERE prof_doc_nro = Medico_Dni AND prof_cod = agen_prof_cod AND Bono_Consulta_Numero IS NULL AND Turno_Numero IS NOT NULL
 GO
 
+--#########################No se migra porque se asume que la fecha config es despues del 01-01-2014#########
 -- MIGRACION RANGOHORARIO
-DECLARE @FECHA_ACTUAL DATETIME = '2013-01-01 00:00:00.00'	-- fecha , esa que saldria de config
-INSERT INTO PROYECTO_W.RangoHorario (hora_agen_cod, hora_fecha, hora_inicio, hora_fin)
-SELECT agen_cod, CAST(Turno_Fecha AS DATE) AS Dia, MIN(Turno_Fecha) AS Primer_Consulta, MAX(Turno_Fecha) AS Ultima_Consulta
-FROM gd_esquema.Maestra, PROYECTO_W.AgendaProfesional, PROYECTO_W.Profesional
-WHERE Medico_Dni = prof_doc_nro AND agen_prof_cod = prof_cod AND Bono_Consulta_Numero IS NULL AND Turno_Numero IS NOT NULL AND Turno_Fecha > @FECHA_ACTUAL
-GROUP BY agen_cod, CAST(Turno_Fecha AS DATE)
-GO
+--DECLARE @FECHA_ACTUAL DATETIME = '2014-01-01 00:00:00.00'	-- fecha , esa que saldria de config
+--INSERT INTO PROYECTO_W.RangoHorario (hora_agen_cod, hora_fecha, hora_inicio, hora_fin)
+--SELECT agen_cod, CAST(Turno_Fecha AS DATE) AS Dia, MIN(Turno_Fecha) AS Primer_Consulta, MAX(Turno_Fecha) AS Ultima_Consulta
+--FROM gd_esquema.Maestra, PROYECTO_W.AgendaProfesional, PROYECTO_W.Profesional
+--WHERE Medico_Dni = prof_doc_nro AND agen_prof_cod = prof_cod AND Bono_Consulta_Numero IS NULL AND Turno_Numero IS NOT NULL AND Turno_Fecha > @FECHA_ACTUAL
+--GROUP BY agen_cod, CAST(Turno_Fecha AS DATE)
+--GO
 
 -- MIGRACION TURNOS
 INSERT INTO [PROYECTO_W].[Turno] (turno_nro, turno_afil_nro, turno_fecha, turno_prof_cod,turno_esp_cod, turno_agen_cod) 
@@ -537,25 +566,25 @@ JOIN PROYECTO_W.AgendaProfesional AS AGEN ON AGEN.agen_prof_cod = PRO.prof_cod
 WHERE MAE.Turno_Numero IS NOT NULL
 GO -- PEDIDOS ES EL ESTADO POR DEFAULT
 
-DECLARE @FECHA_ACTUAL DATETIME = '2013-01-01 00:00:00.00'	-- fecha , esa que saldria de config
-UPDATE [PROYECTO_W].[Turno] SET turno_estado='N'			-- Turnos antes de la fecha que no fueron atendidos (No se presento)
-WHERE Turno_Fecha <= @FECHA_ACTUAL AND turno_nro NOT IN
-(
-SELECT Turno_Numero
-FROM gd_esquema.Maestra
-WHERE Turno_Numero IS NOT NULL AND Bono_Consulta_Numero IS NOT NULL
-)
+--DECLARE @FECHA_ACTUAL DATETIME = '2014-01-01 00:00:00.00'	-- fecha , esa que saldria de config
+--UPDATE [PROYECTO_W].[Turno] SET turno_estado='N'			-- Turnos antes de la fecha que no fueron atendidos (No se presento)
+--WHERE Turno_Fecha <= @FECHA_ACTUAL AND turno_nro NOT IN
+--(
+--SELECT Turno_Numero
+--FROM gd_esquema.Maestra
+--WHERE Turno_Numero IS NOT NULL AND Bono_Consulta_Numero IS NOT NULL
+--)
 
-UPDATE TUR SET turno_estado='P' -- Turno despues de la fecha que no fueron atendidos pero se puede dar un alta de concretado (Pedido)
+UPDATE TUR SET turno_estado='N' -- Turno que no fueron atendidos (No atendidos)
 FROM [PROYECTO_W].[Turno] AS TUR
-WHERE TUR.turno_fecha > @FECHA_ACTUAL AND NOT EXISTS
+WHERE NOT EXISTS
 (
 SELECT turno_nro
 FROM gd_esquema.Maestra as MAE
 WHERE MAE.Turno_Numero = TUR.turno_nro AND MAE.Bono_Consulta_Numero IS NOT NULL
 )
 
-UPDATE TUR SET turno_estado='A' -- Turno concretado independientemente de la fecha (Atendido)
+UPDATE TUR SET turno_estado='A' -- Turno concretado (Atendido)
 FROM [PROYECTO_W].[Turno] AS TUR
 WHERE EXISTS
 (
