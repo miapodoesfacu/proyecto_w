@@ -34,6 +34,7 @@
             this.btnCompraDeBono = new System.Windows.Forms.Button();
             this.btnRegistrarLlegada = new System.Windows.Forms.Button();
             this.btnCancelarAtencion = new System.Windows.Forms.Button();
+            this.btnRegistrarAgenda = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnABMAfiliado
@@ -97,11 +98,22 @@
             this.btnCancelarAtencion.UseVisualStyleBackColor = true;
             this.btnCancelarAtencion.Click += new System.EventHandler(this.btnCancelarAtencion_Click);
             // 
+            // btnRegistrarAgenda
+            // 
+            this.btnRegistrarAgenda.Location = new System.Drawing.Point(12, 154);
+            this.btnRegistrarAgenda.Name = "btnRegistrarAgenda";
+            this.btnRegistrarAgenda.Size = new System.Drawing.Size(132, 23);
+            this.btnRegistrarAgenda.TabIndex = 6;
+            this.btnRegistrarAgenda.Text = "Registrar Agenda";
+            this.btnRegistrarAgenda.UseVisualStyleBackColor = true;
+            this.btnRegistrarAgenda.Click += new System.EventHandler(this.btnRegistrarAgenda_Click);
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 289);
+            this.Controls.Add(this.btnRegistrarAgenda);
             this.Controls.Add(this.btnCancelarAtencion);
             this.Controls.Add(this.btnRegistrarLlegada);
             this.Controls.Add(this.btnCompraDeBono);
@@ -125,5 +137,6 @@
         private System.Windows.Forms.Button btnCompraDeBono;
         private System.Windows.Forms.Button btnRegistrarLlegada;
         private System.Windows.Forms.Button btnCancelarAtencion;
+        private System.Windows.Forms.Button btnRegistrarAgenda;
     }
 }

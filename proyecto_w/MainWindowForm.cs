@@ -12,6 +12,7 @@ using proyecto_w.ABM_Profesional;
 using proyecto_w.Compra_de_Bono;
 using proyecto_w.Registro_de_Llegada;
 using proyecto_w.Cancelar_Atencion;
+using proyecto_w.Registrar_Agenda;
 
 namespace proyecto_w
 {
@@ -64,11 +65,6 @@ namespace proyecto_w
 
         }
 
-        private void btnCompraDeBono_Click(object sender, EventArgs e)
-        {
-         
-        }
-
         private void btnCompraDeBono_Click_1(object sender, EventArgs e)
         {
             this.Hide();
@@ -91,6 +87,14 @@ namespace proyecto_w
             this.Hide();
             frmCancelarAtencion cancelarAtencionForm = new frmCancelarAtencion();
             cancelarAtencionForm.ShowDialog();
+            this.Show();
+        }
+
+        private void btnRegistrarAgenda_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            frmRegistrarAgenda registrarAgendaForm = new frmRegistrarAgenda();
+            registrarAgendaForm.ShowDialog();
             this.Show();
         }
     }
