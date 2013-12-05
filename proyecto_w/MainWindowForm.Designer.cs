@@ -70,7 +70,7 @@
             // 
             // btnCompraDeBono
             // 
-            this.btnCompraDeBono.Location = new System.Drawing.Point(12, 44);
+            this.btnCompraDeBono.Location = new System.Drawing.Point(12, 46);
             this.btnCompraDeBono.Name = "btnCompraDeBono";
             this.btnCompraDeBono.Size = new System.Drawing.Size(121, 23);
             this.btnCompraDeBono.TabIndex = 3;
@@ -80,7 +80,7 @@
             // 
             // btnRegistrarLlegada
             // 
-            this.btnRegistrarLlegada.Location = new System.Drawing.Point(12, 75);
+            this.btnRegistrarLlegada.Location = new System.Drawing.Point(12, 85);
             this.btnRegistrarLlegada.Name = "btnRegistrarLlegada";
             this.btnRegistrarLlegada.Size = new System.Drawing.Size(99, 23);
             this.btnRegistrarLlegada.TabIndex = 4;
@@ -90,7 +90,7 @@
             // 
             // btnCancelarAtencion
             // 
-            this.btnCancelarAtencion.Location = new System.Drawing.Point(12, 114);
+            this.btnCancelarAtencion.Location = new System.Drawing.Point(12, 124);
             this.btnCancelarAtencion.Name = "btnCancelarAtencion";
             this.btnCancelarAtencion.Size = new System.Drawing.Size(121, 23);
             this.btnCancelarAtencion.TabIndex = 5;
@@ -100,7 +100,7 @@
             // 
             // btnRegistrarAgenda
             // 
-            this.btnRegistrarAgenda.Location = new System.Drawing.Point(12, 154);
+            this.btnRegistrarAgenda.Location = new System.Drawing.Point(12, 163);
             this.btnRegistrarAgenda.Name = "btnRegistrarAgenda";
             this.btnRegistrarAgenda.Size = new System.Drawing.Size(132, 23);
             this.btnRegistrarAgenda.TabIndex = 6;

@@ -29,252 +29,279 @@
         private void InitializeComponent()
         {
             this.txtProfCod = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.checkBox3 = new System.Windows.Forms.CheckBox();
-            this.checkBox4 = new System.Windows.Forms.CheckBox();
-            this.checkBox5 = new System.Windows.Forms.CheckBox();
-            this.checkBox6 = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.comboBox6 = new System.Windows.Forms.ComboBox();
-            this.comboBox7 = new System.Windows.Forms.ComboBox();
-            this.comboBox8 = new System.Windows.Forms.ComboBox();
-            this.comboBox9 = new System.Windows.Forms.ComboBox();
-            this.comboBox10 = new System.Windows.Forms.ComboBox();
-            this.comboBox11 = new System.Windows.Forms.ComboBox();
-            this.comboBox12 = new System.Windows.Forms.ComboBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.checkLunes = new System.Windows.Forms.CheckBox();
+            this.checkMartes = new System.Windows.Forms.CheckBox();
+            this.checkMie = new System.Windows.Forms.CheckBox();
+            this.checkJue = new System.Windows.Forms.CheckBox();
+            this.checkVie = new System.Windows.Forms.CheckBox();
+            this.checkSa = new System.Windows.Forms.CheckBox();
+            this.cbxLun_ini = new System.Windows.Forms.ComboBox();
+            this.cbxLun_fin = new System.Windows.Forms.ComboBox();
+            this.cbxMa_ini = new System.Windows.Forms.ComboBox();
+            this.cbxMa_fin = new System.Windows.Forms.ComboBox();
+            this.cbxMi_ini = new System.Windows.Forms.ComboBox();
+            this.cbxMi_fin = new System.Windows.Forms.ComboBox();
+            this.cbxJu_ini = new System.Windows.Forms.ComboBox();
+            this.cbxJu_fin = new System.Windows.Forms.ComboBox();
+            this.cbxVi_ini = new System.Windows.Forms.ComboBox();
+            this.cbxVi_fin = new System.Windows.Forms.ComboBox();
+            this.cbxSa_ini = new System.Windows.Forms.ComboBox();
+            this.cbxSa_fin = new System.Windows.Forms.ComboBox();
+            this.btnRegistrar = new System.Windows.Forms.Button();
+            this.dtp_ini = new System.Windows.Forms.DateTimePicker();
+            this.dtp_fin = new System.Windows.Forms.DateTimePicker();
+            this.lbl_dni = new System.Windows.Forms.Label();
+            this.lblStatus = new System.Windows.Forms.Label();
+            this.gridTesting = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.gridTesting)).BeginInit();
             this.SuspendLayout();
             // 
             // txtProfCod
             // 
-            this.txtProfCod.Location = new System.Drawing.Point(12, 12);
+            this.txtProfCod.Location = new System.Drawing.Point(47, 12);
             this.txtProfCod.Name = "txtProfCod";
             this.txtProfCod.Size = new System.Drawing.Size(100, 20);
             this.txtProfCod.TabIndex = 0;
             // 
-            // checkBox1
+            // checkLunes
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(12, 56);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(80, 17);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkLunes.AutoSize = true;
+            this.checkLunes.Location = new System.Drawing.Point(12, 44);
+            this.checkLunes.Name = "checkLunes";
+            this.checkLunes.Size = new System.Drawing.Size(55, 17);
+            this.checkLunes.TabIndex = 1;
+            this.checkLunes.Text = "Lunes";
+            this.checkLunes.UseVisualStyleBackColor = true;
             // 
-            // checkBox2
+            // checkMartes
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(12, 88);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(80, 17);
-            this.checkBox2.TabIndex = 2;
-            this.checkBox2.Text = "checkBox2";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkMartes.AutoSize = true;
+            this.checkMartes.Location = new System.Drawing.Point(12, 67);
+            this.checkMartes.Name = "checkMartes";
+            this.checkMartes.Size = new System.Drawing.Size(58, 17);
+            this.checkMartes.TabIndex = 2;
+            this.checkMartes.Text = "Martes";
+            this.checkMartes.UseVisualStyleBackColor = true;
             // 
-            // checkBox3
+            // checkMie
             // 
-            this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(12, 125);
-            this.checkBox3.Name = "checkBox3";
-            this.checkBox3.Size = new System.Drawing.Size(80, 17);
-            this.checkBox3.TabIndex = 3;
-            this.checkBox3.Text = "checkBox3";
-            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkMie.AutoSize = true;
+            this.checkMie.Location = new System.Drawing.Point(12, 92);
+            this.checkMie.Name = "checkMie";
+            this.checkMie.Size = new System.Drawing.Size(71, 17);
+            this.checkMie.TabIndex = 3;
+            this.checkMie.Text = "Miércoles";
+            this.checkMie.UseVisualStyleBackColor = true;
             // 
-            // checkBox4
+            // checkJue
             // 
-            this.checkBox4.AutoSize = true;
-            this.checkBox4.Location = new System.Drawing.Point(12, 164);
-            this.checkBox4.Name = "checkBox4";
-            this.checkBox4.Size = new System.Drawing.Size(80, 17);
-            this.checkBox4.TabIndex = 4;
-            this.checkBox4.Text = "checkBox4";
-            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkJue.AutoSize = true;
+            this.checkJue.Location = new System.Drawing.Point(12, 115);
+            this.checkJue.Name = "checkJue";
+            this.checkJue.Size = new System.Drawing.Size(60, 17);
+            this.checkJue.TabIndex = 4;
+            this.checkJue.Text = "Jueves";
+            this.checkJue.UseVisualStyleBackColor = true;
             // 
-            // checkBox5
+            // checkVie
             // 
-            this.checkBox5.AutoSize = true;
-            this.checkBox5.Location = new System.Drawing.Point(12, 205);
-            this.checkBox5.Name = "checkBox5";
-            this.checkBox5.Size = new System.Drawing.Size(80, 17);
-            this.checkBox5.TabIndex = 5;
-            this.checkBox5.Text = "checkBox5";
-            this.checkBox5.UseVisualStyleBackColor = true;
+            this.checkVie.AutoSize = true;
+            this.checkVie.Location = new System.Drawing.Point(12, 138);
+            this.checkVie.Name = "checkVie";
+            this.checkVie.Size = new System.Drawing.Size(61, 17);
+            this.checkVie.TabIndex = 5;
+            this.checkVie.Text = "Viernes";
+            this.checkVie.UseVisualStyleBackColor = true;
             // 
-            // checkBox6
+            // checkSa
             // 
-            this.checkBox6.AutoSize = true;
-            this.checkBox6.Location = new System.Drawing.Point(12, 244);
-            this.checkBox6.Name = "checkBox6";
-            this.checkBox6.Size = new System.Drawing.Size(80, 17);
-            this.checkBox6.TabIndex = 6;
-            this.checkBox6.Text = "checkBox6";
-            this.checkBox6.UseVisualStyleBackColor = true;
+            this.checkSa.AutoSize = true;
+            this.checkSa.Location = new System.Drawing.Point(12, 161);
+            this.checkSa.Name = "checkSa";
+            this.checkSa.Size = new System.Drawing.Size(63, 17);
+            this.checkSa.TabIndex = 6;
+            this.checkSa.Text = "Sábado";
+            this.checkSa.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // cbxLun_ini
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(137, 52);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 21);
-            this.comboBox1.TabIndex = 7;
+            this.cbxLun_ini.FormattingEnabled = true;
+            this.cbxLun_ini.Location = new System.Drawing.Point(137, 42);
+            this.cbxLun_ini.Name = "cbxLun_ini";
+            this.cbxLun_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxLun_ini.TabIndex = 7;
             // 
-            // comboBox2
+            // cbxLun_fin
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(300, 52);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(121, 21);
-            this.comboBox2.TabIndex = 8;
+            this.cbxLun_fin.FormattingEnabled = true;
+            this.cbxLun_fin.Location = new System.Drawing.Point(300, 42);
+            this.cbxLun_fin.Name = "cbxLun_fin";
+            this.cbxLun_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxLun_fin.TabIndex = 8;
             // 
-            // comboBox3
+            // cbxMa_ini
             // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(137, 86);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(121, 21);
-            this.comboBox3.TabIndex = 9;
+            this.cbxMa_ini.FormattingEnabled = true;
+            this.cbxMa_ini.Location = new System.Drawing.Point(137, 65);
+            this.cbxMa_ini.Name = "cbxMa_ini";
+            this.cbxMa_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxMa_ini.TabIndex = 9;
             // 
-            // comboBox4
+            // cbxMa_fin
             // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(300, 88);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(121, 21);
-            this.comboBox4.TabIndex = 10;
+            this.cbxMa_fin.FormattingEnabled = true;
+            this.cbxMa_fin.Location = new System.Drawing.Point(300, 65);
+            this.cbxMa_fin.Name = "cbxMa_fin";
+            this.cbxMa_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxMa_fin.TabIndex = 10;
             // 
-            // comboBox5
+            // cbxMi_ini
             // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(137, 125);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(121, 21);
-            this.comboBox5.TabIndex = 11;
+            this.cbxMi_ini.FormattingEnabled = true;
+            this.cbxMi_ini.Location = new System.Drawing.Point(137, 90);
+            this.cbxMi_ini.Name = "cbxMi_ini";
+            this.cbxMi_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxMi_ini.TabIndex = 11;
             // 
-            // comboBox6
+            // cbxMi_fin
             // 
-            this.comboBox6.FormattingEnabled = true;
-            this.comboBox6.Location = new System.Drawing.Point(300, 125);
-            this.comboBox6.Name = "comboBox6";
-            this.comboBox6.Size = new System.Drawing.Size(121, 21);
-            this.comboBox6.TabIndex = 12;
+            this.cbxMi_fin.FormattingEnabled = true;
+            this.cbxMi_fin.Location = new System.Drawing.Point(300, 90);
+            this.cbxMi_fin.Name = "cbxMi_fin";
+            this.cbxMi_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxMi_fin.TabIndex = 12;
             // 
-            // comboBox7
+            // cbxJu_ini
             // 
-            this.comboBox7.FormattingEnabled = true;
-            this.comboBox7.Location = new System.Drawing.Point(137, 160);
-            this.comboBox7.Name = "comboBox7";
-            this.comboBox7.Size = new System.Drawing.Size(121, 21);
-            this.comboBox7.TabIndex = 13;
+            this.cbxJu_ini.FormattingEnabled = true;
+            this.cbxJu_ini.Location = new System.Drawing.Point(137, 113);
+            this.cbxJu_ini.Name = "cbxJu_ini";
+            this.cbxJu_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxJu_ini.TabIndex = 13;
             // 
-            // comboBox8
+            // cbxJu_fin
             // 
-            this.comboBox8.FormattingEnabled = true;
-            this.comboBox8.Location = new System.Drawing.Point(300, 160);
-            this.comboBox8.Name = "comboBox8";
-            this.comboBox8.Size = new System.Drawing.Size(121, 21);
-            this.comboBox8.TabIndex = 14;
+            this.cbxJu_fin.FormattingEnabled = true;
+            this.cbxJu_fin.Location = new System.Drawing.Point(300, 113);
+            this.cbxJu_fin.Name = "cbxJu_fin";
+            this.cbxJu_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxJu_fin.TabIndex = 14;
             // 
-            // comboBox9
+            // cbxVi_ini
             // 
-            this.comboBox9.FormattingEnabled = true;
-            this.comboBox9.Location = new System.Drawing.Point(137, 201);
-            this.comboBox9.Name = "comboBox9";
-            this.comboBox9.Size = new System.Drawing.Size(121, 21);
-            this.comboBox9.TabIndex = 15;
+            this.cbxVi_ini.FormattingEnabled = true;
+            this.cbxVi_ini.Location = new System.Drawing.Point(137, 136);
+            this.cbxVi_ini.Name = "cbxVi_ini";
+            this.cbxVi_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxVi_ini.TabIndex = 15;
             // 
-            // comboBox10
+            // cbxVi_fin
             // 
-            this.comboBox10.FormattingEnabled = true;
-            this.comboBox10.Location = new System.Drawing.Point(300, 203);
-            this.comboBox10.Name = "comboBox10";
-            this.comboBox10.Size = new System.Drawing.Size(121, 21);
-            this.comboBox10.TabIndex = 16;
+            this.cbxVi_fin.FormattingEnabled = true;
+            this.cbxVi_fin.Location = new System.Drawing.Point(300, 136);
+            this.cbxVi_fin.Name = "cbxVi_fin";
+            this.cbxVi_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxVi_fin.TabIndex = 16;
             // 
-            // comboBox11
+            // cbxSa_ini
             // 
-            this.comboBox11.FormattingEnabled = true;
-            this.comboBox11.Location = new System.Drawing.Point(137, 242);
-            this.comboBox11.Name = "comboBox11";
-            this.comboBox11.Size = new System.Drawing.Size(121, 21);
-            this.comboBox11.TabIndex = 17;
+            this.cbxSa_ini.FormattingEnabled = true;
+            this.cbxSa_ini.Location = new System.Drawing.Point(137, 159);
+            this.cbxSa_ini.Name = "cbxSa_ini";
+            this.cbxSa_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxSa_ini.TabIndex = 17;
             // 
-            // comboBox12
+            // cbxSa_fin
             // 
-            this.comboBox12.FormattingEnabled = true;
-            this.comboBox12.Location = new System.Drawing.Point(300, 240);
-            this.comboBox12.Name = "comboBox12";
-            this.comboBox12.Size = new System.Drawing.Size(121, 21);
-            this.comboBox12.TabIndex = 18;
+            this.cbxSa_fin.FormattingEnabled = true;
+            this.cbxSa_fin.Location = new System.Drawing.Point(300, 159);
+            this.cbxSa_fin.Name = "cbxSa_fin";
+            this.cbxSa_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxSa_fin.TabIndex = 18;
             // 
-            // button1
+            // btnRegistrar
             // 
-            this.button1.Location = new System.Drawing.Point(300, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Location = new System.Drawing.Point(12, 243);
+            this.btnRegistrar.Name = "btnRegistrar";
+            this.btnRegistrar.Size = new System.Drawing.Size(81, 23);
+            this.btnRegistrar.TabIndex = 19;
+            this.btnRegistrar.Text = "Registrar";
+            this.btnRegistrar.UseVisualStyleBackColor = true;
+            this.btnRegistrar.Click += new System.EventHandler(this.btnRegistrar_Click);
             // 
-            // dateTimePicker1
+            // dtp_ini
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(12, 290);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker1.TabIndex = 20;
+            this.dtp_ini.Location = new System.Drawing.Point(12, 196);
+            this.dtp_ini.Name = "dtp_ini";
+            this.dtp_ini.Size = new System.Drawing.Size(200, 20);
+            this.dtp_ini.TabIndex = 20;
             // 
-            // dateTimePicker2
+            // dtp_fin
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(262, 290);
-            this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 20);
-            this.dateTimePicker2.TabIndex = 21;
+            this.dtp_fin.Location = new System.Drawing.Point(277, 196);
+            this.dtp_fin.Name = "dtp_fin";
+            this.dtp_fin.Size = new System.Drawing.Size(200, 20);
+            this.dtp_fin.TabIndex = 21;
             // 
-            // monthCalendar1
+            // lbl_dni
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(150, 322);
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 22;
+            this.lbl_dni.AutoSize = true;
+            this.lbl_dni.Location = new System.Drawing.Point(12, 15);
+            this.lbl_dni.Name = "lbl_dni";
+            this.lbl_dni.Size = new System.Drawing.Size(29, 13);
+            this.lbl_dni.TabIndex = 22;
+            this.lbl_dni.Text = "DNI:";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.AutoSize = true;
+            this.lblStatus.Location = new System.Drawing.Point(106, 228);
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(35, 13);
+            this.lblStatus.TabIndex = 23;
+            this.lblStatus.Text = "label1";
+            // 
+            // gridTesting
+            // 
+            this.gridTesting.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridTesting.Location = new System.Drawing.Point(18, 295);
+            this.gridTesting.Name = "gridTesting";
+            this.gridTesting.Size = new System.Drawing.Size(459, 231);
+            this.gridTesting.TabIndex = 24;
             // 
             // frmRegistrarAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(489, 489);
-            this.Controls.Add(this.monthCalendar1);
-            this.Controls.Add(this.dateTimePicker2);
-            this.Controls.Add(this.dateTimePicker1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.comboBox12);
-            this.Controls.Add(this.comboBox11);
-            this.Controls.Add(this.comboBox10);
-            this.Controls.Add(this.comboBox9);
-            this.Controls.Add(this.comboBox8);
-            this.Controls.Add(this.comboBox7);
-            this.Controls.Add(this.comboBox6);
-            this.Controls.Add(this.comboBox5);
-            this.Controls.Add(this.comboBox4);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.checkBox6);
-            this.Controls.Add(this.checkBox5);
-            this.Controls.Add(this.checkBox4);
-            this.Controls.Add(this.checkBox3);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
+            this.ClientSize = new System.Drawing.Size(495, 547);
+            this.Controls.Add(this.gridTesting);
+            this.Controls.Add(this.lblStatus);
+            this.Controls.Add(this.lbl_dni);
+            this.Controls.Add(this.dtp_fin);
+            this.Controls.Add(this.dtp_ini);
+            this.Controls.Add(this.btnRegistrar);
+            this.Controls.Add(this.cbxSa_fin);
+            this.Controls.Add(this.cbxSa_ini);
+            this.Controls.Add(this.cbxVi_fin);
+            this.Controls.Add(this.cbxVi_ini);
+            this.Controls.Add(this.cbxJu_fin);
+            this.Controls.Add(this.cbxJu_ini);
+            this.Controls.Add(this.cbxMi_fin);
+            this.Controls.Add(this.cbxMi_ini);
+            this.Controls.Add(this.cbxMa_fin);
+            this.Controls.Add(this.cbxMa_ini);
+            this.Controls.Add(this.cbxLun_fin);
+            this.Controls.Add(this.cbxLun_ini);
+            this.Controls.Add(this.checkSa);
+            this.Controls.Add(this.checkVie);
+            this.Controls.Add(this.checkJue);
+            this.Controls.Add(this.checkMie);
+            this.Controls.Add(this.checkMartes);
+            this.Controls.Add(this.checkLunes);
             this.Controls.Add(this.txtProfCod);
             this.Name = "frmRegistrarAgenda";
             this.Text = "RegistrarAgenda";
+            ((System.ComponentModel.ISupportInitialize)(this.gridTesting)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -283,27 +310,29 @@
         #endregion
 
         private System.Windows.Forms.TextBox txtProfCod;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
-        private System.Windows.Forms.CheckBox checkBox3;
-        private System.Windows.Forms.CheckBox checkBox4;
-        private System.Windows.Forms.CheckBox checkBox5;
-        private System.Windows.Forms.CheckBox checkBox6;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox3;
-        private System.Windows.Forms.ComboBox comboBox4;
-        private System.Windows.Forms.ComboBox comboBox5;
-        private System.Windows.Forms.ComboBox comboBox6;
-        private System.Windows.Forms.ComboBox comboBox7;
-        private System.Windows.Forms.ComboBox comboBox8;
-        private System.Windows.Forms.ComboBox comboBox9;
-        private System.Windows.Forms.ComboBox comboBox10;
-        private System.Windows.Forms.ComboBox comboBox11;
-        private System.Windows.Forms.ComboBox comboBox12;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.DateTimePicker dateTimePicker2;
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.CheckBox checkLunes;
+        private System.Windows.Forms.CheckBox checkMartes;
+        private System.Windows.Forms.CheckBox checkMie;
+        private System.Windows.Forms.CheckBox checkJue;
+        private System.Windows.Forms.CheckBox checkVie;
+        private System.Windows.Forms.CheckBox checkSa;
+        private System.Windows.Forms.ComboBox cbxLun_ini;
+        private System.Windows.Forms.ComboBox cbxLun_fin;
+        private System.Windows.Forms.ComboBox cbxMa_ini;
+        private System.Windows.Forms.ComboBox cbxMa_fin;
+        private System.Windows.Forms.ComboBox cbxMi_ini;
+        private System.Windows.Forms.ComboBox cbxMi_fin;
+        private System.Windows.Forms.ComboBox cbxJu_ini;
+        private System.Windows.Forms.ComboBox cbxJu_fin;
+        private System.Windows.Forms.ComboBox cbxVi_ini;
+        private System.Windows.Forms.ComboBox cbxVi_fin;
+        private System.Windows.Forms.ComboBox cbxSa_ini;
+        private System.Windows.Forms.ComboBox cbxSa_fin;
+        private System.Windows.Forms.Button btnRegistrar;
+        private System.Windows.Forms.DateTimePicker dtp_ini;
+        private System.Windows.Forms.DateTimePicker dtp_fin;
+        private System.Windows.Forms.Label lbl_dni;
+        private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.DataGridView gridTesting;
     }
 }
