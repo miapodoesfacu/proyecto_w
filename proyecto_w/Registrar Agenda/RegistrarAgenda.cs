@@ -115,7 +115,7 @@ namespace proyecto_w.Registrar_Agenda
             // LUNES
             if (checkLunes.Checked)
             {
-                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.VarChar).Value = "Lunes";
+                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.Int).Value = 1;
                 cmd.Parameters.Add("@HORA_INI", SqlDbType.Time).Value = cbxLun_ini.Text;
                 cmd.Parameters.Add("@HORA_FIN", SqlDbType.Time).Value = cbxLun_fin.Text;
 
@@ -136,7 +136,7 @@ namespace proyecto_w.Registrar_Agenda
                 cmd.Parameters.RemoveAt("@DIA_CHECK");
                 cmd.Parameters.RemoveAt("@HORA_INI");
                 cmd.Parameters.RemoveAt("@HORA_FIN");
-                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.VarChar).Value = "Martes";
+                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.Int).Value = 2;
                 cmd.Parameters.Add("@HORA_INI", SqlDbType.Time).Value = cbxMa_ini.Text;
                 cmd.Parameters.Add("@HORA_FIN", SqlDbType.Time).Value = cbxMa_fin.Text;
 
@@ -156,7 +156,7 @@ namespace proyecto_w.Registrar_Agenda
                 cmd.Parameters.RemoveAt("@DIA_CHECK");
                 cmd.Parameters.RemoveAt("@HORA_INI");
                 cmd.Parameters.RemoveAt("@HORA_FIN");
-                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.VarChar).Value = "Miércoles";
+                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.Int).Value = 3;
                 cmd.Parameters.Add("@HORA_INI", SqlDbType.Time).Value = cbxMi_ini.Text;
                 cmd.Parameters.Add("@HORA_FIN", SqlDbType.Time).Value = cbxMi_fin.Text;
 
@@ -176,7 +176,7 @@ namespace proyecto_w.Registrar_Agenda
                 cmd.Parameters.RemoveAt("@DIA_CHECK");
                 cmd.Parameters.RemoveAt("@HORA_INI");
                 cmd.Parameters.RemoveAt("@HORA_FIN");
-                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.VarChar).Value = "Jueves";
+                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.Int).Value = 4;
                 cmd.Parameters.Add("@HORA_INI", SqlDbType.Time).Value = cbxJu_ini.Text;
                 cmd.Parameters.Add("@HORA_FIN", SqlDbType.Time).Value = cbxJu_fin.Text;
 
@@ -196,7 +196,7 @@ namespace proyecto_w.Registrar_Agenda
                 cmd.Parameters.RemoveAt("@DIA_CHECK");
                 cmd.Parameters.RemoveAt("@HORA_INI");
                 cmd.Parameters.RemoveAt("@HORA_FIN");
-                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.VarChar).Value = "Viernes";
+                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.Int).Value = 5;
                 cmd.Parameters.Add("@HORA_INI", SqlDbType.Time).Value = cbxVi_ini.Text;
                 cmd.Parameters.Add("@HORA_FIN", SqlDbType.Time).Value = cbxVi_fin.Text;
 
@@ -216,7 +216,7 @@ namespace proyecto_w.Registrar_Agenda
                 cmd.Parameters.RemoveAt("@DIA_CHECK");
                 cmd.Parameters.RemoveAt("@HORA_INI");
                 cmd.Parameters.RemoveAt("@HORA_FIN");
-                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.VarChar).Value = "Sábado";
+                cmd.Parameters.Add("@DIA_CHECK", SqlDbType.Int).Value = 6;
                 cmd.Parameters.Add("@HORA_INI", SqlDbType.Time).Value = cbxSa_ini.Text;
                 cmd.Parameters.Add("@HORA_FIN", SqlDbType.Time).Value = cbxSa_fin.Text;
 
