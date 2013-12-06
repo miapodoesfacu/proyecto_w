@@ -35,6 +35,7 @@
             this.btnRegistrarLlegada = new System.Windows.Forms.Button();
             this.btnCancelarAtencion = new System.Windows.Forms.Button();
             this.btnRegistrarAgenda = new System.Windows.Forms.Button();
+            this.btnListado = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnABMAfiliado
@@ -108,11 +109,22 @@
             this.btnRegistrarAgenda.UseVisualStyleBackColor = true;
             this.btnRegistrarAgenda.Click += new System.EventHandler(this.btnRegistrarAgenda_Click);
             // 
+            // btnListado
+            // 
+            this.btnListado.Location = new System.Drawing.Point(170, 46);
+            this.btnListado.Name = "btnListado";
+            this.btnListado.Size = new System.Drawing.Size(120, 23);
+            this.btnListado.TabIndex = 7;
+            this.btnListado.Text = "Listado Estadistico";
+            this.btnListado.UseVisualStyleBackColor = true;
+            this.btnListado.Click += new System.EventHandler(this.btnListado_Click);
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 289);
+            this.Controls.Add(this.btnListado);
             this.Controls.Add(this.btnRegistrarAgenda);
             this.Controls.Add(this.btnCancelarAtencion);
             this.Controls.Add(this.btnRegistrarLlegada);
@@ -138,5 +150,6 @@
         private System.Windows.Forms.Button btnRegistrarLlegada;
         private System.Windows.Forms.Button btnCancelarAtencion;
         private System.Windows.Forms.Button btnRegistrarAgenda;
+        private System.Windows.Forms.Button btnListado;
     }
 }

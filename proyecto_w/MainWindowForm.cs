@@ -13,6 +13,7 @@ using proyecto_w.Compra_de_Bono;
 using proyecto_w.Registro_de_Llegada;
 using proyecto_w.Cancelar_Atencion;
 using proyecto_w.Registrar_Agenda;
+using proyecto_w.Listado_Estadistico;
 
 namespace proyecto_w
 {
@@ -97,5 +98,14 @@ namespace proyecto_w
             registrarAgendaForm.ShowDialog();
             this.Show();
         }
+
+        private void btnListado_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            ListadoEstadisticoForm Listadofrom = new ListadoEstadisticoForm();
+            Listadofrom.ShowDialog();
+            this.Show();
+        }
+
     }
 }
