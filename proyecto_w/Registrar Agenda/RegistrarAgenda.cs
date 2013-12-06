@@ -30,7 +30,7 @@ namespace proyecto_w.Registrar_Agenda
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = 
                 "EXEC PROYECTO_W.SP_REGISTRAR_AGENDA @PROF_DNI,@DIA_CHECK,@DESDE,@HASTA,@HORA_INI,@HORA_FIN";
-            cmd.Parameters.Add("@PROF_DNI", SqlDbType.Int).Value = txtProfCod.Text.ToString();
+            cmd.Parameters.Add("@PROF_DNI", SqlDbType.Int).Value = txtProfCod.Text;
             cmd.Parameters.Add("@DESDE", SqlDbType.Date).Value = dtp_ini.Value;
             cmd.Parameters.Add("@HASTA", SqlDbType.Date).Value = dtp_fin.Value;
 
@@ -48,7 +48,7 @@ namespace proyecto_w.Registrar_Agenda
             {
                 lblStatus.Text = EXC.Message.ToString();
             }
-
+            
             
 
         }
