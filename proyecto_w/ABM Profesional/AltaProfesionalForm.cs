@@ -34,40 +34,49 @@ namespace proyecto_w.ABM_Profesional
         private bool validarCampos()
         {
             //TODO: Poner los mensajes en todos los campos. @FacuE porfavor hacelo xD
-            if (this.txtApellido.Text == "" || this.txtApellido.Text.Length < 3)
-            {
-                MessageBox.Show("El campo Apellido esta Vacio o no es valido");
-                return false;
-            }
             if (this.txtNombre.Text == "" || this.txtNombre.Text.Length < 3)
             {
-                MessageBox.Show("El campo Nombre esta Vacio o no es valido");
+                MessageBox.Show("El campo Nombre esta Vacio o no es valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            if (this.txtApellido.Text == "" || this.txtApellido.Text.Length < 3)
+            {
+                MessageBox.Show("El campo Apellido esta Vacio o no es valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             if (this.txtNroDoc.Text == "" || this.txtNroDoc.Text.Length < 5)
             {
-                MessageBox.Show("El campo Numero de Documento esta Vacio o no es valido");
+                MessageBox.Show("El campo Numero de Documento esta Vacio o no es valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            if (this.txtDireccion.Text == "" || this.txtDireccion.Text.Length < 4)
+            {
+                MessageBox.Show("El campo Direccion esta Vacio o no es valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            if (this.txtTelefono.Text == "" || this.txtTelefono.Text.Length < 5)
+            {
+                MessageBox.Show("El campo Telefono esta Vacio o no es valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             if (this.txtMail.Text == "" || this.txtMail.Text.Length < 6)
             {
-                MessageBox.Show("El campo Email esta Vacio o no es valido");
-                return false;
-            }
-
-            if (this.txtMatricula.Text == "" || this.txtMatricula.Text.Length < 3)
-            {
-                MessageBox.Show("El campo Matricula esta Vacio o no es valido");
+                MessageBox.Show("El campo Email esta Vacio o no es valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             if (!this.isEmail(this.txtMail.Text))
             {
-                MessageBox.Show("Debe poner un email valido");
+                MessageBox.Show("Debe poner un email valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            if (this.txtMatricula.Text == "" || this.txtMatricula.Text.Length < 3)
+            {
+                MessageBox.Show("El campo Matricula esta Vacio o no es valido", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             if (this.lstEspecialidades.SelectedItems.Count == 0)
             {
-                MessageBox.Show("No selecciono ninguna especialidad, debe seleccional al menos una");
+                MessageBox.Show("No selecciono ninguna especialidad, debe seleccional al menos una", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             return true;
@@ -125,6 +134,7 @@ namespace proyecto_w.ABM_Profesional
             this.txtNroDoc.Text = profesional["prof_doc_nro"].ToString();
             this.dtmFechaNac.Text = profesional["prof_fecha_nac"].ToString();
             this.txtTelefono.Text = profesional["prof_telefono"].ToString();
+            this.btnLimpiar.Visible = false;
         }
 
         public AltaProfesionalForm()
@@ -177,9 +187,9 @@ namespace proyecto_w.ABM_Profesional
                     break;
 
             }
-            if (!this.validarCampos())
-                MessageBox.Show("Algunos campos estan incorrectos. Verifique eso y vuelva a intentarlo");
-            else
+            if (this.validarCampos())
+               // MessageBox.Show("Algunos campos estan incorrectos. Verifique eso y vuelva a intentarlo");
+            //else
             {
                 if (this.btnRegistrar.Text == "Registrar")
                 {
@@ -248,6 +258,19 @@ namespace proyecto_w.ABM_Profesional
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtApellido.Text = "";
+            txtDireccion.Text = "";
+            txtMail.Text = "";
+            txtMatricula.Text = "";
+            txtNombre.Text = "";
+            txtNroDoc.Text = "";
+            txtTelefono.Text = "";
+            cbxSexo.SelectedIndex = 0;
+            cbxTipoDoc.SelectedIndex = 0;
         }
     }
 }

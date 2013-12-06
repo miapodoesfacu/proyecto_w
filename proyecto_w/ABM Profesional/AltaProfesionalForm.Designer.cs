@@ -52,6 +52,7 @@
             this.lblNombre = new System.Windows.Forms.Label();
             this.txtMatricula = new System.Windows.Forms.TextBox();
             this.lstEspecialidades = new System.Windows.Forms.ListBox();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -272,11 +273,22 @@
             this.lstEspecialidades.Size = new System.Drawing.Size(182, 147);
             this.lstEspecialidades.TabIndex = 49;
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(43, 471);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 52;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // AltaProfesionalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 506);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.lstEspecialidades);
             this.Controls.Add(this.txtMatricula);
             this.Controls.Add(this.btnCancel);
@@ -337,5 +349,6 @@
         private System.Windows.Forms.Label lblNombre;
         private System.Windows.Forms.TextBox txtMatricula;
         private System.Windows.Forms.ListBox lstEspecialidades;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }
