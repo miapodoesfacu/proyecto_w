@@ -1057,9 +1057,12 @@ BEGIN TRY
 										OR
 										(@HORA_FIN > hora_inicio AND @HORA_FIN < hora_fin)
 										OR
-										(@HORA_INI = hora_inicio AND @HORA_FIN = hora_fin)
+										(@HORA_INI = hora_inicio)
+										OR
+										(@HORA_FIN = hora_fin)
 										OR
 										(hora_inicio > @HORA_INI AND hora_fin < @HORA_FIN)
+										
 										)
 									)
 								)

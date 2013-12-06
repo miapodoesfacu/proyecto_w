@@ -34,7 +34,7 @@ namespace proyecto_w.Registrar_Agenda
                 st2 += b * uni;
                 uni = uni / 10;
             }
-            if (st2 >= st1)
+            if (st2 > st1)
                 return true;
             else return false;
         }
@@ -46,7 +46,7 @@ namespace proyecto_w.Registrar_Agenda
             
             TimeSpan timeAux = new TimeSpan(07, minutos, 00);
                        
-            while(CompareStringAscii(timeAux.ToString(),"19:59:59"))
+            while(CompareStringAscii(timeAux.ToString(),"20:00:00"))
             {
                 timeAux = new TimeSpan(07, minutos, 00);
                 cbxLun_ini.Items.Add(timeAux.ToString());
@@ -60,8 +60,8 @@ namespace proyecto_w.Registrar_Agenda
                 cbxVi_ini.Items.Add(timeAux.ToString());
                 cbxVi_fin.Items.Add(timeAux.ToString());
 
-                if ((!CompareStringAscii(timeAux.ToString(), "09:59:59")) &
-                    CompareStringAscii(timeAux.ToString(), "15:00:00"))
+                if ((!CompareStringAscii(timeAux.ToString(), "10:00:00")) &
+                    CompareStringAscii(timeAux.ToString(), "15:00:01"))
                 {
                     cbxSa_ini.Items.Add(timeAux.ToString());
                     cbxSa_fin.Items.Add(timeAux.ToString());
@@ -77,6 +77,7 @@ namespace proyecto_w.Registrar_Agenda
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            Boolean noErrorFlag = true;
             if (txtProfCod.Text == "")
             {
                 lblStatus.Text = "Debe ingresar número de documento del profesional";
@@ -88,21 +89,37 @@ namespace proyecto_w.Registrar_Agenda
                 return;
             }
 
-            if (!(CompareStringAscii(cbxLun_ini.Text, cbxLun_fin.Text)
-                & CompareStringAscii(cbxMa_ini.Text, cbxMa_fin.Text)
-                & CompareStringAscii(cbxMi_ini.Text, cbxMi_fin.Text)
-                & CompareStringAscii(cbxJu_ini.Text, cbxJu_fin.Text)
-                & CompareStringAscii(cbxVi_ini.Text, cbxVi_fin.Text)
-                & CompareStringAscii(cbxSa_ini.Text, cbxSa_fin.Text)
-                ))
-            
+            if (checkLunes.Checked & !CompareStringAscii(cbxLun_ini.Text, cbxLun_fin.Text))
             {
-                lblStatus.Text = "Horario de inicio debe ser \n menor o igual que horario final";
+                lblStatus.Text = "Horario de inicio debe ser \n menor que horario final";
+                return;
+            }
+            if (checkMartes.Checked & !CompareStringAscii(cbxMa_ini.Text, cbxMa_fin.Text))
+            {
+                lblStatus.Text = "Horario de inicio debe ser \n menor que horario final";
+                return;
+            }
+            if (checkMie.Checked & !CompareStringAscii(cbxMi_ini.Text, cbxMi_fin.Text))
+            {
+                lblStatus.Text = "Horario de inicio debe ser \n menor que horario final";
+                return;
+            }
+            if (checkJue.Checked & !CompareStringAscii(cbxJu_ini.Text, cbxJu_fin.Text))
+            {
+                lblStatus.Text = "Horario de inicio debe ser \n menor que horario final";
+                return;
+            }
+            if (checkVie.Checked & !CompareStringAscii(cbxVi_ini.Text, cbxVi_fin.Text))
+            {
+                lblStatus.Text = "Horario de inicio debe ser \n menor que horario final";
+                return;
+            }
+            if (checkSa.Checked & !CompareStringAscii(cbxSa_ini.Text, cbxSa_fin.Text))
+            {
+                lblStatus.Text = "Horario de inicio debe ser \n menor que horario final";
                 return;
             }
 
-
-            
             ConexionSQL sqlConexion = ConexionSQL.Instance;
             lblStatus.Text = "EJECUTANDO";
             SqlCommand cmd = new SqlCommand();
@@ -112,9 +129,18 @@ namespace proyecto_w.Registrar_Agenda
             cmd.Parameters.Add("@DESDE", SqlDbType.Date).Value = dtp_ini.Value;
             cmd.Parameters.Add("@HASTA", SqlDbType.Date).Value = dtp_fin.Value;
 
+            // agrego basura
+            cmd.Parameters.Add("@DIA_CHECK", SqlDbType.Int).Value = 1;
+            cmd.Parameters.Add("@HORA_INI", SqlDbType.Time).Value = cbxLun_ini.Text;
+            cmd.Parameters.Add("@HORA_FIN", SqlDbType.Time).Value = cbxLun_fin.Text;
+            // para poder limpiar igual en cada check
+
             // LUNES
             if (checkLunes.Checked)
             {
+                cmd.Parameters.RemoveAt("@DIA_CHECK");
+                cmd.Parameters.RemoveAt("@HORA_INI");
+                cmd.Parameters.RemoveAt("@HORA_FIN");
                 cmd.Parameters.Add("@DIA_CHECK", SqlDbType.Int).Value = 1;
                 cmd.Parameters.Add("@HORA_INI", SqlDbType.Time).Value = cbxLun_ini.Text;
                 cmd.Parameters.Add("@HORA_FIN", SqlDbType.Time).Value = cbxLun_fin.Text;
@@ -126,6 +152,7 @@ namespace proyecto_w.Registrar_Agenda
                 catch (SqlException EXC)
                 {
                     lblStatus.Text = EXC.Message.ToString();
+                    noErrorFlag = false;
                 }
             }
           
@@ -147,6 +174,7 @@ namespace proyecto_w.Registrar_Agenda
                 catch (SqlException EXC)
                 {
                     lblStatus.Text = EXC.Message.ToString();
+                    noErrorFlag = false;
                 }
             }
 
@@ -167,6 +195,7 @@ namespace proyecto_w.Registrar_Agenda
                 catch (SqlException EXC)
                 {
                     lblStatus.Text = EXC.Message.ToString();
+                    noErrorFlag = false;
                 }
             }
 
@@ -187,6 +216,7 @@ namespace proyecto_w.Registrar_Agenda
                 catch (SqlException EXC)
                 {
                     lblStatus.Text = EXC.Message.ToString();
+                    noErrorFlag = false;
                 }
             }
 
@@ -207,6 +237,7 @@ namespace proyecto_w.Registrar_Agenda
                 catch (SqlException EXC)
                 {
                     lblStatus.Text = EXC.Message.ToString();
+                    noErrorFlag = false;
                 }
             }
 
@@ -227,10 +258,12 @@ namespace proyecto_w.Registrar_Agenda
                 catch (SqlException EXC)
                 {
                     lblStatus.Text = EXC.Message.ToString();
+                    noErrorFlag = false;
                 }
             }
-            
-            
+
+            if (noErrorFlag)
+                lblStatus.Text = "Ejecución Correcta";
 
         }
    
