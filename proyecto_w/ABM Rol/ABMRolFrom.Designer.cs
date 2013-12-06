@@ -86,6 +86,7 @@
             this.Name = "frmABMRol";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ABM Rol";
+            this.Activated += new System.EventHandler(this.Activated_Form);
             ((System.ComponentModel.ISupportInitialize)(this.grdRoles)).EndInit();
             this.ResumeLayout(false);
 
