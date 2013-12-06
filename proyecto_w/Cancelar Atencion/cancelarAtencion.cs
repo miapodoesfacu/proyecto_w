@@ -28,6 +28,10 @@ namespace proyecto_w.Cancelar_Atencion
         private void btnCancel_Click(object sender, EventArgs e)
         {
             ConexionSQL CONEXION = ConexionSQL.Instance;
+            if (txtCancel_turno_nro.Text == "")
+            {
+                MessageBox.Show("No ingreso un numero de turno", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
 
             String quien = "nadie";
             if (cbxCancel_quien.Text == "Profesional")
@@ -45,12 +49,20 @@ namespace proyecto_w.Cancelar_Atencion
                 }
                 catch (SqlException ex)
                 {
-                    lblCancel_status.Text = ex.Message;
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                     queryFail = true;
                 }
                 if (!queryFail) lblCancel_status.Text = "Atención cancelada";
             }
-            else lblCancel_status.Text = "Datos invalidos";
+            else MessageBox.Show("Datos invalidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+        }
+
+        private void txtnroturno_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!Char.IsNumber(e.KeyChar) && e.KeyChar != (char)8)
+            {
+                e.Handled = true;
+            }
         }
 
        

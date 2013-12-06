@@ -44,6 +44,7 @@
             this.txtCancel_turno_nro.Name = "txtCancel_turno_nro";
             this.txtCancel_turno_nro.Size = new System.Drawing.Size(100, 20);
             this.txtCancel_turno_nro.TabIndex = 0;
+            this.txtCancel_turno_nro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtnroturno_KeyPress);
             // 
             // txtCancel_motivo
             // 
@@ -55,7 +56,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(31, 172);
+            this.btnCancel.Location = new System.Drawing.Point(365, 183);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(128, 23);
             this.btnCancel.TabIndex = 4;
@@ -112,7 +113,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(505, 202);
+            this.ClientSize = new System.Drawing.Size(505, 218);
             this.Controls.Add(this.lblCancel_status);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
