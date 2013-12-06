@@ -52,8 +52,7 @@
             this.dtp_fin = new System.Windows.Forms.DateTimePicker();
             this.lbl_dni = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
-            this.gridTesting = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.gridTesting)).BeginInit();
+            this.lblhorariosRA = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtProfCod
@@ -261,20 +260,21 @@
             this.lblStatus.TabIndex = 23;
             this.lblStatus.Text = "label1";
             // 
-            // gridTesting
+            // lblhorariosRA
             // 
-            this.gridTesting.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridTesting.Location = new System.Drawing.Point(18, 295);
-            this.gridTesting.Name = "gridTesting";
-            this.gridTesting.Size = new System.Drawing.Size(459, 231);
-            this.gridTesting.TabIndex = 24;
+            this.lblhorariosRA.AutoSize = true;
+            this.lblhorariosRA.Location = new System.Drawing.Point(257, 19);
+            this.lblhorariosRA.Name = "lblhorariosRA";
+            this.lblhorariosRA.Size = new System.Drawing.Size(46, 13);
+            this.lblhorariosRA.TabIndex = 24;
+            this.lblhorariosRA.Text = "Horarios";
             // 
             // frmRegistrarAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 547);
-            this.Controls.Add(this.gridTesting);
+            this.ClientSize = new System.Drawing.Size(495, 280);
+            this.Controls.Add(this.lblhorariosRA);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lbl_dni);
             this.Controls.Add(this.dtp_fin);
@@ -301,7 +301,6 @@
             this.Controls.Add(this.txtProfCod);
             this.Name = "frmRegistrarAgenda";
             this.Text = "RegistrarAgenda";
-            ((System.ComponentModel.ISupportInitialize)(this.gridTesting)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -333,6 +332,6 @@
         private System.Windows.Forms.DateTimePicker dtp_fin;
         private System.Windows.Forms.Label lbl_dni;
         private System.Windows.Forms.Label lblStatus;
-        private System.Windows.Forms.DataGridView gridTesting;
+        private System.Windows.Forms.Label lblhorariosRA;
     }
 }

@@ -30,7 +30,7 @@ namespace proyecto_w.Registrar_Agenda
             cmd.Parameters.Add("@fecha_prueba", SqlDbType.DateTime).Value = dtp_ini.Value;
 
 
-            this.gridTesting.DataSource = sqlConexion.ejecutarQueryConSP(cmd);
+            lblStatus.Text = dtp_ini.Value.ToShortDateString();
 
         }
 
