@@ -31,7 +31,7 @@ namespace proyecto_w.Compra_de_Bono
             // CHEQUEAR AFIL_NRO, CANTIDAD > 0 , ANTES DE ENVIAR LA QUERY
             lblCDB_Status.Text = "HACIENDO";
             ConexionSQL connectionSQL = ConexionSQL.Instance;
-            uint PLAN_COD, SUMA;
+            //uint PLAN_COD, SUMA;
 
             DateTime fecha = new DateTime(2014,9,9); //Fecha del sys
                                    
