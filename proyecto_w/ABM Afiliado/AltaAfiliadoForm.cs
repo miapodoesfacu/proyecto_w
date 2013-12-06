@@ -90,6 +90,7 @@ namespace proyecto_w.ABM_Afiliado
             this.btnCancel.Visible = true;
             this.modifyAfil = true;
             this.btnRegistrar.Text = "Modificar Afiliado";
+            this.btnLimpiar.Visible = false;
         }
 
         public AltaAfiliadoForm(string afiliadoRelacionado)
@@ -150,27 +151,30 @@ namespace proyecto_w.ABM_Afiliado
         {
             if (this.modifyAfil)
             {
-                string query = string.Format("UPDATE PROYECTO_W.Afiliado SET afil_direccion='{0}', afil_telefono={1}, afil_mail='{2}', afil_cant_pers_a_cargo={3}, ", this.txtDireccion.Text, this.txtTelefono.Text, this.txtMail.Text, this.txtCantFamiliares.Text);
-               
-                if (this.cbxSexo.SelectedItem.ToString() == "No determinado")
-                    query += "afil_sexo=NULL, ";
-                else
-                    query += string.Format("afil_sexo='{0}', ", this.cbxSexo.SelectedItem.ToString()[0]);
+                if (!validarCamposModificacion())
+                {
+                    string query = string.Format("UPDATE PROYECTO_W.Afiliado SET afil_direccion='{0}', afil_telefono={1}, afil_mail='{2}', afil_cant_pers_a_cargo={3}, ", this.txtDireccion.Text, this.txtTelefono.Text, this.txtMail.Text, this.txtCantFamiliares.Text);
 
-                if (this.cbxEstadoCivil.SelectedItem.ToString() == "No determinado")
-                    query += "afil_estado_civil=NULL, ";
-                else
-                    query += string.Format("afil_estado_civil='{0}', ", this.estadoCivilMap[this.cbxEstadoCivil.SelectedItem.ToString()]);
+                    if (this.cbxSexo.SelectedItem.ToString() == "No determinado")
+                        query += "afil_sexo=NULL, ";
+                    else
+                        query += string.Format("afil_sexo='{0}', ", this.cbxSexo.SelectedItem.ToString()[0]);
 
-                string planInteger = this.connectionSQL.ejecutarQuery(string.Format("SELECT plan_cod FROM [GD2C2013].[PROYECTO_W].[Plan] WHERE plan_descripcion='{0}'", this.cbxPlanMedico.SelectedItem.ToString())).Rows[0][0].ToString();
+                    if (this.cbxEstadoCivil.SelectedItem.ToString() == "No determinado")
+                        query += "afil_estado_civil=NULL, ";
+                    else
+                        query += string.Format("afil_estado_civil='{0}', ", this.estadoCivilMap[this.cbxEstadoCivil.SelectedItem.ToString()]);
 
-                query += string.Format("afil_plan_cod={0} ", planInteger);
+                    string planInteger = this.connectionSQL.ejecutarQuery(string.Format("SELECT plan_cod FROM [GD2C2013].[PROYECTO_W].[Plan] WHERE plan_descripcion='{0}'", this.cbxPlanMedico.SelectedItem.ToString())).Rows[0][0].ToString();
 
-                query += string.Format("WHERE afil_nro={0}", this.afiliadoNumber);
-                this.connectionSQL.ejecutarQuery(query);
-                this.modifyAfil = false;
-                MessageBox.Show("Afiliado Modificado Correctamente");
-                this.Close();
+                    query += string.Format("afil_plan_cod={0} ", planInteger);
+
+                    query += string.Format("WHERE afil_nro={0}", this.afiliadoNumber);
+                    this.connectionSQL.ejecutarQuery(query);
+                    this.modifyAfil = false;
+                    MessageBox.Show("Afiliado Modificado Correctamente");
+                    this.Close();
+                }
             }
             else
             {
@@ -297,6 +301,12 @@ namespace proyecto_w.ABM_Afiliado
                 cbxTipoDoc.Focus();
                 return true;
             }
+            if (txtNroDoc.Text == "")
+            {
+                MessageBox.Show("Ingresar DNI.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtNroDoc.Focus();
+                return true;
+            }
             if (txtDireccion.Text.Trim() == "")
             {
                 MessageBox.Show("Ingresar dirección.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -382,6 +392,54 @@ namespace proyecto_w.ABM_Afiliado
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtApellido.Text = "";
+            txtCantFamiliares.Text = "";
+            txtDireccion.Text = "";
+            txtNombre.Text = "";
+            txtNroDoc.Text = "";
+            txtTelefono.Text = "";
+            txtMail.Text = "";
+            cbxTipoDoc.SelectedIndex = 0;
+            cbxSexo.SelectedIndex = 0;
+            cbxEstadoCivil.SelectedIndex = 0;
+            cbxPlanMedico.SelectedIndex = 0;
+        }
+
+        private bool validarCamposModificacion()
+        {
+            if (txtDireccion.Text.Trim() == "")
+            {
+                MessageBox.Show("Ingresar dirección.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtDireccion.Focus();
+                return true;
+            }
+            if (txtTelefono.Text.Trim() == "")
+            {
+                MessageBox.Show("Ingresar telefono.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtTelefono.Focus();
+                return true;
+            }
+
+            if (txtMail.Text.Trim() == "" || !this.isEmail(txtMail.Text))
+            {
+                MessageBox.Show("Ingresar mail.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtMail.Focus();
+                return true;
+            }
+            if (txtCantFamiliares.Text.Trim() == "")
+            {
+                MessageBox.Show("Ingresar cantidad de hijos o familiares a cargo.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                txtCantFamiliares.Focus();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         //private bool validarCamposTipos()

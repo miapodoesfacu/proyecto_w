@@ -54,6 +54,7 @@
             this.dtmFechaNac = new System.Windows.Forms.DateTimePicker();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.btnLimpiar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -283,11 +284,22 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // btnLimpiar
+            // 
+            this.btnLimpiar.Location = new System.Drawing.Point(13, 388);
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.Size = new System.Drawing.Size(75, 23);
+            this.btnLimpiar.TabIndex = 27;
+            this.btnLimpiar.Text = "Limpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
             // AltaAfiliadoForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(406, 433);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.dtmFechaNac);
@@ -350,5 +362,6 @@
         private System.Windows.Forms.DateTimePicker dtmFechaNac;
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnLimpiar;
     }
 }
