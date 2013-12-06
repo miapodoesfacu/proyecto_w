@@ -872,27 +872,27 @@ GO
 
 --#-#-#		FUNCIONES
 CREATE FUNCTION PROYECTO_W.F_COMPRABONO_DATOS
-(@AFIL_NRO BIGINT, @TIPO_BONO VARCHAR(255), @CANTIDAD BIGINT, @FECHASYS DATETIME)
+(@AFIL_NRO BIGINT, @TIPO_BONO VARCHAR(255), @CANTIDAD BIGINT)
 RETURNS TABLE
 AS
-
 RETURN
-(SELECT TOP 1 BA.bonadq_suma_pagada, BA.bonadq_plan_cod
+(SELECT TOP 1 BA.bonadq_suma_pagada, BA.bonadq_plan_cod, BA.bonadq_fecha_compra,BA.bonadq_cod,BA.bonadq_tipo_bono
 FROM PROYECTO_W.BonoAdquirido AS BA
 WHERE BA.bonadq_afil_nro = @AFIL_NRO AND BA.bonadq_tipo_bono = @TIPO_BONO AND BA.bonadq_cantidad_comprada=@CANTIDAD
-	AND BA.bonadq_fecha_compra = @FECHASYS
+	AND BA.bonadq_fecha_compra = (SELECT PROYECTO_W.F_FECHA_CONFIG())
 ORDER BY BA.bonadq_cod DESC)
-
 GO
 
 --#-#-#		STOCK PROCEDURES
 	-- COMPRA BONO ADMIN
 CREATE PROCEDURE [PROYECTO_W].[SP_COMPRABONOADMIN]
-@afil_nro bigint, @tipo_bono varchar(255), @cantidad bigint, @fechaSys datetime -- viene de la aplicacion
+@afil_nro bigint, @tipo_bono varchar(255), @cantidad bigint
 AS
 IF (EXISTS (SELECT afil_nro FROM PROYECTO_W.Afiliado WHERE afil_estado = 'H' AND @afil_nro = afil_nro)
 	AND (@tipo_bono = 'Farmacia' OR @tipo_bono = 'Consulta') AND @cantidad > 0)
 BEGIN
+	DECLARE @fechasys DATETIME
+	SET @fechasys = (SELECT PROYECTO_W.F_FECHA_CONFIG())
 	DECLARE @PLANCOD NUMERIC(18,0) =
 	(
 	SELECT PL.plan_cod 

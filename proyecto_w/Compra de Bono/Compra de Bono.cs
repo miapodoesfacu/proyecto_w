@@ -32,18 +32,15 @@ namespace proyecto_w.Compra_de_Bono
             lblCDB_Status.Text = "HACIENDO";
             ConexionSQL connectionSQL = ConexionSQL.Instance;
             //uint PLAN_COD, SUMA;
-
-            DateTime fecha = new DateTime(2014,9,9); //Fecha del sys
                                    
-            String queryCompra = string.Format("exec PROYECTO_W.SP_COMPRABONOADMIN {0},'{1}',{2},'2014-9-9'",
+            String queryCompra = string.Format("exec PROYECTO_W.SP_COMPRABONOADMIN {0},'{1}',{2}",
                 txtCDB_AfilNro.Text, cmbCDB_Tipo.Text, txtCDB_Cantidad.Text);
-            String queryDatos = string.Format("SELECT * FROM PROYECTO_W.F_COMPRABONO_DATOS ({0},'{1}',{2},'2014-9-9')",
+            String queryDatos = string.Format("SELECT * FROM PROYECTO_W.F_COMPRABONO_DATOS ({0},'{1}',{2})",
                 txtCDB_AfilNro.Text, cmbCDB_Tipo.Text, txtCDB_Cantidad.Text);
             // TENDRIA QUE ENVIARSE LA FECHA ACTUAL, PERO ESTAMO PROBANDO NOMA
             
-            
             try
-            { 
+            {
                 connectionSQL.ejecutarQuery(queryCompra);
             }
             catch (SqlException )
@@ -53,10 +50,39 @@ namespace proyecto_w.Compra_de_Bono
             if (lblCDB_Status.Text != "Datos no validos")
             {
                 DataTable datosCompra = connectionSQL.ejecutarQuery(queryDatos);
+                //connectionSQL.ejecutarQuery(queryDatos);
                 lblCDB_Status.Text = "Compra realizada, suma a pagar: " + datosCompra.Rows[0][0].ToString() + 
                         ". Plan: " + datosCompra.Rows[0][1].ToString();
                 if (cmbCDB_Tipo.Text == "Farmacia")
-                    lblCDB_Status.Text = lblCDB_Status.Text + ". \nFecha vencimiento: " + fecha.AddDays(60).ToString();
+                    lblCDB_Status.Text = lblCDB_Status.Text + ". \nFecha vencimiento: " + ((DateTime)(datosCompra.Rows[0][2])).AddDays(60).ToString();
+                // mostrar codigo de bonos
+                if (datosCompra.Rows[0][4].ToString() == "Farmacia")
+                {
+                    //muestro los bonos farmacia
+                    String queryFarmacia =
+                        string.Format("SELECT bonofarm_cod from PROYECTO_W.BonoFarmacia WHERE bonofarm_bonadq_cod = {0}", datosCompra.Rows[0][3]);
+                    DataTable bonosFarmacia = connectionSQL.ejecutarQuery(queryFarmacia);
+                    lblCDB_Status.Text = lblCDB_Status.Text + ". Bonos: ";
+                    int cantBonos = bonosFarmacia.Rows.Count;
+                    while (cantBonos > 0)
+                    {
+                        cantBonos = cantBonos - 1;
+                        lblCDB_Status.Text = lblCDB_Status.Text + bonosFarmacia.Rows[cantBonos][0] + ", ";
+                    }
+                }
+                else
+                {
+                    String queryConsulta =
+                       string.Format("select bonocons_cod from PROYECTO_W.BonoConsulta WHERE bonocons_bonadq_cod = {0}", datosCompra.Rows[0][3]);
+                    DataTable bonosConsulta = connectionSQL.ejecutarQuery(queryConsulta);
+                    lblCDB_Status.Text = lblCDB_Status.Text + ". Bonos: ";
+                    int cantBonos = bonosConsulta.Rows.Count;
+                    while (cantBonos > 0)
+                    {
+                        cantBonos = cantBonos - 1;
+                        lblCDB_Status.Text = lblCDB_Status.Text + bonosConsulta.Rows[cantBonos][0] + ", ";
+                    }
+                }
             }
             
         }
