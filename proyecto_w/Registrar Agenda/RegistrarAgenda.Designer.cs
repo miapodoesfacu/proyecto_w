@@ -129,6 +129,7 @@
             this.cbxLun_ini.Name = "cbxLun_ini";
             this.cbxLun_ini.Size = new System.Drawing.Size(121, 21);
             this.cbxLun_ini.TabIndex = 7;
+            //this.cbxLun_ini.SelectedIndexChanged += new System.EventHandler(this.cbxLun_ini_SelectedIndexChanged);
             // 
             // cbxLun_fin
             // 
@@ -256,9 +257,9 @@
             this.lblStatus.AutoSize = true;
             this.lblStatus.Location = new System.Drawing.Point(106, 228);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(35, 13);
+            this.lblStatus.Size = new System.Drawing.Size(37, 13);
             this.lblStatus.TabIndex = 23;
-            this.lblStatus.Text = "label1";
+            this.lblStatus.Text = "Status";
             // 
             // lblhorariosRA
             // 
