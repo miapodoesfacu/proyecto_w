@@ -40,7 +40,7 @@ namespace proyecto_w.Cancelar_Atencion
                 quien = "PACIENTE";
             if (quien != "nadie")
             {
-                String QUERY = string.Format("EXEC PROYECTO_W.SP_CANCELAR {0},'{1}','{2}',(SELECT PROYECTO_W.F_FECHA_CONFIG())", txtCancel_turno_nro.Text,
+                String QUERY = string.Format("EXEC PROYECTO_W.SP_CANCELAR {0},'{1}','{2}'", txtCancel_turno_nro.Text,
                        quien, txtCancel_motivo.Text);
                 Boolean queryFail = false;
                 try
