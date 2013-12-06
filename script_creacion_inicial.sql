@@ -3,8 +3,14 @@ GO
 
 IF SCHEMA_ID('PROYECTO_W') IS NOT NULL
 BEGIN
+		IF OBJECT_ID('PROYECTO_W.SP_REGISTRAR_AGENDA') IS NOT NULL
+			DROP PROCEDURE PROYECTO_W.SP_REGISTRAR_AGENDA;
+			
 		IF OBJECT_ID('PROYECTO_W.V_LISTADO_4') IS NOT NULL
 			DROP VIEW PROYECTO_W.V_LISTADO_4;
+			
+		IF OBJECT_ID('[PROYECTO_W].[#Bono_Consulta_Aux]') IS NOT NULL
+			DROP TABLE [PROYECTO_W].[#Bono_Consulta_Aux];
 		
 		IF OBJECT_ID('PROYECTO_W.F_COMPRABONO_DATOS') IS NOT NULL
 			DROP FUNCTION PROYECTO_W.F_COMPRABONO_DATOS;
@@ -542,12 +548,14 @@ SELECT prof_cod
 FROM PROYECTO_W.Profesional
 GO
 
--- MIGRACION FECHA
+-- MIGRACION FECHA 
+/*
 INSERT INTO PROYECTO_W.Fecha (fecha_agen_cod, fecha_fecha)
 SELECT DISTINCT agen_cod, CAST(Turno_Fecha AS DATE) AS Dia
 FROM gd_esquema.Maestra, PROYECTO_W.Profesional, PROYECTO_W.AgendaProfesional
 WHERE prof_doc_nro = Medico_Dni AND prof_cod = agen_prof_cod AND Bono_Consulta_Numero IS NULL AND Turno_Numero IS NOT NULL
 GO
+*/
 
 --#########################No se migra porque se asume que la fecha config es despues del 01-01-2014#########
 -- MIGRACION RANGOHORARIO
@@ -985,6 +993,99 @@ BEGIN -- UN DIA ANTES, EXISTE EL TURNO
 END
 GO
 
+	-- PROCEDURE REGISTRAR_AGENDA
+CREATE PROCEDURE PROYECTO_W.SP_REGISTRAR_AGENDA
+@PROF_DNI NUMERIC(18,0), @DIA_CHECK VARCHAR(255), @DESDE DATE, @HASTA DATE,
+	@HORA_INI TIME, @HORA_FIN TIME
+AS 
+BEGIN
+BEGIN TRANSACTION -- SI DA UN ERROR EN ALGUN LUGAR, NO SE HACE NADA (CREO)
+BEGIN TRY
+	IF NOT EXISTS (	SELECT prof_cod
+					FROM PROYECTO_W.Profesional 
+					WHERE prof_doc_nro = @PROF_DNI AND prof_estado = 'H' )
+	BEGIN
+		RAISERROR('NO EXISTE O ESTA DADO DE BAJA',16,1)
+		--ROLLBACK TRANSACTION
+	END
+	ELSE
+		BEGIN
+			IF NOT EXISTS (	SELECT agen_prof_cod 
+							FROM PROYECTO_W.Profesional
+							JOIN PROYECTO_W.AgendaProfesional ON prof_cod = agen_prof_cod	
+							WHERE prof_doc_nro = @PROF_DNI )
+			BEGIN
+				INSERT INTO PROYECTO_W.AgendaProfesional (agen_prof_cod)
+				SELECT prof_cod
+				FROM PROYECTO_W.Profesional
+				WHERE prof_doc_nro = @PROF_DNI
+			END
+			
+			DECLARE @FECHA DATE
+			SET @FECHA = @DESDE
+			WHILE (DATENAME(DW,@FECHA) != @DIA_CHECK)
+			SET @FECHA = DATEADD(DAY,1,@FECHA)
+			
+			DECLARE @FECHA_AGEN_COD BIGINT
+			SET @FECHA_AGEN_COD = (	SELECT agen_cod 
+									FROM PROYECTO_W.Profesional
+									JOIN PROYECTO_W.AgendaProfesional
+										ON agen_prof_cod = prof_cod
+									WHERE prof_doc_nro = @PROF_DNI	)
+			
+			WHILE (@FECHA <= @HASTA)
+			BEGIN  
+				IF NOT EXISTS (	SELECT * 
+								FROM PROYECTO_W.Fecha
+								WHERE fecha_agen_cod = @FECHA_AGEN_COD
+									AND fecha_fecha = @FECHA	)
+				BEGIN -- SI YA ESTA LA FECHA NO HAGO EL INSERT
+					INSERT INTO PROYECTO_W.Fecha (fecha_agen_cod,fecha_fecha)
+					VALUES (@FECHA_AGEN_COD,@FECHA)
+				END
+				-- AHORA PARA UNA FECHA, TENGO QUE VER QUE LOS HORARIOS QUE METE NO SE SUPERPONGAN
+				-- QUE META SEPARADO SI AGREGA UN RANGO HORARIO PA UNA MISMA FECHA PA UN MISMO CHABON
+				IF NOT EXISTS (	SELECT * 
+								FROM PROYECTO_W.RangoHorario 
+								WHERE 
+									(
+										(hora_agen_cod = @FECHA_AGEN_COD
+										AND hora_fecha = @FECHA)
+										AND
+										(
+										(@HORA_INI > hora_inicio AND @HORA_INI < hora_fin)
+										OR
+										(@HORA_FIN > hora_inicio AND @HORA_FIN < hora_fin)
+										OR
+										(@HORA_INI = hora_inicio AND @HORA_FIN = hora_fin)
+										OR
+										(hora_inicio > @HORA_INI AND hora_fin < @HORA_FIN)
+										)
+									)
+								)
+				BEGIN
+					INSERT INTO PROYECTO_W.RangoHorario 
+					(hora_agen_cod,hora_fecha,hora_inicio,hora_fin)
+					VALUES (@FECHA_AGEN_COD,@FECHA,@HORA_INI,@HORA_FIN)
+				END
+				ELSE
+				BEGIN
+					RAISERROR('RANGOS SUPERPUESTOS',16,1)
+					--ROLLBACK TRANSACTION
+				END
+			SET @FECHA = DATEADD(DAY,7,@FECHA)
+			END
+		END
+COMMIT TRANSACTION
+END TRY
+BEGIN CATCH
+	ROLLBACK TRANSACTION
+	RAISERROR('DATOS INVALIDOS',16,1)
+END CATCH
+END
+GO	-- AGREGAR MERGE AUTOMATICO CUANDO HORA FIN VIEJA = HORA INI NUEVA EN MISMO DIA
+-- AGREGAR ROLLBACK TRANSACTION, PERO BIEN 
+
 -- Vista para listado estadistico 4
 CREATE VIEW PROYECTO_W.V_LISTADO_4
 AS
@@ -999,5 +1100,3 @@ WHERE BONOADQ.bonadq_afil_nro != TURN.turno_afil_nro
 
 -- HABRIA QUE PONER RESTRICCIONES, QUE UN ADMIN NO SE PUEDA ASIGNAR A USUARIOS AFILIADOS Y PROFESIONALES
 -- QUE UN USERNAME NO PUEDA SER DE USUARIO Y PROF DISTINTOS A LA VEZ,, ETC
-
-
