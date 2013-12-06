@@ -27,6 +27,12 @@ namespace proyecto_w.Cancelar_Atencion
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            if (cbxCancel_quien.Text == "")
+            {
+                lblCancel_status.Text = "Debe seleccionar quién cancela";
+                return;
+            }
+            
             ConexionSQL CONEXION = ConexionSQL.Instance;
             if (txtCancel_turno_nro.Text == "")
             {

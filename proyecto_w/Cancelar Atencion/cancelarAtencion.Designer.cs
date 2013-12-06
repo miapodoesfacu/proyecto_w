@@ -66,10 +66,12 @@
             // 
             // cbxCancel_quien
             // 
+            this.cbxCancel_quien.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxCancel_quien.FormattingEnabled = true;
             this.cbxCancel_quien.Location = new System.Drawing.Point(101, 42);
             this.cbxCancel_quien.Name = "cbxCancel_quien";
             this.cbxCancel_quien.Size = new System.Drawing.Size(121, 21);
+            this.cbxCancel_quien.Sorted = true;
             this.cbxCancel_quien.TabIndex = 5;
             this.cbxCancel_quien.SelectedIndexChanged += new System.EventHandler(this.cbxCancel_quien_SelectedIndexChanged);
             // 
