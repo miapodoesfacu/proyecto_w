@@ -1,2 +1,4 @@
 proyecto_w/bin/Debug/*
 proyecto_w/obj/Debug/*
+proyecto_w/*.suo
+proyecto_w/*.sln

@@ -20,7 +20,6 @@ namespace proyecto_w.Generar_Receta
 
         private void Generar_Receta_Load(object sender, EventArgs e)
         {
-            textBox1.Text = turno_nro.ToString();
         }
     }
 }
