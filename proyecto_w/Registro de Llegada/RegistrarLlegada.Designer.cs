@@ -48,11 +48,7 @@
             this.txtBono = new System.Windows.Forms.TextBox();
             this.btnRegistrar = new System.Windows.Forms.Button();
             this.btnFilter = new System.Windows.Forms.Button();
-            this.btnClean = new System.Windows.Forms.Button();
-            this.NumeroTurno = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Fecha = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NombreAfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ApellidoAfil = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnValidar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdProfesionales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.grdTurnos)).BeginInit();
             this.SuspendLayout();
@@ -95,10 +91,10 @@
             // 
             // txtLastnameFilter
             // 
-            this.txtLastnameFilter.Location = new System.Drawing.Point(143, 54);
+            this.txtLastnameFilter.Location = new System.Drawing.Point(124, 54);
             this.txtLastnameFilter.MaxLength = 15;
             this.txtLastnameFilter.Name = "txtLastnameFilter";
-            this.txtLastnameFilter.Size = new System.Drawing.Size(100, 20);
+            this.txtLastnameFilter.Size = new System.Drawing.Size(159, 20);
             this.txtLastnameFilter.TabIndex = 7;
             // 
             // txtAfilNro
@@ -112,19 +108,19 @@
             // 
             // txtNameFilter
             // 
-            this.txtNameFilter.Location = new System.Drawing.Point(143, 26);
+            this.txtNameFilter.Location = new System.Drawing.Point(124, 26);
             this.txtNameFilter.MaxLength = 15;
             this.txtNameFilter.Name = "txtNameFilter";
-            this.txtNameFilter.Size = new System.Drawing.Size(100, 20);
+            this.txtNameFilter.Size = new System.Drawing.Size(159, 20);
             this.txtNameFilter.TabIndex = 6;
             // 
             // cbxEspecialidadFilter
             // 
             this.cbxEspecialidadFilter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxEspecialidadFilter.FormattingEnabled = true;
-            this.cbxEspecialidadFilter.Location = new System.Drawing.Point(143, 82);
+            this.cbxEspecialidadFilter.Location = new System.Drawing.Point(124, 82);
             this.cbxEspecialidadFilter.Name = "cbxEspecialidadFilter";
-            this.cbxEspecialidadFilter.Size = new System.Drawing.Size(100, 21);
+            this.cbxEspecialidadFilter.Size = new System.Drawing.Size(159, 21);
             this.cbxEspecialidadFilter.TabIndex = 8;
             // 
             // btnLimpiar
@@ -214,11 +210,6 @@
             this.grdTurnos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grdTurnos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.grdTurnos.ColumnHeadersHeight = 21;
-            this.grdTurnos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.NumeroTurno,
-            this.Fecha,
-            this.NombreAfil,
-            this.ApellidoAfil});
             this.grdTurnos.Location = new System.Drawing.Point(143, 199);
             this.grdTurnos.MultiSelect = false;
             this.grdTurnos.Name = "grdTurnos";
@@ -229,6 +220,8 @@
             this.grdTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdTurnos.Size = new System.Drawing.Size(448, 83);
             this.grdTurnos.TabIndex = 1;
+            this.grdTurnos.MouseClick += new System.Windows.Forms.MouseEventHandler(this.click_fila);
+            this.grdTurnos.SelectionChanged += new System.EventHandler(this.seleccion_fila);
             // 
             // lblBono
             // 
@@ -269,59 +262,22 @@
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
-            // btnClean
+            // btnValidar
             // 
-            this.btnClean.Location = new System.Drawing.Point(22, 252);
-            this.btnClean.Name = "btnClean";
-            this.btnClean.Size = new System.Drawing.Size(100, 23);
-            this.btnClean.TabIndex = 15;
-            this.btnClean.Text = "Limpiar";
-            this.btnClean.UseVisualStyleBackColor = true;
-            this.btnClean.Click += new System.EventHandler(this.btnClean_Click);
-            // 
-            // NumeroTurno
-            // 
-            this.NumeroTurno.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.NumeroTurno.DataPropertyName = "turno_nro";
-            this.NumeroTurno.Frozen = true;
-            this.NumeroTurno.HeaderText = "N° Turno";
-            this.NumeroTurno.Name = "NumeroTurno";
-            this.NumeroTurno.ReadOnly = true;
-            // 
-            // Fecha
-            // 
-            this.Fecha.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Fecha.DataPropertyName = "turno_fecha";
-            this.Fecha.Frozen = true;
-            this.Fecha.HeaderText = "Fecha";
-            this.Fecha.Name = "Fecha";
-            this.Fecha.ReadOnly = true;
-            // 
-            // NombreAfil
-            // 
-            this.NombreAfil.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.NombreAfil.DataPropertyName = "afil_nombre";
-            this.NombreAfil.Frozen = true;
-            this.NombreAfil.HeaderText = "Nombre";
-            this.NombreAfil.Name = "NombreAfil";
-            this.NombreAfil.ReadOnly = true;
-            // 
-            // ApellidoAfil
-            // 
-            this.ApellidoAfil.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.ApellidoAfil.DataPropertyName = "afil_apellido";
-            this.ApellidoAfil.Frozen = true;
-            this.ApellidoAfil.HeaderText = "Apellido";
-            this.ApellidoAfil.Name = "ApellidoAfil";
-            this.ApellidoAfil.ReadOnly = true;
-            this.ApellidoAfil.Width = 150;
+            this.btnValidar.Location = new System.Drawing.Point(22, 252);
+            this.btnValidar.Name = "btnValidar";
+            this.btnValidar.Size = new System.Drawing.Size(100, 23);
+            this.btnValidar.TabIndex = 15;
+            this.btnValidar.Text = "Validar";
+            this.btnValidar.UseVisualStyleBackColor = true;
+            this.btnValidar.Click += new System.EventHandler(this.btnValidar_Click);
             // 
             // frmRegistrarLlegada
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(614, 385);
-            this.Controls.Add(this.btnClean);
+            this.Controls.Add(this.btnValidar);
             this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.btnRegistrar);
             this.Controls.Add(this.txtBono);
@@ -371,10 +327,6 @@
         private System.Windows.Forms.TextBox txtBono;
         private System.Windows.Forms.Button btnRegistrar;
         private System.Windows.Forms.Button btnFilter;
-        private System.Windows.Forms.Button btnClean;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NumeroTurno;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Fecha;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NombreAfil;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ApellidoAfil;
+        private System.Windows.Forms.Button btnValidar;
     }
 }

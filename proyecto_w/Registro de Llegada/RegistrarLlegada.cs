@@ -80,20 +80,27 @@ namespace proyecto_w.Registro_de_Llegada
             this.txtNameFilter.Text = "";
             this.txtLastnameFilter.Text = "";
             this.cbxEspecialidadFilter.SelectedIndex = 0;
+            this.txtBono.Enabled = false;
+            this.txtAfilNro.Text = "";
+            this.grdTurnos.DataSource = null;
         }
 
         private void btnSeleccionar_Click(object sender, EventArgs e)
         {
-            if (this.txtAfilNro.Text == "")
-                MessageBox.Show("Debe Ingresar Numero de Afiliado");
+            if (grdProfesionales.SelectedRows.Count == 0)
+                MessageBox.Show("Debe Seleccionar un Profesional", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             else
             {
                 int selectedrowindex = grdProfesionales.SelectedCells[0].RowIndex;
                 DataGridViewRow selectedRow = grdProfesionales.Rows[selectedrowindex];  
                 string prof_cod = Convert.ToString(selectedRow.Cells["NroProfesional"].Value);           
 
-                string date = string.Format("{0:yyyy-M-d HH:mm:ss}", DateTime.Now);
-                string query = string.Format("SELECT T.turno_nro, A.afil_nombre, A.afil_apellido, T.turno_fecha FROM PROYECTO_W.Turno AS T JOIN PROYECTO_W.Afiliado AS A ON A.afil_nro=T.turno_afil_nro WHERE T.turno_fecha<CONVERT(DATETIME, '{0}', 120) AND A.afil_nro={1} AND T.turno_estado = 'P' AND T.turno_prof_cod={2}", date, this.txtAfilNro.Text, prof_cod);
+                //string date = string.Format("{0:yyyy-M-d HH:mm:ss}", DateTime.Now);
+                string query = string.Format("DECLARE @FECHA DATETIME");
+                query += string.Format(" SET @FECHA = PROYECTO_W.F_FECHA_CONFIG()");
+                query += string.Format(" SELECT T.turno_nro AS Turno, T.turno_afil_nro AS Nro_Afil, A.afil_nombre AS Nom_Afil, A.afil_apellido AS Apell_Afil, T.turno_fecha");
+                query += string.Format(" FROM PROYECTO_W.Turno AS T JOIN PROYECTO_W.Afiliado AS A ON A.afil_nro=T.turno_afil_nro");
+                query += string.Format(" WHERE CAST(T.turno_fecha AS DATE) = CAST(@FECHA AS DATE) AND T.turno_estado = 'P' AND T.turno_prof_cod={0}",  prof_cod);
                 DataTable results = this.conn.ejecutarQuery(query);
                 int amount_results = results.Rows.Count;
                 this.grdTurnos.DataSource = results;
@@ -110,13 +117,6 @@ namespace proyecto_w.Registro_de_Llegada
             this.onlyNumbers(e);
         }
 
-        private void btnClean_Click(object sender, EventArgs e)
-        {
-            this.txtBono.Enabled = false;
-            this.txtAfilNro.Text = "";
-            this.grdTurnos.DataSource = null;
-        }
-
         private void txtBono_KeyPress(object sender, KeyPressEventArgs e)
         {
             this.onlyNumbers(e);
@@ -124,44 +124,105 @@ namespace proyecto_w.Registro_de_Llegada
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
-            string query = string.Format("SELECT BC.bonocons_estado FROM PROYECTO_W.BonoConsulta AS BC WHERE BC.bonocons_cod={0}", this.txtBono.Text);
-            DataTable results = this.conn.ejecutarQuery(query);
-            if (results.Rows[0][0].ToString() == "S")
+            if ((validar_campos() == true) && (validar_nro_afil() == true))
             {
-                query = string.Format("UPDATE PROYECTO_W.BonoConsulta SET bonocons_estado='U' WHERE bonocons_cod={0}", this.txtBono.Text);
-                this.conn.ejecutarQuery(query);
+                string query = string.Format("SELECT bonocons_estado");
+                query += string.Format(" FROM PROYECTO_W.BonoConsulta JOIN PROYECTO_W.BonoAdquirido ON BonoConsulta.bonocons_bonadq_cod = BonoAdquirido.bonadq_cod");
+                query += string.Format(" WHERE bonadq_afil_nro={0} AND bonocons_cod={1}", txtAfilNro.Text, this.txtBono.Text);
+                DataTable results = this.conn.ejecutarQuery(query);
+                if (results.Rows.Count != 0)
+                {
+                    if (results.Rows[0][0].ToString() == "S")
+                    {
+                        query = string.Format("UPDATE PROYECTO_W.BonoConsulta SET bonocons_estado='U' WHERE bonocons_cod={0}", this.txtBono.Text);
+                        this.conn.ejecutarQuery(query);
 
-                int selectedrowindex = grdProfesionales.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = grdProfesionales.Rows[selectedrowindex];  
-                string prof_cod = Convert.ToString(selectedRow.Cells["NroProfesional"].Value);           
-                string date = string.Format("{0:yyyy-M-d HH:mm:ss}", DateTime.Now);
-                query = string.Format("SELECT T.turno_nro FROM PROYECTO_W.Turno AS T JOIN PROYECTO_W.Afiliado AS A ON A.afil_nro=T.turno_afil_nro WHERE T.turno_fecha<CONVERT(DATETIME, '{0}', 120) AND A.afil_nro={1} AND T.turno_estado = 'P' AND T.turno_prof_cod={2}", date, this.txtAfilNro.Text, prof_cod);
+                        int selectedrowindex = grdProfesionales.SelectedCells[0].RowIndex;
+                        DataGridViewRow selectedRow = grdProfesionales.Rows[selectedrowindex];
+                        //string prof_cod = Convert.ToString(selectedRow.Cells["NroProfesional"].Value);
+                        //string date = string.Format("{0:yyyy-M-d HH:mm:ss}", DateTime.Now);
+                        //query = string.Format("SELECT T.turno_nro FROM PROYECTO_W.Turno AS T JOIN PROYECTO_W.Afiliado AS A ON A.afil_nro=T.turno_afil_nro WHERE T.turno_fecha<CONVERT(DATETIME, '{0}', 120) AND A.afil_nro={1} AND T.turno_estado = 'P' AND T.turno_prof_cod={2}", date, this.txtAfilNro.Text, prof_cod);
 
-                /*int selectedrowindex = grdProfesionales.SelectedCells[0].RowIndex;
-                DataGridViewRow selectedRow = grdProfesionales.Rows[selectedrowindex];
-                string turnoNro = Convert.ToString(selectedRow.Cells["NumeroTurno"].Value);
-                */
-                string turnoNro = this.conn.ejecutarQuery(query).Rows[0][0].ToString();
+                        /*int selectedrowindex = grdProfesionales.SelectedCells[0].RowIndex;
+                        DataGridViewRow selectedRow = grdProfesionales.Rows[selectedrowindex];
+                        string turnoNro = Convert.ToString(selectedRow.Cells["NumeroTurno"].Value);
+                        */
+                        //string turnoNro = this.conn.ejecutarQuery(query).Rows[0][0].ToString();
+                        string turnoNro = Convert.ToString(grdTurnos.SelectedCells[0].Value);
 
-                query = string.Format("UPDATE PROYECTO_W.Turno SET turno_estado='A' WHERE turno_nro={0}", turnoNro);
-                this.conn.ejecutarQuery(query);
+                        //query = string.Format("UPDATE PROYECTO_W.Turno SET turno_estado='A' WHERE turno_nro={0}", turnoNro);
+                        //this.conn.ejecutarQuery(query);
 
-                query = string.Format("SELECT afil_nro_consultas FROM PROYECTO_W.Afiliado WHERE afil_nro={0}", this.txtAfilNro.Text);
-                int nroConsultas = int.Parse(this.conn.ejecutarQuery(query).Rows[0][0].ToString());
+                        query = string.Format("SELECT afil_nro_consultas FROM PROYECTO_W.Afiliado WHERE afil_nro={0}", this.txtAfilNro.Text);
+                        int nroConsultas = int.Parse(this.conn.ejecutarQuery(query).Rows[0][0].ToString());
 
-                query = string.Format("INSERT INTO PROYECTO_W.TurnoLlegada VALUES ({0}, {1}, {2})", turnoNro, nroConsultas + 1, this.txtBono.Text);
-                this.conn.ejecutarQuery(query);
+                        query = string.Format("DECLARE @FECHA DATETIME SET @FECHA = PROYECTO_W.F_FECHA_CONFIG() INSERT INTO PROYECTO_W.TurnoLlegada VALUES ({0}, {1}, {2}, @FECHA)", turnoNro, nroConsultas + 1, this.txtBono.Text);
+                        this.conn.ejecutarQuery(query);
 
-                query = string.Format("UPDATE PROYECTO_W.Afiliado SET afil_nro_consultas={0} WHERE afil_nro={1}", nroConsultas + 1, this.txtAfilNro.Text);
-                this.conn.ejecutarQuery(query);
+                        query = string.Format("UPDATE PROYECTO_W.Afiliado SET afil_nro_consultas={0} WHERE afil_nro={1}", nroConsultas + 1, this.txtAfilNro.Text);
+                        this.conn.ejecutarQuery(query);
 
-                MessageBox.Show("Consulta Registrada");
-                this.txtBono.Enabled = false;
-                this.txtAfilNro.Text = "";
-                this.grdTurnos.DataSource = null;
+                        MessageBox.Show("Consulta Registrada");
+                        this.txtBono.Enabled = false;
+                        this.txtAfilNro.Text = "";
+                        this.grdTurnos.DataSource = null;
+                    }
+                    else
+                        MessageBox.Show("El Bono Consulta ya fue utilizado");
+                }
+                else
+                    MessageBox.Show("-No se encontro el Bono Consulta o\n-No se encontro el numero de afiliado o\n-El bono no pertenece al afiliado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            else
-                MessageBox.Show("El Bono Consulta ya fue utilizado");
+        }
+
+        private void btnValidar_Click(object sender, EventArgs e)
+        {
+            validar_nro_afil();
+        }
+        private bool validar_campos()
+        {
+            if (txtBono.Text == "")
+            {
+                MessageBox.Show("Ingrese el numero de bono consulta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            else return true;
+        }
+        private bool validar_nro_afil()
+        {
+            bool flag = false;
+            bool flag2 = false;
+            if (txtAfilNro.Text == "")
+            {
+                MessageBox.Show("Ingrese Numero de Afiliado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                flag2 = true;
+            }
+            foreach (DataGridViewRow fila in grdTurnos.Rows)
+            {
+                if (Convert.ToString(fila.Cells[1].Value) == txtAfilNro.Text)
+                {
+                    MessageBox.Show("El afiliado posee un turno con el profesional el dia de hoy", "Validado", MessageBoxButtons.OK);
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag2 && !flag)
+            {
+                MessageBox.Show("El afiliado no posee ningun turno el dia de hoy con el profesional", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            return flag;
+        }
+
+        private void seleccion_fila(object sender, EventArgs e)
+        {
+        }
+
+        private void click_fila(object sender, MouseEventArgs e)
+        {
+            if (grdTurnos.Rows.Count > 0)
+            {
+                txtAfilNro.Text = Convert.ToString(grdTurnos.SelectedCells[1].Value);
+            }
         }
     }
 }
