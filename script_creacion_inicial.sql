@@ -387,6 +387,7 @@ CREATE TABLE [PROYECTO_W].[TurnoLlegada]
         [turlle_turno_nro] [numeric](18, 0) NOT NULL,
         [turlle_afil_nro_consulta] [numeric](18, 0) NOT NULL,
         [turlle_bonocons_cod] [bigint] NOT NULL,
+        [turlle_llegada_fecha] [datetime] NOT NULL,
         FOREIGN KEY([turlle_bonocons_cod]) REFERENCES [PROYECTO_W].[BonoConsulta] ([bonocons_cod]),
         FOREIGN KEY([turlle_turno_nro]) REFERENCES [PROYECTO_W].[Turno] ([turno_nro]),
         UNIQUE(turlle_turno_nro,turlle_bonocons_cod),
@@ -728,8 +729,8 @@ WHERE Bono_Farmacia_Medicamento IS NOT NULL
 GO
 
 -- MIGRACION TABLA TURNO_LLEGADA
-INSERT INTO PROYECTO_W.TurnoLlegada (turlle_turno_nro, turlle_afil_nro_consulta, turlle_bonocons_cod)
-SELECT A.turno_nro, ROW_NUMBER() OVER(PARTITION BY A.turno_afil_nro ORDER BY A.turno_fecha) AS Nro_Consulta, B.Bono_Consulta_Numero AS Bono_Nro
+INSERT INTO PROYECTO_W.TurnoLlegada (turlle_turno_nro, turlle_afil_nro_consulta, turlle_bonocons_cod, turlle_llegada_fecha)
+SELECT A.turno_nro, ROW_NUMBER() OVER(PARTITION BY A.turno_afil_nro ORDER BY A.turno_fecha) AS Nro_Consulta, B.Bono_Consulta_Numero AS Bono_Nro, A.turno_fecha
 FROM PROYECTO_W.Turno A, gd_esquema.Maestra B
 WHERE A.turno_estado = 'A' AND A.turno_nro = B.Turno_Numero AND B.Bono_Consulta_Numero IS NOT NULL
 GO
