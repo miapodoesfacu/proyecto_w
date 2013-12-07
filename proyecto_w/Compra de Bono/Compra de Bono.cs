@@ -28,6 +28,12 @@ namespace proyecto_w.Compra_de_Bono
 
         private void btnCDB_RealizarCompra_Click(object sender, EventArgs e)
         {
+            if (cmbCDB_Tipo.Text == "")
+            {
+                lblCDB_Status.Text = "Debe seleccionar el tipo de bono";
+                return;
+            }
+            
             // CHEQUEAR AFIL_NRO, CANTIDAD > 0 , ANTES DE ENVIAR LA QUERY
             lblCDB_Status.Text = "HACIENDO";
             ConexionSQL connectionSQL = ConexionSQL.Instance;

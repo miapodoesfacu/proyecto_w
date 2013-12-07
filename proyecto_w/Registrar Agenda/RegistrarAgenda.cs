@@ -77,6 +77,18 @@ namespace proyecto_w.Registrar_Agenda
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            if (((cbxLun_ini.Text == "" | cbxLun_fin.Text == "") & checkLunes.Checked)
+                | ((cbxMa_ini.Text == "" | cbxMa_fin.Text == "") & checkMartes.Checked)
+                | ((cbxMi_ini.Text == "" | cbxMi_fin.Text == "") & checkMie.Checked)
+                | ((cbxJu_ini.Text == "" | cbxJu_fin.Text == "") & checkJue.Checked)
+                | ((cbxVi_ini.Text == "" | cbxVi_fin.Text == "") & checkVie.Checked)
+                | ((cbxSa_ini.Text == "" | cbxSa_fin.Text == "") & checkSa.Checked)
+                )
+            {
+                lblStatus.Text = "Debe seleccionar horarios para los días chequeados";
+                return;
+            }
+            
             Boolean noErrorFlag = true;
             if (txtProfCod.Text == "")
             {

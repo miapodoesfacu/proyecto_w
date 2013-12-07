@@ -124,99 +124,122 @@
             // 
             // cbxLun_ini
             // 
+            this.cbxLun_ini.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxLun_ini.FormattingEnabled = true;
             this.cbxLun_ini.Location = new System.Drawing.Point(137, 42);
             this.cbxLun_ini.Name = "cbxLun_ini";
             this.cbxLun_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxLun_ini.Sorted = true;
             this.cbxLun_ini.TabIndex = 7;
-            //this.cbxLun_ini.SelectedIndexChanged += new System.EventHandler(this.cbxLun_ini_SelectedIndexChanged);
             // 
             // cbxLun_fin
             // 
+            this.cbxLun_fin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxLun_fin.FormattingEnabled = true;
             this.cbxLun_fin.Location = new System.Drawing.Point(300, 42);
             this.cbxLun_fin.Name = "cbxLun_fin";
             this.cbxLun_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxLun_fin.Sorted = true;
             this.cbxLun_fin.TabIndex = 8;
             // 
             // cbxMa_ini
             // 
+            this.cbxMa_ini.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMa_ini.FormattingEnabled = true;
             this.cbxMa_ini.Location = new System.Drawing.Point(137, 65);
             this.cbxMa_ini.Name = "cbxMa_ini";
             this.cbxMa_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxMa_ini.Sorted = true;
             this.cbxMa_ini.TabIndex = 9;
             // 
             // cbxMa_fin
             // 
+            this.cbxMa_fin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMa_fin.FormattingEnabled = true;
             this.cbxMa_fin.Location = new System.Drawing.Point(300, 65);
             this.cbxMa_fin.Name = "cbxMa_fin";
             this.cbxMa_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxMa_fin.Sorted = true;
             this.cbxMa_fin.TabIndex = 10;
             // 
             // cbxMi_ini
             // 
+            this.cbxMi_ini.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMi_ini.FormattingEnabled = true;
             this.cbxMi_ini.Location = new System.Drawing.Point(137, 90);
             this.cbxMi_ini.Name = "cbxMi_ini";
             this.cbxMi_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxMi_ini.Sorted = true;
             this.cbxMi_ini.TabIndex = 11;
             // 
             // cbxMi_fin
             // 
+            this.cbxMi_fin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxMi_fin.FormattingEnabled = true;
             this.cbxMi_fin.Location = new System.Drawing.Point(300, 90);
             this.cbxMi_fin.Name = "cbxMi_fin";
             this.cbxMi_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxMi_fin.Sorted = true;
             this.cbxMi_fin.TabIndex = 12;
             // 
             // cbxJu_ini
             // 
+            this.cbxJu_ini.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxJu_ini.FormattingEnabled = true;
             this.cbxJu_ini.Location = new System.Drawing.Point(137, 113);
             this.cbxJu_ini.Name = "cbxJu_ini";
             this.cbxJu_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxJu_ini.Sorted = true;
             this.cbxJu_ini.TabIndex = 13;
             // 
             // cbxJu_fin
             // 
+            this.cbxJu_fin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxJu_fin.FormattingEnabled = true;
             this.cbxJu_fin.Location = new System.Drawing.Point(300, 113);
             this.cbxJu_fin.Name = "cbxJu_fin";
             this.cbxJu_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxJu_fin.Sorted = true;
             this.cbxJu_fin.TabIndex = 14;
             // 
             // cbxVi_ini
             // 
+            this.cbxVi_ini.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxVi_ini.FormattingEnabled = true;
             this.cbxVi_ini.Location = new System.Drawing.Point(137, 136);
             this.cbxVi_ini.Name = "cbxVi_ini";
             this.cbxVi_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxVi_ini.Sorted = true;
             this.cbxVi_ini.TabIndex = 15;
             // 
             // cbxVi_fin
             // 
+            this.cbxVi_fin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxVi_fin.FormattingEnabled = true;
             this.cbxVi_fin.Location = new System.Drawing.Point(300, 136);
             this.cbxVi_fin.Name = "cbxVi_fin";
             this.cbxVi_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxVi_fin.Sorted = true;
             this.cbxVi_fin.TabIndex = 16;
             // 
             // cbxSa_ini
             // 
+            this.cbxSa_ini.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSa_ini.FormattingEnabled = true;
             this.cbxSa_ini.Location = new System.Drawing.Point(137, 159);
             this.cbxSa_ini.Name = "cbxSa_ini";
             this.cbxSa_ini.Size = new System.Drawing.Size(121, 21);
+            this.cbxSa_ini.Sorted = true;
             this.cbxSa_ini.TabIndex = 17;
             // 
             // cbxSa_fin
             // 
+            this.cbxSa_fin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxSa_fin.FormattingEnabled = true;
             this.cbxSa_fin.Location = new System.Drawing.Point(300, 159);
             this.cbxSa_fin.Name = "cbxSa_fin";
             this.cbxSa_fin.Size = new System.Drawing.Size(121, 21);
+            this.cbxSa_fin.Sorted = true;
             this.cbxSa_fin.TabIndex = 18;
             // 
             // btnRegistrar

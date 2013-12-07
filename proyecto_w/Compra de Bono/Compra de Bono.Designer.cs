@@ -41,6 +41,7 @@
             // 
             // cmbCDB_Tipo
             // 
+            this.cmbCDB_Tipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCDB_Tipo.FormattingEnabled = true;
             this.cmbCDB_Tipo.Location = new System.Drawing.Point(332, 25);
             this.cmbCDB_Tipo.Name = "cmbCDB_Tipo";
