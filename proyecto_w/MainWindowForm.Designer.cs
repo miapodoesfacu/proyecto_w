@@ -36,6 +36,7 @@
             this.btnCancelarAtencion = new System.Windows.Forms.Button();
             this.btnRegistrarAgenda = new System.Windows.Forms.Button();
             this.btnListado = new System.Windows.Forms.Button();
+            this.btnRegistroResultadoAtencion = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnABMAfiliado
@@ -119,11 +120,22 @@
             this.btnListado.UseVisualStyleBackColor = true;
             this.btnListado.Click += new System.EventHandler(this.btnListado_Click);
             // 
+            // btnRegistroResultadoAtencion
+            // 
+            this.btnRegistroResultadoAtencion.Location = new System.Drawing.Point(12, 204);
+            this.btnRegistroResultadoAtencion.Name = "btnRegistroResultadoAtencion";
+            this.btnRegistroResultadoAtencion.Size = new System.Drawing.Size(169, 23);
+            this.btnRegistroResultadoAtencion.TabIndex = 8;
+            this.btnRegistroResultadoAtencion.Text = "Registro Resultado Atencion";
+            this.btnRegistroResultadoAtencion.UseVisualStyleBackColor = true;
+            this.btnRegistroResultadoAtencion.Click += new System.EventHandler(this.btnRegistroResultadoAtencion_Click);
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 289);
+            this.Controls.Add(this.btnRegistroResultadoAtencion);
             this.Controls.Add(this.btnListado);
             this.Controls.Add(this.btnRegistrarAgenda);
             this.Controls.Add(this.btnCancelarAtencion);
@@ -151,5 +163,6 @@
         private System.Windows.Forms.Button btnCancelarAtencion;
         private System.Windows.Forms.Button btnRegistrarAgenda;
         private System.Windows.Forms.Button btnListado;
+        private System.Windows.Forms.Button btnRegistroResultadoAtencion;
     }
 }

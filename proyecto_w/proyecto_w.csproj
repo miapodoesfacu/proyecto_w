@@ -96,6 +96,12 @@
     <Compile Include="Compra de Bono\Compra de Bono.Designer.cs">
       <DependentUpon>Compra de Bono.cs</DependentUpon>
     </Compile>
+    <Compile Include="Generar Receta\Generar Receta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generar Receta\Generar Receta.Designer.cs">
+      <DependentUpon>Generar Receta.cs</DependentUpon>
+    </Compile>
     <Compile Include="Listado Estadistico\ListadoEstadisticoForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +158,9 @@
     <EmbeddedResource Include="Compra de Bono\Compra de Bono.resx">
       <DependentUpon>Compra de Bono.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Generar Receta\Generar Receta.resx">
+      <DependentUpon>Generar Receta.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Listado Estadistico\ListadoEstadisticoForm.resx">
       <DependentUpon>ListadoEstadisticoForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,11 +187,8 @@
     <EmbeddedResource Include="Registro de Llegada\RegistrarLlegada.resx">
       <DependentUpon>RegistrarLlegada.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Registro de Resultado\GenerarReceta.resx">
-      <DependentUpon>GenerarReceta.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Registro de Resultado\RegistrarDiagnostico.resx">
-      <DependentUpon>RegistrarDiagnostico.cs</DependentUpon>
+    <EmbeddedResource Include="Registro Resultado Atencion\Registro Resultado Atencion.resx">
+      <DependentUpon>Registro Resultado Atencion.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -209,17 +215,11 @@
     <Compile Include="Registro de Llegada\RegistrarLlegada.Designer.cs">
       <DependentUpon>RegistrarLlegada.cs</DependentUpon>
     </Compile>
-    <Compile Include="Registro de Resultado\GenerarReceta.cs">
+    <Compile Include="Registro Resultado Atencion\Registro Resultado Atencion.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Registro de Resultado\GenerarReceta.Designer.cs">
-      <DependentUpon>GenerarReceta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Registro de Resultado\RegistrarDiagnostico.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Registro de Resultado\RegistrarDiagnostico.Designer.cs">
-      <DependentUpon>RegistrarDiagnostico.cs</DependentUpon>
+    <Compile Include="Registro Resultado Atencion\Registro Resultado Atencion.Designer.cs">
+      <DependentUpon>Registro Resultado Atencion.cs</DependentUpon>
     </Compile>
     <Compile Include="Utilities\ConexionSQL.cs" />
   </ItemGroup>
