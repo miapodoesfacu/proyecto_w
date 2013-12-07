@@ -1148,6 +1148,9 @@ IF ((EXISTS (	SELECT * FROM PROYECTO_W.Turno
 			INSERT INTO PROYECTO_W.TurnoConcretado
 			(turconcr_sintomas,turconcr_diagnostico,turconcr_turno_nro)
 			VALUES (@SINTOMAS,@DIAGNOSTICO,@TURNO_NRO)
+			
+			UPDATE PROYECTO_W.Turno SET turno_estado = 'A' 
+			WHERE turno_nro = @TURNO_NRO
 		END
 	END
 	ELSE
