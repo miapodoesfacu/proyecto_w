@@ -363,7 +363,7 @@ GO
 
 CREATE TABLE [PROYECTO_W].[Turno]
 (
-        [turno_nro] [numeric](18, 0) /*IDENTITY(56565,1)*/ NOT NULL,
+        [turno_nro] [numeric](18, 0) IDENTITY(56565,1) NOT NULL,
         [turno_afil_nro] [bigint] NOT NULL,
         [turno_estado] [char](1) NOT NULL DEFAULT 'P', --Pedido,Registrado,Contretado.. aca es Pedido, A AUSENTE
         [turno_fecha] [datetime] NOT NULL,
@@ -568,15 +568,48 @@ GO
 --GROUP BY agen_cod, CAST(Turno_Fecha AS DATE)
 --GO
 
--- MIGRACION TURNOS
-INSERT INTO [PROYECTO_W].[Turno] (turno_nro, turno_afil_nro, turno_fecha, turno_prof_cod,turno_esp_cod, turno_agen_cod) 
+
+-- Creacion de tabla auxiliar para los turnos
+CREATE TABLE #AuxTurnos
+(
+		[auxturno_nro] [numeric](18, 0) NOT NULL,
+        [auxturno_afil_nro] [bigint] NOT NULL,
+        [auxturno_estado] [char](1) NOT NULL DEFAULT 'P', --Pedido,Registrado,Contretado.. aca es Pedido, A AUSENTE
+        [auxturno_fecha] [datetime] NOT NULL,
+        [auxturno_prof_cod] [bigint] NOT NULL,
+        [auxturno_esp_cod] [numeric](18, 0) NOT NULL,
+        [auxturno_agen_cod] [bigint] NOT NULL
+)
+GO
+
+-- Migracion a la tabla auxiliar
+INSERT INTO #AuxTurnos(auxturno_nro, auxturno_afil_nro, auxturno_fecha, auxturno_prof_cod, auxturno_esp_cod, auxturno_agen_cod) 
 SELECT DISTINCT MAE.Turno_Numero, AFI.afil_nro, MAE.Turno_Fecha, PRO.prof_cod, MAE.Especialidad_Codigo, AGEN.agen_cod
 FROM gd_esquema.Maestra AS MAE
 JOIN PROYECTO_W.Afiliado AS AFI ON MAE.Paciente_Dni = AFI.afil_doc_nro
 JOIN PROYECTO_W.Profesional AS PRO ON MAE.Medico_Dni = PRO.prof_doc_nro
 JOIN PROYECTO_W.AgendaProfesional AS AGEN ON AGEN.agen_prof_cod = PRO.prof_cod
 WHERE MAE.Turno_Numero IS NOT NULL
-GO -- PEDIDOS ES EL ESTADO POR DEFAULT
+GO
+
+
+-- MIGRACION TURNOS
+INSERT INTO [PROYECTO_W].[Turno] (turno_afil_nro, turno_fecha, turno_prof_cod,turno_esp_cod, turno_agen_cod)
+SELECT auxturno_afil_nro, auxturno_fecha, auxturno_prof_cod, auxturno_esp_cod, auxturno_agen_cod
+FROM #AuxTurnos
+ORDER BY auxturno_nro
+GO
+
+DROP TABLE #AuxTurnos
+GO
+--INSERT INTO [PROYECTO_W].[Turno] (turno_nro, turno_afil_nro, turno_fecha, turno_prof_cod,turno_esp_cod, turno_agen_cod) 
+--SELECT DISTINCT MAE.Turno_Numero, AFI.afil_nro, MAE.Turno_Fecha, PRO.prof_cod, MAE.Especialidad_Codigo, AGEN.agen_cod
+--FROM gd_esquema.Maestra AS MAE
+--JOIN PROYECTO_W.Afiliado AS AFI ON MAE.Paciente_Dni = AFI.afil_doc_nro
+--JOIN PROYECTO_W.Profesional AS PRO ON MAE.Medico_Dni = PRO.prof_doc_nro
+--JOIN PROYECTO_W.AgendaProfesional AS AGEN ON AGEN.agen_prof_cod = PRO.prof_cod
+--WHERE MAE.Turno_Numero IS NOT NULL
+--GO -- PEDIDOS ES EL ESTADO POR DEFAULT
 
 --DECLARE @FECHA_ACTUAL DATETIME = '2014-01-01 00:00:00.00'	-- fecha , esa que saldria de config
 --UPDATE [PROYECTO_W].[Turno] SET turno_estado='N'			-- Turnos antes de la fecha que no fueron atendidos (No se presento)
