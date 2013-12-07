@@ -1,6 +1,6 @@
 ﻿namespace proyecto_w.Generar_Receta
 {
-    partial class Generar_Receta
+    partial class Generar_Receta_Form
     {
         /// <summary>
         /// Required designer variable.
@@ -28,20 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // Generar_Receta
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(75, 94);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 20);
+            this.textBox1.TabIndex = 0;
+            // 
+            // Generar_Receta_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 273);
-            this.Name = "Generar_Receta";
+            this.Controls.Add(this.textBox1);
+            this.Name = "Generar_Receta_Form";
             this.Text = "Generar_Receta";
+            this.Load += new System.EventHandler(this.Generar_Receta_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox textBox1;
 
     }
 }

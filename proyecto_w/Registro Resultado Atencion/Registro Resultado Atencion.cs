@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using proyecto_w.Utilities.Conexion;
 using System.Data.SqlClient;
+using proyecto_w.Generar_Receta;
 
 namespace proyecto_w.Registro_Resultado_Atencion
 {
@@ -38,6 +39,15 @@ namespace proyecto_w.Registro_Resultado_Atencion
                 lblStatus.Text = ex.Message;
                 noError = false;
             }
+
+            if (/*noError &*/ checkConReceta.Checked)
+            {
+                Generar_Receta_Form genReceta = new Generar_Receta_Form(System.UInt32.Parse(txtTurnoNro.Text));
+                this.Hide();
+                genReceta.ShowDialog();
+                this.Show();
+            }
+
             if (noError)
                 lblStatus.Text = "Registrado correctamente";
         }
