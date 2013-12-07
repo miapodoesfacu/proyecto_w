@@ -14,6 +14,7 @@ using proyecto_w.Registro_de_Llegada;
 using proyecto_w.Cancelar_Atencion;
 using proyecto_w.Registrar_Agenda;
 using proyecto_w.Listado_Estadistico;
+using proyecto_w.Registro_Resultado_Atencion;
 
 namespace proyecto_w
 {
@@ -104,6 +105,14 @@ namespace proyecto_w
             this.Hide();
             ListadoEstadisticoForm Listadofrom = new ListadoEstadisticoForm();
             Listadofrom.ShowDialog();
+            this.Show();
+        }
+
+        private void btnRegistroResultadoAtencion_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Registro_Resultado_Atencion_Form regiResulAtenForm = new Registro_Resultado_Atencion_Form();
+            regiResulAtenForm.ShowDialog();
             this.Show();
         }
 

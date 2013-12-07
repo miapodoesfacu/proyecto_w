@@ -7,14 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace proyecto_w.Registro_de_Resultado
+namespace proyecto_w.Generar_Receta
 {
-    public partial class GenerarReceta : Form
+    public partial class Generar_Receta : Form
     {
-        public GenerarReceta()
+        public Generar_Receta()
         {
             InitializeComponent();
         }
-
     }
 }
