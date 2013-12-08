@@ -1048,6 +1048,9 @@ BEGIN -- UN DIA ANTES, EXISTE EL TURNO
 				-- se lo dejo borrado por ahora
 				DELETE FROM PROYECTO_W.TurnoLlegada
 				WHERE turlle_turno_nro = @TURNO_NRO
+				
+				UPDATE PROYECTO_W.Afiliado SET afil_nro_consultas = afil_nro_consultas - 1
+				
 			END
 		END ELSE RAISERROR('LAS CANCELACIONES SON CON UN DIA DE ANTELACION',16,1)
 	END ELSE RAISERROR('NO EXISTE EL NUMERO DE TURNO',16,1)
@@ -1177,7 +1180,7 @@ IF ((EXISTS (	SELECT * FROM PROYECTO_W.Turno
 	END
 	ELSE
 	BEGIN
-		RAISERROR('TURNO NO REGISTRADO O NO PEDIDO',16,1);
+		RAISERROR('Turno no disponible para registrar',16,1);
 	END
 END
 GO

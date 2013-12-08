@@ -45,6 +45,8 @@
             this.lblBonFarm = new System.Windows.Forms.Label();
             this.cbxBonosFarmacia = new System.Windows.Forms.ComboBox();
             this.lblInfoBono = new System.Windows.Forms.Label();
+            this.gridX = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.gridX)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxMed1
@@ -116,6 +118,7 @@
             this.txtCant1.Name = "txtCant1";
             this.txtCant1.Size = new System.Drawing.Size(64, 20);
             this.txtCant1.TabIndex = 7;
+            this.txtCant1.Text = "0";
             this.txtCant1.TextChanged += new System.EventHandler(this.txtCant1_TextChanged);
             // 
             // txtCant2
@@ -124,6 +127,7 @@
             this.txtCant2.Name = "txtCant2";
             this.txtCant2.Size = new System.Drawing.Size(64, 20);
             this.txtCant2.TabIndex = 8;
+            this.txtCant2.Text = "0";
             this.txtCant2.TextChanged += new System.EventHandler(this.txtCant2_TextChanged);
             // 
             // txtCant3
@@ -132,6 +136,7 @@
             this.txtCant3.Name = "txtCant3";
             this.txtCant3.Size = new System.Drawing.Size(64, 20);
             this.txtCant3.TabIndex = 9;
+            this.txtCant3.Text = "0";
             this.txtCant3.TextChanged += new System.EventHandler(this.txtCant3_TextChanged);
             // 
             // txtCant4
@@ -140,6 +145,7 @@
             this.txtCant4.Name = "txtCant4";
             this.txtCant4.Size = new System.Drawing.Size(64, 20);
             this.txtCant4.TabIndex = 10;
+            this.txtCant4.Text = "0";
             this.txtCant4.TextChanged += new System.EventHandler(this.txtCant4_TextChanged);
             // 
             // txtCant5
@@ -148,6 +154,7 @@
             this.txtCant5.Name = "txtCant5";
             this.txtCant5.Size = new System.Drawing.Size(64, 20);
             this.txtCant5.TabIndex = 11;
+            this.txtCant5.Text = "0";
             this.txtCant5.TextChanged += new System.EventHandler(this.txtCant5_TextChanged);
             // 
             // btnFinalizar
@@ -198,11 +205,21 @@
             this.lblInfoBono.TabIndex = 17;
             this.lblInfoBono.Text = "InfoBono";
             // 
+            // gridX
+            // 
+            this.gridX.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridX.Location = new System.Drawing.Point(250, 205);
+            this.gridX.Name = "gridX";
+            this.gridX.Size = new System.Drawing.Size(240, 66);
+            this.gridX.TabIndex = 18;
+            this.gridX.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridX_CellContentClick);
+            // 
             // Generar_Receta_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 273);
+            this.Controls.Add(this.gridX);
             this.Controls.Add(this.lblInfoBono);
             this.Controls.Add(this.cbxBonosFarmacia);
             this.Controls.Add(this.lblBonFarm);
@@ -223,6 +240,7 @@
             this.Name = "Generar_Receta_Form";
             this.Text = "Generar_Receta";
             this.Load += new System.EventHandler(this.Generar_Receta_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.gridX)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -247,6 +265,7 @@
         private System.Windows.Forms.Label lblBonFarm;
         private System.Windows.Forms.ComboBox cbxBonosFarmacia;
         private System.Windows.Forms.Label lblInfoBono;
+        private System.Windows.Forms.DataGridView gridX;
 
 
     }
