@@ -815,9 +815,10 @@ FOREIGN KEY([bonoxreceta_receta_cod]) REFERENCES [PROYECTO_W].[Receta] ([receta_
 GO
 
 
-
+/*
 SET IDENTITY_INSERT [PROYECTO_W].[Receta] ON
 GO
+*/
 
 --#-#-# INSERT DE COSAS Y ESO
         -- INSERT DE FUNCIONALIDAD

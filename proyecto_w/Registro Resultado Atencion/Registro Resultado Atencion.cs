@@ -40,8 +40,18 @@ namespace proyecto_w.Registro_Resultado_Atencion
                 noError = false;
             }
 
-            if (/*noError &*/ checkConReceta.Checked)
+            if (noError & checkConReceta.Checked)
             {
+                //verificar primero que no haya receta ya hecha 
+                queryConcretado =
+                    string.Format("SELECT * FROM PROYECTO_W.TurnoConcretado WHERE turconcr_turno_nro = {0} AND turconcr_receta_cod != NULL", txtTurnoNro.Text);
+                DataTable checkTab = sqlConexion.ejecutarQuery(queryConcretado);
+                if (checkTab.Rows.Count > 0)
+                {
+                    lblStatus.Text= "Este turno ya posee \n receta asociada";
+                    return;
+                }
+
                 Generar_Receta_Form genReceta = new Generar_Receta_Form(System.UInt32.Parse(txtTurnoNro.Text));
                 this.Hide();
                 genReceta.ShowDialog();
