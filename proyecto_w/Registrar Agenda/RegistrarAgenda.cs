@@ -278,6 +278,20 @@ namespace proyecto_w.Registrar_Agenda
                 lblStatus.Text = "Ejecución Correcta";
 
         }
+
+        private void btnAddEx_Click(object sender, EventArgs e)
+        {
+            if(!checkedListEx.Items.Contains(dtpEx.Value.Date))
+            checkedListEx.Items.Add(dtpEx.Value.Date);
+        }
+
+        private void btnRemoveEx_Click(object sender, EventArgs e)
+        {
+            foreach (var item in checkedListEx.CheckedItems.OfType<DateTime>().ToList())
+            {
+                checkedListEx.Items.Remove(item);
+            }
+        }
    
     }
 }

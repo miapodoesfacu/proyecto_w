@@ -53,6 +53,11 @@
             this.lbl_dni = new System.Windows.Forms.Label();
             this.lblStatus = new System.Windows.Forms.Label();
             this.lblhorariosRA = new System.Windows.Forms.Label();
+            this.dtpEx = new System.Windows.Forms.DateTimePicker();
+            this.checkedListEx = new System.Windows.Forms.CheckedListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnAddEx = new System.Windows.Forms.Button();
+            this.btnRemoveEx = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtProfCod
@@ -293,11 +298,60 @@
             this.lblhorariosRA.TabIndex = 24;
             this.lblhorariosRA.Text = "Horarios";
             // 
+            // dtpEx
+            // 
+            this.dtpEx.Location = new System.Drawing.Point(553, 196);
+            this.dtpEx.Name = "dtpEx";
+            this.dtpEx.Size = new System.Drawing.Size(200, 20);
+            this.dtpEx.TabIndex = 25;
+            // 
+            // checkedListEx
+            // 
+            this.checkedListEx.FormattingEnabled = true;
+            this.checkedListEx.Location = new System.Drawing.Point(553, 25);
+            this.checkedListEx.Name = "checkedListEx";
+            this.checkedListEx.Size = new System.Drawing.Size(200, 154);
+            this.checkedListEx.TabIndex = 26;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(622, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(68, 13);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "Excepciones";
+            // 
+            // btnAddEx
+            // 
+            this.btnAddEx.Location = new System.Drawing.Point(553, 228);
+            this.btnAddEx.Name = "btnAddEx";
+            this.btnAddEx.Size = new System.Drawing.Size(200, 23);
+            this.btnAddEx.TabIndex = 28;
+            this.btnAddEx.Text = "Añadir a lista";
+            this.btnAddEx.UseVisualStyleBackColor = true;
+            this.btnAddEx.Click += new System.EventHandler(this.btnAddEx_Click);
+            // 
+            // btnRemoveEx
+            // 
+            this.btnRemoveEx.Location = new System.Drawing.Point(553, 257);
+            this.btnRemoveEx.Name = "btnRemoveEx";
+            this.btnRemoveEx.Size = new System.Drawing.Size(200, 23);
+            this.btnRemoveEx.TabIndex = 29;
+            this.btnRemoveEx.Text = "Quitar los seleccionados de la lista";
+            this.btnRemoveEx.UseVisualStyleBackColor = true;
+            this.btnRemoveEx.Click += new System.EventHandler(this.btnRemoveEx_Click);
+            // 
             // frmRegistrarAgenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(495, 280);
+            this.ClientSize = new System.Drawing.Size(800, 287);
+            this.Controls.Add(this.btnRemoveEx);
+            this.Controls.Add(this.btnAddEx);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.checkedListEx);
+            this.Controls.Add(this.dtpEx);
             this.Controls.Add(this.lblhorariosRA);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.lbl_dni);
@@ -357,5 +411,10 @@
         private System.Windows.Forms.Label lbl_dni;
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.Label lblhorariosRA;
+        private System.Windows.Forms.DateTimePicker dtpEx;
+        private System.Windows.Forms.CheckedListBox checkedListEx;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnAddEx;
+        private System.Windows.Forms.Button btnRemoveEx;
     }
 }
