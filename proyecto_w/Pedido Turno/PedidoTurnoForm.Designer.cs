@@ -75,6 +75,7 @@
             this.btnselec_profesional.TabIndex = 23;
             this.btnselec_profesional.Text = "Seleccionar";
             this.btnselec_profesional.UseVisualStyleBackColor = true;
+            this.btnselec_profesional.Click += new System.EventHandler(this.btnselec_profesional_Click);
             // 
             // grdProfesionales
             // 
@@ -208,9 +209,18 @@
             // 
             // grdDias
             // 
-            this.grdDias.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdDias.AllowUserToAddRows = false;
+            this.grdDias.AllowUserToDeleteRows = false;
+            this.grdDias.AllowUserToResizeColumns = false;
+            this.grdDias.AllowUserToResizeRows = false;
+            this.grdDias.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grdDias.Location = new System.Drawing.Point(16, 31);
+            this.grdDias.MultiSelect = false;
             this.grdDias.Name = "grdDias";
+            this.grdDias.ReadOnly = true;
+            this.grdDias.RowHeadersVisible = false;
+            this.grdDias.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdDias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdDias.Size = new System.Drawing.Size(239, 197);
             this.grdDias.TabIndex = 26;
             // 
@@ -222,6 +232,7 @@
             this.btnselec_dia.TabIndex = 28;
             this.btnselec_dia.Text = "Seleccionar";
             this.btnselec_dia.UseVisualStyleBackColor = true;
+            this.btnselec_dia.Click += new System.EventHandler(this.btnselec_dia_Click);
             // 
             // groupBox2
             // 
@@ -232,7 +243,7 @@
             this.groupBox2.Size = new System.Drawing.Size(279, 304);
             this.groupBox2.TabIndex = 30;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Dias";
+            this.groupBox2.Text = "Dias Agenda Profesional";
             // 
             // groupBox3
             // 
@@ -257,9 +268,19 @@
             // 
             // grdTurnos
             // 
+            this.grdTurnos.AllowUserToAddRows = false;
+            this.grdTurnos.AllowUserToDeleteRows = false;
+            this.grdTurnos.AllowUserToResizeColumns = false;
+            this.grdTurnos.AllowUserToResizeRows = false;
+            this.grdTurnos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grdTurnos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdTurnos.Location = new System.Drawing.Point(25, 31);
+            this.grdTurnos.MultiSelect = false;
             this.grdTurnos.Name = "grdTurnos";
+            this.grdTurnos.ReadOnly = true;
+            this.grdTurnos.RowHeadersVisible = false;
+            this.grdTurnos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.grdTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdTurnos.Size = new System.Drawing.Size(239, 197);
             this.grdTurnos.TabIndex = 26;
             // 

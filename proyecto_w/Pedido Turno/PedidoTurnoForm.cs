@@ -12,6 +12,7 @@ namespace proyecto_w.Pedido_Turno
 {
     public partial class PedidoTurnoForm : Form
     {
+        private string prof_cod = "";
         public PedidoTurnoForm()
         {
             InitializeComponent();
@@ -28,6 +29,8 @@ namespace proyecto_w.Pedido_Turno
             {
                 cbxEspecialidadFilter.Items.Add(especialidad["esp_descripcion"].ToString());
             }
+            cbTurnos.Items.Add("Hora del Turno a Registrar");
+            cbTurnos.SelectedIndex = 0;
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)
@@ -79,6 +82,58 @@ namespace proyecto_w.Pedido_Turno
             this.grdDias.DataSource = null;
             this.grdTurnos.DataSource = null;
             this.cbTurnos.SelectedIndex = -1;
+        }
+
+        private void btnselec_profesional_Click(object sender, EventArgs e)
+        {
+            if (validar_seleccion() == true)
+            {
+                ConexionSQL conn = new ConexionSQL();
+                prof_cod = grdProfesionales.SelectedCells[0].Value.ToString();
+                string query;
+                query = string.Format("DECLARE @FECHA DATETIME SET @FECHA = PROYECTO_W.F_FECHA_CONFIG()");
+                query += string.Format(" SELECT fecha_fecha AS Fecha, (CASE DATEPART(DW, fecha_fecha) WHEN 1 THEN 'Lunes' WHEN 2 THEN 'Martes' WHEN 3 THEN 'Miercoles' WHEN 4 THEN 'Jueves' WHEN 5 THEN 'Viernes' WHEN 6 THEN 'Sabado' WHEN 7 THEN 'Domingo' END) AS Dia");
+                query += string.Format(" FROM PROYECTO_W.Profesional JOIN PROYECTO_W.AgendaProfesional ON prof_cod = agen_prof_cod JOIN PROYECTO_W.Fecha ON agen_cod = fecha_agen_cod");
+                query += string.Format(" WHERE prof_cod = {0} AND fecha_fecha >= @FECHA", prof_cod);
+                query += string.Format(" ORDER BY fecha_fecha");
+                grdDias.DataSource = conn.ejecutarQuery(query);
+            }
+        }
+
+        private bool validar_seleccion()
+        {
+            if (grdProfesionales.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("No selecciono ningun profesional", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            else
+                return true;
+        }
+
+        private void btnselec_dia_Click(object sender, EventArgs e)
+        {
+            if (validar_seleccion_dia() == true)
+            {
+                ConexionSQL conn = new ConexionSQL();
+                string query;
+                string fecha = grdDias.SelectedCells[0].Value.ToString();
+                query = string.Format("SELECT turno_nro as Turno, CAST(turno_fecha AS TIME(0)) AS Hora, turno_afil_nro as Afiliado");
+                query += string.Format(" FROM PROYECTO_W.Turno");
+                query += string.Format(" WHERE CAST(turno_fecha AS DATE) = '{0}' AND turno_prof_cod = {1} AND turno_estado = 'P'", fecha, prof_cod);
+                query += string.Format(" ORDER BY turno_fecha");
+                grdTurnos.DataSource = conn.ejecutarQuery(query);
+            }
+        }
+
+        private bool validar_seleccion_dia()
+        {
+            if (grdDias.SelectedCells.Count == 0)
+            {
+                MessageBox.Show("No selecciono ningun dia", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return false;
+            }
+            else return true;
         }
     }
 }
