@@ -46,9 +46,12 @@
             this.btnselec_dia = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cbTurnos = new System.Windows.Forms.ComboBox();
             this.grdTurnos = new System.Windows.Forms.DataGridView();
             this.btnregis_turno = new System.Windows.Forms.Button();
+            this.cbTurnos = new System.Windows.Forms.ComboBox();
+            this.txtNro_Afil = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.cbxEspecialidad = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdProfesionales)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdDias)).BeginInit();
@@ -236,6 +239,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.label1);
+            this.groupBox2.Controls.Add(this.txtNro_Afil);
             this.groupBox2.Controls.Add(this.grdDias);
             this.groupBox2.Controls.Add(this.btnselec_dia);
             this.groupBox2.Location = new System.Drawing.Point(12, 210);
@@ -247,6 +252,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cbxEspecialidad);
             this.groupBox3.Controls.Add(this.cbTurnos);
             this.groupBox3.Controls.Add(this.grdTurnos);
             this.groupBox3.Controls.Add(this.btnregis_turno);
@@ -256,15 +262,6 @@
             this.groupBox3.TabIndex = 31;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Turnos ya asignados";
-            // 
-            // cbTurnos
-            // 
-            this.cbTurnos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbTurnos.FormattingEnabled = true;
-            this.cbTurnos.Location = new System.Drawing.Point(25, 234);
-            this.cbTurnos.Name = "cbTurnos";
-            this.cbTurnos.Size = new System.Drawing.Size(239, 21);
-            this.cbTurnos.TabIndex = 29;
             // 
             // grdTurnos
             // 
@@ -281,17 +278,53 @@
             this.grdTurnos.RowHeadersVisible = false;
             this.grdTurnos.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.grdTurnos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdTurnos.Size = new System.Drawing.Size(239, 197);
+            this.grdTurnos.Size = new System.Drawing.Size(239, 169);
             this.grdTurnos.TabIndex = 26;
             // 
             // btnregis_turno
             // 
-            this.btnregis_turno.Location = new System.Drawing.Point(25, 261);
+            this.btnregis_turno.Location = new System.Drawing.Point(25, 260);
             this.btnregis_turno.Name = "btnregis_turno";
             this.btnregis_turno.Size = new System.Drawing.Size(239, 23);
             this.btnregis_turno.TabIndex = 28;
             this.btnregis_turno.Text = "Registrar";
             this.btnregis_turno.UseVisualStyleBackColor = true;
+            this.btnregis_turno.Click += new System.EventHandler(this.btnregis_turno_Click);
+            // 
+            // cbTurnos
+            // 
+            this.cbTurnos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTurnos.FormattingEnabled = true;
+            this.cbTurnos.Location = new System.Drawing.Point(25, 206);
+            this.cbTurnos.Name = "cbTurnos";
+            this.cbTurnos.Size = new System.Drawing.Size(239, 21);
+            this.cbTurnos.TabIndex = 29;
+            // 
+            // txtNro_Afil
+            // 
+            this.txtNro_Afil.Location = new System.Drawing.Point(111, 264);
+            this.txtNro_Afil.Name = "txtNro_Afil";
+            this.txtNro_Afil.Size = new System.Drawing.Size(144, 20);
+            this.txtNro_Afil.TabIndex = 29;
+            this.txtNro_Afil.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtNro_Afil_KeyPress);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 270);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 30;
+            this.label1.Text = "Nro Afiliado";
+            // 
+            // cbxEspecialidad
+            // 
+            this.cbxEspecialidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxEspecialidad.FormattingEnabled = true;
+            this.cbxEspecialidad.Location = new System.Drawing.Point(25, 233);
+            this.cbxEspecialidad.Name = "cbxEspecialidad";
+            this.cbxEspecialidad.Size = new System.Drawing.Size(239, 21);
+            this.cbxEspecialidad.TabIndex = 30;
             // 
             // PedidoTurnoForm
             // 
@@ -311,6 +344,7 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdDias)).EndInit();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.grdTurnos)).EndInit();
             this.ResumeLayout(false);
@@ -337,8 +371,11 @@
         private System.Windows.Forms.Button btnselec_dia;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.ComboBox cbTurnos;
         private System.Windows.Forms.DataGridView grdTurnos;
         private System.Windows.Forms.Button btnregis_turno;
+        private System.Windows.Forms.ComboBox cbTurnos;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtNro_Afil;
+        private System.Windows.Forms.ComboBox cbxEspecialidad;
     }
 }
