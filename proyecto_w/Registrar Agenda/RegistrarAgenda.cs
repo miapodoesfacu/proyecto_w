@@ -77,6 +77,23 @@ namespace proyecto_w.Registrar_Agenda
 
         private void btnRegistrar_Click(object sender, EventArgs e)
         {
+            // obtengo el primer dia a partir del dia actual del sistema
+            // si la fecha hasta se pasa de 120 dias,, sale mensajito y no hace nada
+            ConexionSQL sqlConexion = ConexionSQL.Instance;
+            String query120 =
+                string.Format("SELECT TOP 1 fecha_fecha FROM PROYECTO_W.Fecha JOIN PROYECTO_W.AgendaProfesional ON agen_cod = fecha_agen_cod JOIN PROYECTO_W.Profesional ON prof_cod = agen_prof_cod WHERE prof_doc_nro = {0} AND fecha_fecha >= CAST((SELECT TOP 1 * FROM PROYECTO_W.FechaConfig) AS DATE) ORDER BY fecha_fecha ASC",
+                txtProfCod.Text);
+            DataTable diasIni120 = sqlConexion.ejecutarQuery(query120);
+            if (diasIni120.Rows.Count != 0) // es porque habia dias ahi
+            {
+                if(Convert.ToDateTime(dtp_fin.Text).Date > Convert.ToDateTime(diasIni120.Rows[0][0]).Date)
+                {
+                    lblStatus.Text = "La fecha hasta la cual se desea programar supera el rango de 120 días";
+                    return;
+                }
+            }
+
+            //
             if (((cbxLun_ini.Text == "" | cbxLun_fin.Text == "") & checkLunes.Checked)
                 | ((cbxMa_ini.Text == "" | cbxMa_fin.Text == "") & checkMartes.Checked)
                 | ((cbxMi_ini.Text == "" | cbxMi_fin.Text == "") & checkMie.Checked)
@@ -132,7 +149,7 @@ namespace proyecto_w.Registrar_Agenda
                 return;
             }
 
-            ConexionSQL sqlConexion = ConexionSQL.Instance;
+            
             lblStatus.Text = "EJECUTANDO";
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = 
