@@ -15,6 +15,7 @@ using proyecto_w.Cancelar_Atencion;
 using proyecto_w.Registrar_Agenda;
 using proyecto_w.Listado_Estadistico;
 using proyecto_w.Registro_Resultado_Atencion;
+using proyecto_w.Pedido_Turno;
 
 namespace proyecto_w
 {
@@ -113,6 +114,14 @@ namespace proyecto_w
             this.Hide();
             Registro_Resultado_Atencion_Form regiResulAtenForm = new Registro_Resultado_Atencion_Form();
             regiResulAtenForm.ShowDialog();
+            this.Show();
+        }
+
+        private void btnTurno_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            PedidoTurnoForm turnoform = new PedidoTurnoForm();
+            turnoform.ShowDialog();
             this.Show();
         }
 

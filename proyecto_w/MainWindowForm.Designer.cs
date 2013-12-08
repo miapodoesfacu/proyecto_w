@@ -37,6 +37,7 @@
             this.btnRegistrarAgenda = new System.Windows.Forms.Button();
             this.btnListado = new System.Windows.Forms.Button();
             this.btnRegistroResultadoAtencion = new System.Windows.Forms.Button();
+            this.btnTurno = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnABMAfiliado
@@ -130,11 +131,22 @@
             this.btnRegistroResultadoAtencion.UseVisualStyleBackColor = true;
             this.btnRegistroResultadoAtencion.Click += new System.EventHandler(this.btnRegistroResultadoAtencion_Click);
             // 
+            // btnTurno
+            // 
+            this.btnTurno.Location = new System.Drawing.Point(198, 123);
+            this.btnTurno.Name = "btnTurno";
+            this.btnTurno.Size = new System.Drawing.Size(92, 23);
+            this.btnTurno.TabIndex = 9;
+            this.btnTurno.Text = "Pedido Turno";
+            this.btnTurno.UseVisualStyleBackColor = true;
+            this.btnTurno.Click += new System.EventHandler(this.btnTurno_Click);
+            // 
             // MainWindowForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(346, 289);
+            this.Controls.Add(this.btnTurno);
             this.Controls.Add(this.btnRegistroResultadoAtencion);
             this.Controls.Add(this.btnListado);
             this.Controls.Add(this.btnRegistrarAgenda);
@@ -164,5 +176,6 @@
         private System.Windows.Forms.Button btnRegistrarAgenda;
         private System.Windows.Forms.Button btnListado;
         private System.Windows.Forms.Button btnRegistroResultadoAtencion;
+        private System.Windows.Forms.Button btnTurno;
     }
 }
