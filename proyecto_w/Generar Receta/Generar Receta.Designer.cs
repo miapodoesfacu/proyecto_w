@@ -45,8 +45,6 @@
             this.lblBonFarm = new System.Windows.Forms.Label();
             this.cbxBonosFarmacia = new System.Windows.Forms.ComboBox();
             this.lblInfoBono = new System.Windows.Forms.Label();
-            this.gridX = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.gridX)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxMed1
@@ -205,21 +203,11 @@
             this.lblInfoBono.TabIndex = 17;
             this.lblInfoBono.Text = "InfoBono";
             // 
-            // gridX
-            // 
-            this.gridX.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridX.Location = new System.Drawing.Point(250, 205);
-            this.gridX.Name = "gridX";
-            this.gridX.Size = new System.Drawing.Size(240, 66);
-            this.gridX.TabIndex = 18;
-            this.gridX.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridX_CellContentClick);
-            // 
             // Generar_Receta_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(618, 273);
-            this.Controls.Add(this.gridX);
+            this.ClientSize = new System.Drawing.Size(618, 226);
             this.Controls.Add(this.lblInfoBono);
             this.Controls.Add(this.cbxBonosFarmacia);
             this.Controls.Add(this.lblBonFarm);
@@ -240,7 +228,6 @@
             this.Name = "Generar_Receta_Form";
             this.Text = "Generar_Receta";
             this.Load += new System.EventHandler(this.Generar_Receta_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gridX)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -265,7 +252,6 @@
         private System.Windows.Forms.Label lblBonFarm;
         private System.Windows.Forms.ComboBox cbxBonosFarmacia;
         private System.Windows.Forms.Label lblInfoBono;
-        private System.Windows.Forms.DataGridView gridX;
 
 
     }
