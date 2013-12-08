@@ -3,6 +3,9 @@ GO
 
 IF SCHEMA_ID('PROYECTO_W') IS NOT NULL
 BEGIN
+		IF OBJECT_ID('PROYECTO_W.F_BONOS_FARMACIA_DISPONIBLES') IS NOT NULL
+			DROP FUNCTION PROYECTO_W.F_BONOS_FARMACIA_DISPONIBLES;
+			
 		IF OBJECT_ID('PROYECTO_W.SP_TURNO_CONCRETADO') IS NOT NULL
 			DROP PROCEDURE PROYECTO_W.SP_TURNO_CONCRETADO;
 			
@@ -919,6 +922,24 @@ WHERE BA.bonadq_afil_nro = @AFIL_NRO AND BA.bonadq_tipo_bono = @TIPO_BONO AND BA
 	AND BA.bonadq_fecha_compra = (SELECT PROYECTO_W.F_FECHA_CONFIG())
 ORDER BY BA.bonadq_cod DESC)
 GO
+
+CREATE FUNCTION PROYECTO_W.F_BONOS_FARMACIA_DISPONIBLES
+(@TURNO_NRO NUMERIC(18,0))
+RETURNS TABLE
+AS
+RETURN (
+SELECT bonofarm_cod,bonadq_afil_nro,bonofarm_fecha_venc
+FROM PROYECTO_W.Turno
+JOIN PROYECTO_W.Afiliado ON turno_afil_nro = afil_nro
+JOIN PROYECTO_W.BonoAdquirido ON afil_plan_cod = bonadq_plan_cod 
+JOIN PROYECTO_W.BonoFarmacia ON bonadq_cod = bonofarm_bonadq_cod
+WHERE (CAST(bonadq_afil_nro AS BIGINT)/100) = (CAST(afil_nro AS BIGINT)/100)
+	AND bonofarm_fecha_venc >= (SELECT PROYECTO_W.F_FECHA_CONFIG())
+	AND bonofarm_estado = 'S'
+	AND turno_nro = @TURNO_NRO
+)
+GO
+
 
 --#-#-#		STOCK PROCEDURES
 	-- COMPRA BONO ADMIN

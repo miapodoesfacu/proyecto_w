@@ -43,6 +43,8 @@
             this.btnFinalizar = new System.Windows.Forms.Button();
             this.btnAgregarMas = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
+            this.lblBonFarm = new System.Windows.Forms.Label();
+            this.cbxBonosFarmacia = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // cbxMed1
@@ -152,18 +154,19 @@
             // 
             this.btnFinalizar.Location = new System.Drawing.Point(12, 197);
             this.btnFinalizar.Name = "btnFinalizar";
-            this.btnFinalizar.Size = new System.Drawing.Size(90, 23);
+            this.btnFinalizar.Size = new System.Drawing.Size(103, 23);
             this.btnFinalizar.TabIndex = 12;
             this.btnFinalizar.Text = "Finalizar";
             this.btnFinalizar.UseVisualStyleBackColor = true;
+            this.btnFinalizar.Click += new System.EventHandler(this.btnFinalizar_Click);
             // 
             // btnAgregarMas
             // 
             this.btnAgregarMas.Location = new System.Drawing.Point(12, 238);
             this.btnAgregarMas.Name = "btnAgregarMas";
-            this.btnAgregarMas.Size = new System.Drawing.Size(90, 23);
+            this.btnAgregarMas.Size = new System.Drawing.Size(103, 23);
             this.btnAgregarMas.TabIndex = 13;
-            this.btnAgregarMas.Text = "Agregar Bono";
+            this.btnAgregarMas.Text = "Seguir Agregando";
             this.btnAgregarMas.UseVisualStyleBackColor = true;
             // 
             // lblStatus
@@ -175,11 +178,30 @@
             this.lblStatus.TabIndex = 14;
             this.lblStatus.Text = "Status";
             // 
+            // lblBonFarm
+            // 
+            this.lblBonFarm.AutoSize = true;
+            this.lblBonFarm.Location = new System.Drawing.Point(452, 176);
+            this.lblBonFarm.Name = "lblBonFarm";
+            this.lblBonFarm.Size = new System.Drawing.Size(83, 13);
+            this.lblBonFarm.TabIndex = 15;
+            this.lblBonFarm.Text = "Bonos Farmacia";
+            // 
+            // cbxBonosFarmacia
+            // 
+            this.cbxBonosFarmacia.FormattingEnabled = true;
+            this.cbxBonosFarmacia.Location = new System.Drawing.Point(434, 192);
+            this.cbxBonosFarmacia.Name = "cbxBonosFarmacia";
+            this.cbxBonosFarmacia.Size = new System.Drawing.Size(121, 21);
+            this.cbxBonosFarmacia.TabIndex = 16;
+            // 
             // Generar_Receta_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(618, 273);
+            this.Controls.Add(this.cbxBonosFarmacia);
+            this.Controls.Add(this.lblBonFarm);
             this.Controls.Add(this.lblStatus);
             this.Controls.Add(this.btnAgregarMas);
             this.Controls.Add(this.btnFinalizar);
@@ -220,6 +242,8 @@
         private System.Windows.Forms.Button btnFinalizar;
         private System.Windows.Forms.Button btnAgregarMas;
         private System.Windows.Forms.Label lblStatus;
+        private System.Windows.Forms.Label lblBonFarm;
+        private System.Windows.Forms.ComboBox cbxBonosFarmacia;
 
 
     }

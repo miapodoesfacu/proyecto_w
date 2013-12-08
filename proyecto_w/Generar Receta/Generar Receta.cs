@@ -15,10 +15,18 @@ namespace proyecto_w.Generar_Receta
     public partial class Generar_Receta_Form : Form
     {
         public uint turno_nro;
+        public uint receta_cod;
         public Generar_Receta_Form(uint nro_turno)
         {
             InitializeComponent();
             turno_nro = nro_turno;
+            receta_cod = 0;
+        }
+
+        private void recargarListaBonos(ComboBox cbxBonos)
+        {
+            ConexionSQL sqlConn = ConexionSQL.Instance;
+
         }
 
         private void Generar_Receta_Load(object sender, EventArgs e)
@@ -66,6 +74,13 @@ namespace proyecto_w.Generar_Receta
         private void txtCant5_TextChanged(object sender, EventArgs e)
         {
             if (!Regex.IsMatch(txtCant5.Text, @"^\d+$")) { txtCant5.Text = String.Empty; }
+        }
+
+        private void btnFinalizar_Click(object sender, EventArgs e)
+        {
+            ConexionSQL sqlConn = ConexionSQL.Instance;
+            String recetaQuery =
+                string.Format(""); 
         }
     }
 }
