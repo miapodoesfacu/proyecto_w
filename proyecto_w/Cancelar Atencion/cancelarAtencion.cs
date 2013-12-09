@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using proyecto_w.Utilities.Conexion;
 using System.Data.SqlClient;
+using proyecto_w.Login;
 
 namespace proyecto_w.Cancelar_Atencion
 {
@@ -16,8 +17,20 @@ namespace proyecto_w.Cancelar_Atencion
         public frmCancelarAtencion()
         {
             InitializeComponent();
-            cbxCancel_quien.Items.Add("Profesional");
-            cbxCancel_quien.Items.Add("Afiliado");
+
+            if (frmLogin.user == "profesional")
+            {
+                cbxCancel_quien.Items.Add("Profesional");
+            }
+            else if (frmLogin.user == "afiliado")
+            {
+                cbxCancel_quien.Items.Add("Afiliado");
+            }
+            else
+            {
+                cbxCancel_quien.Items.Add("Profesional");
+                cbxCancel_quien.Items.Add("Afiliado");
+            }
         }
 
         private void cbxCancel_quien_SelectedIndexChanged(object sender, EventArgs e)

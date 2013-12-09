@@ -15,6 +15,7 @@ namespace proyecto_w
     public partial class frmLogin : Form
     {
         private String rolSelected;
+        public static string user;
         public frmLogin()
         {
             InitializeComponent();
@@ -41,6 +42,7 @@ namespace proyecto_w
             string queryLogin, querySQL;
             ConexionSQL connectionSQL = ConexionSQL.Instance;
             string username = txtUsername.Text;
+            user = txtUsername.Text;
             string password = txtPassword.Text;
             queryLogin = string.Format("SELECT usu_password, usu_estado, usu_cant_intentos FROM PROYECTO_W.Usuario WHERE usu_username='{0}'", username);
             DataTable users = connectionSQL.ejecutarQuery(queryLogin);
