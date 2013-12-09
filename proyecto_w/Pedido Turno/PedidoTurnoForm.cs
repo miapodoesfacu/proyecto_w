@@ -142,7 +142,7 @@ namespace proyecto_w.Pedido_Turno
                 this.cbTurnos.SelectedIndex = 0;
                 ConexionSQL conn = new ConexionSQL();
                 string query;
-                fecha = grdDias.SelectedCells[0].Value.ToString();
+                fecha = grdDias.SelectedCells[0].Value.ToString().Substring(0,10);
                 query = string.Format("SELECT turno_nro as Turno, CAST(turno_fecha AS TIME(0)) AS Hora, turno_afil_nro as Afiliado");
                 query += string.Format(" FROM PROYECTO_W.Turno");
                 query += string.Format(" WHERE CAST(turno_fecha AS DATE) = '{0}' AND turno_prof_cod = {1} AND turno_estado = 'P'", fecha, prof_cod);
