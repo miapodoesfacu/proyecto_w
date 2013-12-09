@@ -28,20 +28,17 @@ namespace proyecto_w
 
         public void setFunctions(List<String> functionList)
         {
-            //TODO: Hacer visible los botones en base a las funcionabilidades que tengo en la 
-            System.Console.Write(functionList.ToString());
-            if (functionList.IndexOf("ABM_AFILIADO") != -1) btnABMAfiliado.Show();
-            if (functionList.IndexOf("ABM_ROL") != -1) btnABMRol.Show();
-            if (functionList.IndexOf("ABM_PROFESIONAL") != -1) btnABMProfesional.Show();
+            if (!functionList.Contains("ABM_ROL")) btnABMRol.Hide();
+            if (!functionList.Contains("ABM_AFILIADO")) btnABMAfiliado.Hide();
+            if (!functionList.Contains("ABM_PROFESIONAL")) btnABMProfesional.Hide();
+            if (!functionList.Contains("ABM_AGEN_PROF")) btnRegistrarAgenda.Hide();
+            if (!functionList.Contains("ABM_BONOS")) btnCompraDeBono.Hide();
+            if (!functionList.Contains("ABM_TURNO")) btnTurno.Hide();
+            if (!functionList.Contains("ABM_REGISTRO_LLEGADA")) btnRegistrarLlegada.Hide();
+            if (!functionList.Contains("ABM_REG_ATENCION")) btnRegistroResultadoAtencion.Hide();
+            if (!functionList.Contains("ABM_CANCELACION")) btnCancelarAtencion.Hide();
+            if (!functionList.Contains("ABM_ESTADISTICO")) btnListado.Hide();
         }
-
-        //private void btnABMAfiliado_Click(object sender, EventArgs e)
-        //{
-        //    this.Hide();
-        //    frmABMAfiliado afiliadoForm = new frmABMAfiliado();
-        //    afiliadoForm.ShowDialog();
-        //    this.Show();
-        //}
 
         private void btnABMAfiliado_Click_1(object sender, EventArgs e)
         {

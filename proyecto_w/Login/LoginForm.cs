@@ -71,7 +71,7 @@ namespace proyecto_w
                 }
                 else
                 {
-                    queryLogin = string.Format("SELECT R.rol_cod, R.rol_nombre FROM PROYECTO_W.Rol AS R, PROYECTO_W.RolPorUsuario AS RU WHERE RU.rolxusu_username='{0}' AND RU.rolxusu_rol_cod=R.rol_cod", username);
+                    queryLogin = string.Format("SELECT R.rol_cod, R.rol_nombre FROM PROYECTO_W.Rol AS R, PROYECTO_W.RolPorUsuario AS RU WHERE RU.rolxusu_username='{0}' AND RU.rolxusu_rol_cod=R.rol_cod and rol_estado = 'H'", username);
                     DataTable rols = connectionSQL.ejecutarQuery(queryLogin);
                     this.Hide();
                     if (rols.Rows.Count > 1)
@@ -91,12 +91,12 @@ namespace proyecto_w
                     {
                         this.rolSelected = rols.Rows[0]["rol_nombre"].ToString();
                     }
-                    querySQL = string.Format("SELECT F.func_nombre FROM PROYECTO_W.Funcionalidad AS F JOIN PROYECTO_W.FuncionalidadPorRol AS FR ON FR.funcxrol_func_cod=F.func_cod JOIN PROYECTO_W.Rol AS R ON R.rol_cod=fr.funcxrol_rol_cod WHERE R.rol_nombre='{0}'", rolSelected);
+                    querySQL = string.Format("SELECT F.func_nombre FROM PROYECTO_W.Funcionalidad AS F JOIN PROYECTO_W.FuncionalidadPorRol AS FR ON FR.funcxrol_func_cod=F.func_cod JOIN PROYECTO_W.Rol AS R ON R.rol_cod=fr.funcxrol_rol_cod WHERE R.rol_nombre='{0}' and funcxrol_estado = 'H'", rolSelected);
                     DataTable functions = connectionSQL.ejecutarQuery(querySQL);
 
                     if (functions.Rows.Count == 0)
                     {
-                        MessageBox.Show("No tiene funcionalidades Habilitadas. Cerrando Softguare");
+                        MessageBox.Show("No tiene funcionalidades Habilitadas. Cerrando Programa");
                         this.Close();
                     }
                     List<String> functionsStrings = new List<string>();
