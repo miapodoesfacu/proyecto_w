@@ -44,7 +44,7 @@ namespace proyecto_w.Generar_Receta
         private void Generar_Receta_Load(object sender, EventArgs e)
         {
             ConexionSQL sqlConn = ConexionSQL.Instance;
-            String queryMedicamentosCBX = 
+            String queryMedicamentosCBX =
                 string.Format("SELECT DISTINCT medicamento_nombre FROM PROYECTO_W.Medicamento");
             DataTable Meds = sqlConn.ejecutarQuery(queryMedicamentosCBX);
             uint medCount = 0;
@@ -59,7 +59,7 @@ namespace proyecto_w.Generar_Receta
             }
 
             recargarListaBonos(cbxBonosFarmacia);
-            
+
 
         }
 
@@ -94,11 +94,11 @@ namespace proyecto_w.Generar_Receta
             {
                 uint indice = 0;
                 uint tope = (uint)bonosFarmDisp.Rows.Count;
-                while (cbxBonosFarmacia.Text != bonosFarmDisp.Rows[(int)indice][0].ToString() & indice != tope-1)
+                while (cbxBonosFarmacia.Text != bonosFarmDisp.Rows[(int)indice][0].ToString() & indice != tope - 1)
                 {
                     indice++;
                 }
-                lblInfoBono.Text = 
+                lblInfoBono.Text =
                     string.Format("{0}\n{1}", bonosFarmDisp.Rows[(int)indice][1], bonosFarmDisp.Rows[(int)indice][2]);
             }
         }
@@ -111,7 +111,7 @@ namespace proyecto_w.Generar_Receta
                 lblStatus.Text = "No ha seleccionado \n medicamento alguno";
                 return;
             }
-            
+
             if (cbxBonosFarmacia.Text != "")
             {
                 ConexionSQL sqlConn = ConexionSQL.Instance;
@@ -123,150 +123,121 @@ namespace proyecto_w.Generar_Receta
 
                 if (hayBono.Rows.Count == 1)
                 {
+                    if ((cbxMed1.Text != "" & !(Convert.ToInt32(txtCant1.Text) <= 3 & Convert.ToInt32(txtCant1.Text) >= 1))
+                        | (cbxMed2.Text != "" & !(Convert.ToInt32(txtCant2.Text) <= 3 & Convert.ToInt32(txtCant2.Text) >= 1))
+                        | (cbxMed3.Text != "" & !(Convert.ToInt32(txtCant3.Text) <= 3 & Convert.ToInt32(txtCant3.Text) >= 1))
+                        | (cbxMed4.Text != "" & !(Convert.ToInt32(txtCant4.Text) <= 3 & Convert.ToInt32(txtCant4.Text) >= 1))
+                        | (cbxMed5.Text != "" & !(Convert.ToInt32(txtCant5.Text) <= 3 & Convert.ToInt32(txtCant5.Text) >= 1))
+                        )
+                    {
+                        lblStatus.Text = "La cantidad de medicamentos debe ser entre 1 y 3";
+                        return;
+                    }
+
                     if (cbxMed1.Text != "")
                     {
-                        if (Convert.ToInt32(txtCant1.Text) <= 3 & Convert.ToInt32(txtCant1.Text) >= 1)
+                        recetaQuery =
+                            string.Format("INSERT INTO PROYECTO_W.MedicamentoPorBonoFarmacia (medxbonofar_bonofarm_cod,medxbonofar_medicamento_cantidad,medxbonofar_medicamento_nombre_cod) VALUES ({0},{1},(SELECT TOP 1 medicamento_nombre_cod FROM PROYECTO_W.Medicamento WHERE medicamento_nombre = '{2}'))",
+                            cbxBonosFarmacia.Text, txtCant1.Text, cbxMed1.Text);
+                        try
                         {
-                            recetaQuery =
-                                string.Format("INSERT INTO PROYECTO_W.MedicamentoPorBonoFarmacia (medxbonofar_bonofarm_cod,medxbonofar_medicamento_cantidad,medxbonofar_medicamento_nombre_cod) VALUES ({0},{1},(SELECT TOP 1 medicamento_nombre_cod FROM PROYECTO_W.Medicamento WHERE medicamento_nombre = '{2}'))",
-                                cbxBonosFarmacia.Text, txtCant1.Text, cbxMed1.Text);
-                            try
-                            {
-                                sqlConn.ejecutarQuery(recetaQuery);
-                            }
-                            catch (SqlException)
-                            {
-                                lblStatus.Text = "Medicamento Duplicado";
-                                recetaQuery =
-                                    string.Format("DELETE PROYECTO_W.MedicamentoPorBonoFarmacia WHERE medxbonofar_bonofarm_cod = {0}",
-                                    cbxBonosFarmacia.Text);
-                                sqlConn.ejecutarQuery(recetaQuery);
-                                return;
-                            }
+                            sqlConn.ejecutarQuery(recetaQuery);
                         }
-                        else
+                        catch (SqlException)
                         {
-                            lblStatus.Text = "Cantidad entre 1 y 3";
+                            lblStatus.Text = "Medicamento Duplicado";
+                            recetaQuery =
+                                string.Format("DELETE PROYECTO_W.MedicamentoPorBonoFarmacia WHERE medxbonofar_bonofarm_cod = {0}",
+                                cbxBonosFarmacia.Text);
+                            sqlConn.ejecutarQuery(recetaQuery);
                             return;
                         }
                     }
-                    
+
 
                     if (cbxMed2.Text != "")
                     {
-                        if (Convert.ToInt32(txtCant2.Text) <= 3 & Convert.ToInt32(txtCant2.Text) >= 1)
+                        recetaQuery =
+                            string.Format("INSERT INTO PROYECTO_W.MedicamentoPorBonoFarmacia (medxbonofar_bonofarm_cod,medxbonofar_medicamento_cantidad,medxbonofar_medicamento_nombre_cod) VALUES ({0},{1},(SELECT TOP 1 medicamento_nombre_cod FROM PROYECTO_W.Medicamento WHERE medicamento_nombre = '{2}'))",
+                            cbxBonosFarmacia.Text, txtCant2.Text, cbxMed2.Text);
+                        try
                         {
-                            recetaQuery =
-                                string.Format("INSERT INTO PROYECTO_W.MedicamentoPorBonoFarmacia (medxbonofar_bonofarm_cod,medxbonofar_medicamento_cantidad,medxbonofar_medicamento_nombre_cod) VALUES ({0},{1},(SELECT TOP 1 medicamento_nombre_cod FROM PROYECTO_W.Medicamento WHERE medicamento_nombre = '{2}'))",
-                                cbxBonosFarmacia.Text, txtCant2.Text, cbxMed2.Text);
-                            try
-                            {
-                                sqlConn.ejecutarQuery(recetaQuery);
-                            }
-                            catch (SqlException)
-                            {
-                                lblStatus.Text = "Medicamento Duplicado";
-                                recetaQuery =
-                                    string.Format("DELETE PROYECTO_W.MedicamentoPorBonoFarmacia WHERE medxbonofar_bonofarm_cod = {0}",
-                                    cbxBonosFarmacia.Text);
-                                sqlConn.ejecutarQuery(recetaQuery);
-                                return;
-                            }
+                            sqlConn.ejecutarQuery(recetaQuery);
                         }
-                        else
+                        catch (SqlException)
                         {
-                            lblStatus.Text = "Cantidad entre 1 y 3";
+                            lblStatus.Text = "Medicamento Duplicado";
+                            recetaQuery =
+                                string.Format("DELETE PROYECTO_W.MedicamentoPorBonoFarmacia WHERE medxbonofar_bonofarm_cod = {0}",
+                                cbxBonosFarmacia.Text);
+                            sqlConn.ejecutarQuery(recetaQuery);
                             return;
                         }
                     }
-                    
+
 
                     if (cbxMed3.Text != "")
                     {
-                        if (Convert.ToInt32(txtCant3.Text) <= 3 & Convert.ToInt32(txtCant3.Text) >= 1)
+                        recetaQuery =
+                            string.Format("INSERT INTO PROYECTO_W.MedicamentoPorBonoFarmacia (medxbonofar_bonofarm_cod,medxbonofar_medicamento_cantidad,medxbonofar_medicamento_nombre_cod) VALUES ({0},{1},(SELECT TOP 1 medicamento_nombre_cod FROM PROYECTO_W.Medicamento WHERE medicamento_nombre = '{2}'))",
+                            cbxBonosFarmacia.Text, txtCant3.Text, cbxMed3.Text);
+                        try
                         {
-                            recetaQuery =
-                                string.Format("INSERT INTO PROYECTO_W.MedicamentoPorBonoFarmacia (medxbonofar_bonofarm_cod,medxbonofar_medicamento_cantidad,medxbonofar_medicamento_nombre_cod) VALUES ({0},{1},(SELECT TOP 1 medicamento_nombre_cod FROM PROYECTO_W.Medicamento WHERE medicamento_nombre = '{2}'))",
-                                cbxBonosFarmacia.Text, txtCant3.Text, cbxMed3.Text);
-                            try
-                            {
-                                sqlConn.ejecutarQuery(recetaQuery);
-                            }
-                            catch (SqlException)
-                            {
-                                lblStatus.Text = "Medicamento Duplicado";
-                                recetaQuery =
-                                    string.Format("DELETE PROYECTO_W.MedicamentoPorBonoFarmacia WHERE medxbonofar_bonofarm_cod = {0}",
-                                    cbxBonosFarmacia.Text);
-                                sqlConn.ejecutarQuery(recetaQuery);
-                                return;
-                            }
+                            sqlConn.ejecutarQuery(recetaQuery);
                         }
-                        else
+                        catch (SqlException)
                         {
-                            lblStatus.Text = "Cantidad entre 1 y 3";
+                            lblStatus.Text = "Medicamento Duplicado";
+                            recetaQuery =
+                                string.Format("DELETE PROYECTO_W.MedicamentoPorBonoFarmacia WHERE medxbonofar_bonofarm_cod = {0}",
+                                cbxBonosFarmacia.Text);
+                            sqlConn.ejecutarQuery(recetaQuery);
                             return;
                         }
                     }
-                    
+
 
                     if (cbxMed4.Text != "")
                     {
-                        if (Convert.ToInt32(txtCant4.Text) <= 3 & Convert.ToInt32(txtCant4.Text) >= 1)
+                        recetaQuery =
+                            string.Format("INSERT INTO PROYECTO_W.MedicamentoPorBonoFarmacia (medxbonofar_bonofarm_cod,medxbonofar_medicamento_cantidad,medxbonofar_medicamento_nombre_cod) VALUES ({0},{1},(SELECT TOP 1 medicamento_nombre_cod FROM PROYECTO_W.Medicamento WHERE medicamento_nombre = '{2}'))",
+                            cbxBonosFarmacia.Text, txtCant4.Text, cbxMed4.Text);
+                        try
                         {
-                            recetaQuery =
-                                string.Format("INSERT INTO PROYECTO_W.MedicamentoPorBonoFarmacia (medxbonofar_bonofarm_cod,medxbonofar_medicamento_cantidad,medxbonofar_medicamento_nombre_cod) VALUES ({0},{1},(SELECT TOP 1 medicamento_nombre_cod FROM PROYECTO_W.Medicamento WHERE medicamento_nombre = '{2}'))",
-                                cbxBonosFarmacia.Text, txtCant4.Text, cbxMed4.Text);
-                            try
-                            {
-                                sqlConn.ejecutarQuery(recetaQuery);
-                            }
-                            catch (SqlException)
-                            {
-                                lblStatus.Text = "Medicamento Duplicado";
-                                recetaQuery =
-                                    string.Format("DELETE PROYECTO_W.MedicamentoPorBonoFarmacia WHERE medxbonofar_bonofarm_cod = {0}",
-                                    cbxBonosFarmacia.Text);
-                                sqlConn.ejecutarQuery(recetaQuery);
-                                return;
-                            }
+                            sqlConn.ejecutarQuery(recetaQuery);
                         }
-                        else
+                        catch (SqlException)
                         {
-                            lblStatus.Text = "Cantidad entre 1 y 3";
+                            lblStatus.Text = "Medicamento Duplicado";
+                            recetaQuery =
+                                string.Format("DELETE PROYECTO_W.MedicamentoPorBonoFarmacia WHERE medxbonofar_bonofarm_cod = {0}",
+                                cbxBonosFarmacia.Text);
+                            sqlConn.ejecutarQuery(recetaQuery);
                             return;
                         }
                     }
-                    
+
 
                     if (cbxMed5.Text != "")
                     {
-                        if (Convert.ToInt32(txtCant5.Text) <= 3 & Convert.ToInt32(txtCant5.Text) >= 1)
+                        recetaQuery =
+                            string.Format("INSERT INTO PROYECTO_W.MedicamentoPorBonoFarmacia (medxbonofar_bonofarm_cod,medxbonofar_medicamento_cantidad,medxbonofar_medicamento_nombre_cod) VALUES ({0},{1},(SELECT TOP 1 medicamento_nombre_cod FROM PROYECTO_W.Medicamento WHERE medicamento_nombre = '{2}'))",
+                            cbxBonosFarmacia.Text, txtCant5.Text, cbxMed5.Text);
+                        try
                         {
-                            recetaQuery =
-                                string.Format("INSERT INTO PROYECTO_W.MedicamentoPorBonoFarmacia (medxbonofar_bonofarm_cod,medxbonofar_medicamento_cantidad,medxbonofar_medicamento_nombre_cod) VALUES ({0},{1},(SELECT TOP 1 medicamento_nombre_cod FROM PROYECTO_W.Medicamento WHERE medicamento_nombre = '{2}'))",
-                                cbxBonosFarmacia.Text, txtCant5.Text, cbxMed5.Text);
-                            try
-                            {
-                                sqlConn.ejecutarQuery(recetaQuery);
-                            }
-                            catch (SqlException)
-                            {
-                                lblStatus.Text = "Medicamento Duplicado";
-                                recetaQuery =
-                                    string.Format("DELETE PROYECTO_W.MedicamentoPorBonoFarmacia WHERE medxbonofar_bonofarm_cod = {0}",
-                                    cbxBonosFarmacia.Text);
-                                sqlConn.ejecutarQuery(recetaQuery);
-                                return;
-                            }
+                            sqlConn.ejecutarQuery(recetaQuery);
                         }
-                        else
+                        catch (SqlException)
                         {
-                            lblStatus.Text = "Cantidad entre 1 y 3";
+                            lblStatus.Text = "Medicamento Duplicado";
+                            recetaQuery =
+                                string.Format("DELETE PROYECTO_W.MedicamentoPorBonoFarmacia WHERE medxbonofar_bonofarm_cod = {0}",
+                                cbxBonosFarmacia.Text);
+                            sqlConn.ejecutarQuery(recetaQuery);
                             return;
                         }
                     }
-                    
+
 
                     recetaQuery =
                         string.Format("UPDATE PROYECTO_W.BonoFarmacia SET bonofarm_estado = 'U' WHERE bonofarm_cod = {0}",
@@ -312,15 +283,15 @@ namespace proyecto_w.Generar_Receta
             {
                 lblStatus.Text = "Debe elegir Bono";
             }
-            }
+        }
 
         private void gridX_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-    
 
-      
+
+
     }
 }
