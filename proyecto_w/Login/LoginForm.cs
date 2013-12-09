@@ -49,7 +49,7 @@ namespace proyecto_w
                 if (users.Rows[0]["usu_estado"].ToString() == "D")
                 {
                     MessageBox.Show("Usuario Deshabilitado. Hable con el Administrador para solucionar el problema");
-                } 
+                }
                 else if (users.Rows[0]["usu_password"].ToString().ToUpper() != (Hash.getHashSha256(password)).ToUpper())
                 {
                     queryLogin = string.Format("UPDATE PROYECTO_W.Usuario SET usu_cant_intentos=usu_cant_intentos+1 WHERE usu_username='{0}'", username);
@@ -74,46 +74,53 @@ namespace proyecto_w
                     queryLogin = string.Format("SELECT R.rol_cod, R.rol_nombre FROM PROYECTO_W.Rol AS R, PROYECTO_W.RolPorUsuario AS RU WHERE RU.rolxusu_username='{0}' AND RU.rolxusu_rol_cod=R.rol_cod and rol_estado = 'H'", username);
                     DataTable rols = connectionSQL.ejecutarQuery(queryLogin);
                     this.Hide();
-                    if (rols.Rows.Count > 1)
+                    if (rols.Rows.Count != 0)
                     {
-                        List<String> rols_strings = new List<string>();
-
-                        for (int i = 0; i < rols.Rows.Count; i++)
+                        if (rols.Rows.Count > 1)
                         {
-                            rols_strings.Add(rols.Rows[i]["rol_nombre"].ToString());
+                            List<String> rols_strings = new List<string>();
+
+                            for (int i = 0; i < rols.Rows.Count; i++)
+                            {
+                                rols_strings.Add(rols.Rows[i]["rol_nombre"].ToString());
+                            }
+                            frmRols rolsForm = new frmRols();
+                            rolsForm.setRoles(rols_strings);
+                            rolsForm.ShowDialog();
+                            this.rolSelected = rolsForm.rolSelected;
                         }
-                        frmRols rolsForm = new frmRols();
-                        rolsForm.setRoles(rols_strings);
-                        rolsForm.ShowDialog();
-                        this.rolSelected = rolsForm.rolSelected;
+                        else
+                        {
+                            this.rolSelected = rols.Rows[0]["rol_nombre"].ToString();
+                        }
+                        querySQL = string.Format("SELECT F.func_nombre FROM PROYECTO_W.Funcionalidad AS F JOIN PROYECTO_W.FuncionalidadPorRol AS FR ON FR.funcxrol_func_cod=F.func_cod JOIN PROYECTO_W.Rol AS R ON R.rol_cod=fr.funcxrol_rol_cod WHERE R.rol_nombre='{0}' and funcxrol_estado = 'H'", rolSelected);
+                        DataTable functions = connectionSQL.ejecutarQuery(querySQL);
+
+                        if (functions.Rows.Count == 0)
+                        {
+                            MessageBox.Show("No tiene funcionalidades Habilitadas. Cerrando Programa");
+                            this.Close();
+                        }
+                        List<String> functionsStrings = new List<string>();
+                        for (int i = 0; i < functions.Rows.Count; i++)
+                        {
+                            functionsStrings.Add(functions.Rows[i]["func_nombre"].ToString());
+                        }
+
+                        MainWindowForm mainWindow = new MainWindowForm();
+                        mainWindow.setFunctions(functionsStrings);
+                        mainWindow.Show();
                     }
                     else
                     {
-                        this.rolSelected = rols.Rows[0]["rol_nombre"].ToString();
+                        MessageBox.Show("No tiene ningun Rol asignado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-                    querySQL = string.Format("SELECT F.func_nombre FROM PROYECTO_W.Funcionalidad AS F JOIN PROYECTO_W.FuncionalidadPorRol AS FR ON FR.funcxrol_func_cod=F.func_cod JOIN PROYECTO_W.Rol AS R ON R.rol_cod=fr.funcxrol_rol_cod WHERE R.rol_nombre='{0}' and funcxrol_estado = 'H'", rolSelected);
-                    DataTable functions = connectionSQL.ejecutarQuery(querySQL);
-
-                    if (functions.Rows.Count == 0)
-                    {
-                        MessageBox.Show("No tiene funcionalidades Habilitadas. Cerrando Programa");
-                        this.Close();
-                    }
-                    List<String> functionsStrings = new List<string>();
-                    for (int i = 0; i < functions.Rows.Count; i++)
-                    {
-                        functionsStrings.Add(functions.Rows[i]["func_nombre"].ToString());
-                    }
-
-                    MainWindowForm mainWindow = new MainWindowForm();
-                    mainWindow.setFunctions(functionsStrings);
-                    mainWindow.Show();
                 }
             }
             else
             {
-              MessageBox.Show("Credenciales Incorrectas. Porfavor intene nuevamente");
-              txtUsername.Text = "";
+                MessageBox.Show("Credenciales Incorrectas. Porfavor intene nuevamente");
+                txtUsername.Text = "";
             }
         }
 
