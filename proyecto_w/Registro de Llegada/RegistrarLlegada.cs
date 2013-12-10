@@ -132,8 +132,8 @@ namespace proyecto_w.Registro_de_Llegada
             if ((validar_campos() == true) && (validar_nro_afil() == true))
             {
                 string query = string.Format("SELECT bonocons_estado");
-                query += string.Format(" FROM PROYECTO_W.BonoConsulta JOIN PROYECTO_W.BonoAdquirido ON BonoConsulta.bonocons_bonadq_cod = BonoAdquirido.bonadq_cod JOIN PROYECTO_W.Afiliado ON bonadq_afil_nro = afil_nro");
-                query += string.Format(" WHERE bonadq_afil_nro={0} AND bonocons_cod={1} AND afil_estado = 'H'", txtAfilNro.Text, this.txtBono.Text);
+                query += string.Format(" FROM PROYECTO_W.BonoConsulta JOIN PROYECTO_W.BonoAdquirido ON BonoConsulta.bonocons_bonadq_cod = BonoAdquirido.bonadq_cod");
+                query += string.Format(" WHERE SUBSTRING( (CAST(bonadq_afil_nro AS VARCHAR)), 1, 6) = {0} AND bonocons_cod={1}", txtAfilNro.Text.Substring(0,6), this.txtBono.Text);
                 DataTable results = this.conn.ejecutarQuery(query);
                 if (results.Rows.Count != 0)
                 {
@@ -176,7 +176,7 @@ namespace proyecto_w.Registro_de_Llegada
                         MessageBox.Show("El Bono Consulta ya fue utilizado");
                 }
                 else
-                    MessageBox.Show("Ocurrio un problema, pudo haber sido:\n-No se encontro el Bono Consulta\n-No se encontro el numero de afiliado\n-El afiliado esta dado de baja\n-El bono no pertenece al afiliado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Ocurrio un problema, pudo haber sido:\n-No se encontro el Bono Consulta\n-No se encontro el numero de afiliado\n-El bono no pertenece al afiliado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
 
@@ -197,10 +197,19 @@ namespace proyecto_w.Registro_de_Llegada
         {
             bool flag = false;
             bool flag2 = false;
+            bool flag3 = false;
+            ConexionSQL conn = new ConexionSQL();
+            string query = string.Format("SELECT * FROM PROYECTO_W.Afiliado WHERE afil_nro={0} AND afil_estado = 'H'", txtAfilNro.Text);
             if (txtAfilNro.Text == "")
             {
                 MessageBox.Show("Ingrese Numero de Afiliado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 flag2 = true;
+            }
+
+            if (conn.ejecutarQuery(query).Rows.Count == 0)
+            {
+                MessageBox.Show("El usuario esta deshabilitado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                flag3 = true;
             }
             foreach (DataGridViewRow fila in grdTurnos.Rows)
             {
@@ -211,7 +220,7 @@ namespace proyecto_w.Registro_de_Llegada
                     break;
                 }
             }
-            if (!flag2 && !flag)
+            if (!flag2 && !flag && !flag3)
             {
                 MessageBox.Show("El afiliado no posee ningun turno el dia de hoy con el profesional", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
