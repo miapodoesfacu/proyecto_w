@@ -115,14 +115,15 @@ namespace proyecto_w
 
                         MainWindowForm mainWindow = new MainWindowForm();
                         mainWindow.setFunctions(functionsStrings);
-                        mainWindow.Show();
+                        mainWindow.ShowDialog();
                     }
+                        
                     
                     else
                     {
                         MessageBox.Show("No tiene ningun Rol asignado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-                    return;
+                    if (!this.Visible) this.Close();
                 }
             }
             else
