@@ -14,6 +14,20 @@ namespace proyecto_w.Cancelar_Atencion
 {
     public partial class frmCancelarAtencion : Form
     {
+        private void recargarComboTurno(ComboBox cbX)
+        {
+            ConexionSQL sqlConn = ConexionSQL.Instance;
+            String llena = "select turno_nro from PROYECTO_W.Turno join PROYECTO_W.TurnoLlegada on turlle_turno_nro = turno_nro join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H'";
+            cbX.Items.Clear();
+            DataTable turnos = sqlConn.ejecutarQuery(llena);
+            uint i = 0;
+            while (i < turnos.Rows.Count)
+            {
+                cbX.Items.Add(turnos.Rows[0][(int)i]);
+                i++;
+            }
+
+        }
         public frmCancelarAtencion()
         {
             InitializeComponent();
@@ -31,7 +45,10 @@ namespace proyecto_w.Cancelar_Atencion
                 cbxCancel_quien.Items.Add("Profesional");
                 cbxCancel_quien.Items.Add("Afiliado");
             }
+            recargarComboTurno(txtCancel_turno_nro);
         }
+
+        
 
         private void cbxCancel_quien_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -50,6 +67,7 @@ namespace proyecto_w.Cancelar_Atencion
             if (txtCancel_turno_nro.Text == "")
             {
                 MessageBox.Show("No ingreso un numero de turno", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
             }
 
             String quien = "nadie";
@@ -71,7 +89,11 @@ namespace proyecto_w.Cancelar_Atencion
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
                     queryFail = true;
                 }
-                if (!queryFail) lblCancel_status.Text = "Atención cancelada";
+                if (!queryFail)
+                {
+                    lblCancel_status.Text = "Atención cancelada";
+                    recargarComboTurno(txtCancel_turno_nro);
+                }
             }
             else MessageBox.Show("Datos invalidos", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
@@ -82,6 +104,35 @@ namespace proyecto_w.Cancelar_Atencion
             {
                 e.Handled = true;
             }
+        }
+
+        private void txtCancel_turno_nro_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (txtCancel_turno_nro.Text != "")
+            {
+                ConexionSQL sqlConn = ConexionSQL.Instance;
+                String qData = "select 'Fecha: ' + turno_fecha, ";
+                qData += "'Afiliado: ' + afil_apellido + ', ' + afil_nombre as afil_data, ";
+                qData += "'Profesional: '+prof_apellido+', '+prof_nombre as prof_data, ";
+                qData += "'Especialidad: '+esp_descripcion as esp from PROYECTO_W.Turno ";
+                qData += "join PROYECTO_W.TurnoLlegada on turlle_turno_nro = turno_nro ";
+                qData += "join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro ";
+                qData += "join PROYECTO_W.Profesional on prof_cod = turno_prof_cod ";
+                qData += "join PROYECTO_W.Especialidad on turno_esp_cod = esp_cod ";
+                qData += String.Format("where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H' and turno_nro = {0}", txtCancel_turno_nro.Text);
+                DataTable infoTable = sqlConn.ejecutarQuery(qData);
+                if (infoTable.Rows.Count != 0)
+                {
+                    lblTurnoInfo.Text = String.Format("{0}; {1}\n{2}; {3}",
+                        infoTable.Rows[0][0].ToString(), infoTable.Rows[0][1].ToString(),
+                        infoTable.Rows[0][2].ToString(), infoTable.Rows[0][3].ToString());
+                }
+            }
+            else
+            {
+                lblTurnoInfo.Text = "";
+            }
+
         }
 
        

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtCancel_turno_nro = new System.Windows.Forms.TextBox();
+            this.txtCancel_turno_nro = new System.Windows.Forms.ComboBox();
             this.txtCancel_motivo = new System.Windows.Forms.TextBox();
             this.btnCancel = new System.Windows.Forms.Button();
             this.cbxCancel_quien = new System.Windows.Forms.ComboBox();
@@ -36,14 +36,17 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.lblCancel_status = new System.Windows.Forms.Label();
+            this.lblTurnoInfo = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // txtCancel_turno_nro
             // 
+            this.txtCancel_turno_nro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.txtCancel_turno_nro.Location = new System.Drawing.Point(101, 6);
             this.txtCancel_turno_nro.Name = "txtCancel_turno_nro";
-            this.txtCancel_turno_nro.Size = new System.Drawing.Size(100, 20);
+            this.txtCancel_turno_nro.Size = new System.Drawing.Size(121, 21);
             this.txtCancel_turno_nro.TabIndex = 0;
+            this.txtCancel_turno_nro.SelectedIndexChanged += new System.EventHandler(this.txtCancel_turno_nro_SelectedIndexChanged);
             this.txtCancel_turno_nro.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtnroturno_KeyPress);
             // 
             // txtCancel_motivo
@@ -105,17 +108,27 @@
             // lblCancel_status
             // 
             this.lblCancel_status.AutoSize = true;
-            this.lblCancel_status.Location = new System.Drawing.Point(240, 13);
+            this.lblCancel_status.Location = new System.Drawing.Point(12, 170);
             this.lblCancel_status.Name = "lblCancel_status";
             this.lblCancel_status.Size = new System.Drawing.Size(13, 13);
             this.lblCancel_status.TabIndex = 9;
             this.lblCancel_status.Text = "_";
+            // 
+            // lblTurnoInfo
+            // 
+            this.lblTurnoInfo.AutoSize = true;
+            this.lblTurnoInfo.Location = new System.Drawing.Point(262, 14);
+            this.lblTurnoInfo.Name = "lblTurnoInfo";
+            this.lblTurnoInfo.Size = new System.Drawing.Size(53, 13);
+            this.lblTurnoInfo.TabIndex = 10;
+            this.lblTurnoInfo.Text = "TurnoInfo";
             // 
             // frmCancelarAtencion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 218);
+            this.Controls.Add(this.lblTurnoInfo);
             this.Controls.Add(this.lblCancel_status);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -133,7 +146,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtCancel_turno_nro;
+        private System.Windows.Forms.ComboBox txtCancel_turno_nro;
         private System.Windows.Forms.TextBox txtCancel_motivo;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.ComboBox cbxCancel_quien;
@@ -141,5 +154,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblCancel_status;
+        private System.Windows.Forms.Label lblTurnoInfo;
     }
 }
