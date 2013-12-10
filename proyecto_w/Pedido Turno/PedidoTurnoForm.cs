@@ -112,7 +112,7 @@ namespace proyecto_w.Pedido_Turno
                 query = string.Format("DECLARE @FECHA DATETIME SET @FECHA = PROYECTO_W.F_FECHA_CONFIG()");
                 query += string.Format(" SELECT fecha_fecha AS Fecha, (CASE DATEPART(DW, fecha_fecha) WHEN 1 THEN 'Lunes' WHEN 2 THEN 'Martes' WHEN 3 THEN 'Miercoles' WHEN 4 THEN 'Jueves' WHEN 5 THEN 'Viernes' WHEN 6 THEN 'Sabado' WHEN 7 THEN 'Domingo' END) AS Dia");
                 query += string.Format(" FROM PROYECTO_W.Profesional JOIN PROYECTO_W.AgendaProfesional ON prof_cod = agen_prof_cod JOIN PROYECTO_W.Fecha ON agen_cod = fecha_agen_cod");
-                query += string.Format(" WHERE prof_cod = {0} AND fecha_fecha >= @FECHA", prof_cod);
+                query += string.Format(" WHERE prof_cod = {0} AND fecha_fecha >= CAST(@FECHA AS DATE)", prof_cod);
                 query += string.Format(" ORDER BY fecha_fecha");
                 grdDias.DataSource = conn.ejecutarQuery(query);
                 query = string.Format("SELECT esp_descripcion, esp_cod");
