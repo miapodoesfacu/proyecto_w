@@ -268,6 +268,7 @@ namespace proyecto_w.Generar_Receta
                     recetaQuery =
                         string.Format("INSERT INTO PROYECTO_W.BonoPorReceta(bonoxreceta_receta_cod,bonoxreceta_bonofarm_cod) VALUES ({0},{1})",
                         receta_cod, cbxBonosFarmacia.Text);
+                    sqlConn.ejecutarQuery(recetaQuery);
 
                     // FINALIZA OK TODO
                     lblStatus.Text = "INGRESO CORRECTO";

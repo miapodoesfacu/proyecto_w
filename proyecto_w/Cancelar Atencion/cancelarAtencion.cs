@@ -23,7 +23,7 @@ namespace proyecto_w.Cancelar_Atencion
             uint i = 0;
             while (i < turnos.Rows.Count)
             {
-                cbX.Items.Add(turnos.Rows[0][(int)i]);
+                cbX.Items.Add(turnos.Rows[(int)i][0]);
                 i++;
             }
 

@@ -383,7 +383,7 @@ CREATE TABLE [PROYECTO_W].[Turno]
         FOREIGN KEY([turno_prof_cod]) REFERENCES [PROYECTO_W].[Profesional] ([prof_cod]),
         FOREIGN KEY([turno_esp_cod]) REFERENCES [PROYECTO_W].[Especialidad] ([esp_cod]),
         FOREIGN KEY ([turno_agen_cod]) REFERENCES [PROYECTO_W].[AgendaProfesional],
-        UNIQUE (turno_fecha, turno_prof_cod), --no puede estar en dos lugares a la vez el profesional
+        --UNIQUE (turno_fecha, turno_prof_cod)
         PRIMARY KEY (turno_nro)
 )
 GO

@@ -26,7 +26,15 @@ namespace proyecto_w.Registro_Resultado_Atencion
             bool noError = true;
             int Concretado = 0;
             if (checkConcretado.Checked)
+            {
+                if (txtDiagnostico.Text == "")
+                {
+                    lblStatus.Text = "Debe ingresar algún diagnóstico";
+                    return;
+                }
+                
                 Concretado = 1;
+            }
             String queryConcretado =
                 string.Format("EXEC PROYECTO_W.SP_TURNO_CONCRETADO {0},'{1}','{2}',{3}",
                     txtTurnoNro.Text, txtSintoma.Text, txtDiagnostico.Text, Concretado);
