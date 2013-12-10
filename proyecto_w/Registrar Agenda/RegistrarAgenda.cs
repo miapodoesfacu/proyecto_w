@@ -93,25 +93,70 @@ namespace proyecto_w.Registrar_Agenda
                 lblStatus.Text = "Debe seleccionar horarios para los días chequeados";
                 return;
             }
-
-            if ((checkLunes.Checked &
-                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxLun_ini.Text).ToString()), arch_config.Default.fecha))
-                | (checkMartes.Checked &
-                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxMa_ini.Text).ToString()), arch_config.Default.fecha))
-                | (checkMie.Checked &
-                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxMi_ini.Text).ToString()), arch_config.Default.fecha))
-                | (checkJue.Checked &
-                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxJu_ini.Text).ToString()), arch_config.Default.fecha))
-                | (checkVie.Checked &
-                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxVi_ini.Text).ToString()), arch_config.Default.fecha))
-                | (checkSa.Checked &
-                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxSa_ini.Text).ToString()), arch_config.Default.fecha))
-                )
+            if (!(checkLunes.Checked | checkMartes.Checked | checkMie.Checked | checkJue.Checked | checkVie.Checked | checkSa.Checked))
             {
-                lblStatus.Text =
-                    String.Format("Debe elegir una fecha y hora no menor a: {0}", arch_config.Default.fecha);
+                lblStatus.Text = "No ha seleccionado ningún día";
                 return;
             }
+
+            if (checkLunes.Checked)
+            {
+                if((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxLun_ini.Text)) < Convert.ToDateTime(arch_config.Default.fecha)) 
+                {
+                    lblStatus.Text =
+                    String.Format("Debe elegir una fecha y hora no menor a: {0}", arch_config.Default.fecha);
+                    return;
+                }
+
+            }
+            if (checkMartes.Checked)
+            {
+                if ((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxMa_ini.Text)) < Convert.ToDateTime(arch_config.Default.fecha))
+                {
+                    lblStatus.Text =
+                    String.Format("Debe elegir una fecha y hora no menor a: {0}", arch_config.Default.fecha);
+                    return;
+                }
+            }
+            if (checkMie.Checked)
+            {
+                if ((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxMi_ini.Text)) < Convert.ToDateTime(arch_config.Default.fecha))
+                {
+                    lblStatus.Text =
+                    String.Format("Debe elegir una fecha y hora no menor a: {0}", arch_config.Default.fecha);
+                    return;
+                }
+            }
+            if (checkJue.Checked)
+            {
+                if ((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxJu_ini.Text)) < Convert.ToDateTime(arch_config.Default.fecha))
+                {
+                    lblStatus.Text =
+                    String.Format("Debe elegir una fecha y hora no menor a: {0}", arch_config.Default.fecha);
+                    return;
+                }
+            }
+
+            if (checkVie.Checked)
+            {
+                if ((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxVi_ini.Text)) < Convert.ToDateTime(arch_config.Default.fecha))
+                {
+                    lblStatus.Text =
+                    String.Format("Debe elegir una fecha y hora no menor a: {0}", arch_config.Default.fecha);
+                    return;
+                }
+            }
+            if (checkSa.Checked)
+            {
+                if ((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxSa_ini.Text)) < Convert.ToDateTime(arch_config.Default.fecha))
+                {
+                    lblStatus.Text =
+                    String.Format("Debe elegir una fecha y hora no menor a: {0}", arch_config.Default.fecha);
+                    return;
+                }
+            }
+
+               
 
             
             Boolean noErrorFlag = true;
