@@ -123,7 +123,7 @@ namespace proyecto_w
                     {
                         MessageBox.Show("No tiene ningun Rol asignado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
-                    if (!this.Visible) this.Close();
+                    if (!this.Visible) Application.Exit();
                 }
             }
             else
