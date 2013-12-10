@@ -477,6 +477,7 @@ BEGIN
 		INSERT INTO PROYECTO_W.FechaConfig (fechaconfig) VALUES (@FECHA_CARG)
 	END
 END
+GO
 		
 
 --###################################FUNCION-FECHA-CONFIG#########################################
