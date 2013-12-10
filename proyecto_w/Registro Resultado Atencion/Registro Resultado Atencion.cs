@@ -18,6 +18,23 @@ namespace proyecto_w.Registro_Resultado_Atencion
         public Registro_Resultado_Atencion_Form()
         {
             InitializeComponent();
+            string llena;
+            ConexionSQL conn = new ConexionSQL();
+            if (frmLogin.user.Contains("prof"))
+            {
+                llena = string.Format("select turno_nro from PROYECTO_W.Turno join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro join PROYECTO_W.Profesional on turno_prof_cod = prof_cod where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H' and prof_username = '{0}'", frmLogin.user);
+            }
+            else
+            {
+                llena = "select turno_nro from PROYECTO_W.Turno join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H'";
+            }
+            DataTable turnos = conn.ejecutarQuery(llena);
+            uint i = 0;
+            while (i < turnos.Rows.Count)
+            {
+                txtTurnoNro.Items.Add(turnos.Rows[(int)i][0]);
+                i++;
+            }
         }
 
         private void btnRegistrarResultadoAtencion_Click(object sender, EventArgs e)

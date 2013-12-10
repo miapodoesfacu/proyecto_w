@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtTurnoNro = new System.Windows.Forms.TextBox();
             this.lblTurnoNro = new System.Windows.Forms.Label();
             this.lblSintoma = new System.Windows.Forms.Label();
             this.txtSintoma = new System.Windows.Forms.TextBox();
@@ -38,15 +37,8 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.checkConReceta = new System.Windows.Forms.CheckBox();
             this.checkConcretado = new System.Windows.Forms.CheckBox();
+            this.txtTurnoNro = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
-            // 
-            // txtTurnoNro
-            // 
-            this.txtTurnoNro.Location = new System.Drawing.Point(79, 12);
-            this.txtTurnoNro.Name = "txtTurnoNro";
-            this.txtTurnoNro.Size = new System.Drawing.Size(128, 20);
-            this.txtTurnoNro.TabIndex = 0;
-            this.txtTurnoNro.TextChanged += new System.EventHandler(this.txtTurnoNro_TextChanged);
             // 
             // lblTurnoNro
             // 
@@ -130,11 +122,21 @@
             this.checkConcretado.Text = "Concretado";
             this.checkConcretado.UseVisualStyleBackColor = true;
             // 
+            // txtTurnoNro
+            // 
+            this.txtTurnoNro.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.txtTurnoNro.FormattingEnabled = true;
+            this.txtTurnoNro.Location = new System.Drawing.Point(80, 6);
+            this.txtTurnoNro.Name = "txtTurnoNro";
+            this.txtTurnoNro.Size = new System.Drawing.Size(121, 21);
+            this.txtTurnoNro.TabIndex = 11;
+            // 
             // Registro_Resultado_Atencion_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(292, 287);
+            this.Controls.Add(this.txtTurnoNro);
             this.Controls.Add(this.checkConcretado);
             this.Controls.Add(this.checkConReceta);
             this.Controls.Add(this.lblStatus);
@@ -144,7 +146,6 @@
             this.Controls.Add(this.txtSintoma);
             this.Controls.Add(this.lblSintoma);
             this.Controls.Add(this.lblTurnoNro);
-            this.Controls.Add(this.txtTurnoNro);
             this.Name = "Registro_Resultado_Atencion_Form";
             this.Text = "Registro_Resultado_Atencion";
             this.Load += new System.EventHandler(this.Registro_Resultado_Atencion_Form_Load);
@@ -155,7 +156,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtTurnoNro;
         private System.Windows.Forms.Label lblTurnoNro;
         private System.Windows.Forms.Label lblSintoma;
         private System.Windows.Forms.TextBox txtSintoma;
@@ -165,5 +165,6 @@
         private System.Windows.Forms.Label lblStatus;
         private System.Windows.Forms.CheckBox checkConReceta;
         private System.Windows.Forms.CheckBox checkConcretado;
+        private System.Windows.Forms.ComboBox txtTurnoNro;
     }
 }

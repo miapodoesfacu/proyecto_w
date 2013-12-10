@@ -70,6 +70,13 @@ namespace proyecto_w.Registrar_Agenda
                 minutos += 30;
 
             }
+            if(frmLogin.user.Contains("prof"))
+            {
+                string query = string.Format("SELECT prof_doc_nro FROM PROYECTO_W.Profesional WHERE prof_username = '{0}'", frmLogin.user);
+                ConexionSQL conn = new ConexionSQL();
+                txtProfCod.Text = conn.ejecutarQuery(query).Rows[0][0].ToString();
+                txtProfCod.Enabled = false;
+            }
         }
 /* CREATE PROCEDURE PROYECTO_W.SP_REGISTRAR_AGENDA
 @PROF_DNI NUMERIC(18,0), @DIA_CHECK VARCHAR(255), @DESDE DATE, @HASTA DATE,

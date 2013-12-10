@@ -22,6 +22,10 @@ namespace proyecto_w.Cancelar_Atencion
             {
                 llena = string.Format("select turno_nro from PROYECTO_W.Turno join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H' and afil_username = '{0}'", frmLogin.user);
             }
+            else if (frmLogin.user.Contains("prof"))
+            {
+                llena = string.Format("select turno_nro from PROYECTO_W.Turno join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro join PROYECTO_W.Profesional on turno_prof_cod = prof_cod where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H' and prof_username = '{0}'", frmLogin.user);
+            }
             else
             {
                 llena = "select turno_nro from PROYECTO_W.Turno join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H'";
