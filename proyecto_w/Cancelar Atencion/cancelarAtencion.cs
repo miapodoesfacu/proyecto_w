@@ -17,7 +17,7 @@ namespace proyecto_w.Cancelar_Atencion
         private void recargarComboTurno(ComboBox cbX)
         {
             ConexionSQL sqlConn = ConexionSQL.Instance;
-            String llena = "select turno_nro from PROYECTO_W.Turno join PROYECTO_W.TurnoLlegada on turlle_turno_nro = turno_nro join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H'";
+            String llena = "select turno_nro from PROYECTO_W.Turno join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H'";
             cbX.Items.Clear();
             DataTable turnos = sqlConn.ejecutarQuery(llena);
             uint i = 0;
@@ -111,19 +111,19 @@ namespace proyecto_w.Cancelar_Atencion
             if (txtCancel_turno_nro.Text != "")
             {
                 ConexionSQL sqlConn = ConexionSQL.Instance;
-                String qData = "select 'Fecha: ' + turno_fecha, ";
+                String qData = "select 'Fecha: ' + CONVERT(VARCHAR, turno_fecha,120), ";
                 qData += "'Afiliado: ' + afil_apellido + ', ' + afil_nombre as afil_data, ";
                 qData += "'Profesional: '+prof_apellido+', '+prof_nombre as prof_data, ";
                 qData += "'Especialidad: '+esp_descripcion as esp from PROYECTO_W.Turno ";
-                qData += "join PROYECTO_W.TurnoLlegada on turlle_turno_nro = turno_nro ";
+                //qData += "join PROYECTO_W.TurnoLlegada on turlle_turno_nro = turno_nro ";
                 qData += "join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro ";
                 qData += "join PROYECTO_W.Profesional on prof_cod = turno_prof_cod ";
                 qData += "join PROYECTO_W.Especialidad on turno_esp_cod = esp_cod ";
-                qData += String.Format("where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H' and turno_nro = {0}", txtCancel_turno_nro.Text);
+                qData += String.Format("where turno_estado = 'P' and CAST(turno_fecha AS DATETIME) >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H' and turno_nro = {0}", txtCancel_turno_nro.Text);
                 DataTable infoTable = sqlConn.ejecutarQuery(qData);
                 if (infoTable.Rows.Count != 0)
                 {
-                    lblTurnoInfo.Text = String.Format("{0}; {1}\n{2}; {3}",
+                    lblTurnoInfo.Text = String.Format("{0}\n{1}\n{2}\n{3}",
                         infoTable.Rows[0][0].ToString(), infoTable.Rows[0][1].ToString(),
                         infoTable.Rows[0][2].ToString(), infoTable.Rows[0][3].ToString());
                 }
@@ -132,6 +132,11 @@ namespace proyecto_w.Cancelar_Atencion
             {
                 lblTurnoInfo.Text = "";
             }
+
+        }
+
+        private void frmCancelarAtencion_Load(object sender, EventArgs e)
+        {
 
         }
 

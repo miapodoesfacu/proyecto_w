@@ -139,6 +139,7 @@
             this.Controls.Add(this.txtCancel_turno_nro);
             this.Name = "frmCancelarAtencion";
             this.Text = "cancelarAtencion";
+            this.Load += new System.EventHandler(this.frmCancelarAtencion_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
