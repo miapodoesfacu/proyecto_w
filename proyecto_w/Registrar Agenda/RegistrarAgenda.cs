@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using proyecto_w.Utilities.Conexion;
 using System.Data.SqlClient;
-
+using System.Text.RegularExpressions;
 
 
 namespace proyecto_w.Registrar_Agenda
@@ -34,7 +34,7 @@ namespace proyecto_w.Registrar_Agenda
                 st2 += b * uni;
                 uni = uni / 10;
             }
-            if (st2 > st1)
+            if (st1 < st2)
                 return true;
             else return false;
         }
@@ -80,22 +80,8 @@ namespace proyecto_w.Registrar_Agenda
             // obtengo el primer dia a partir del dia actual del sistema
             // si la fecha hasta se pasa de 120 dias,, sale mensajito y no hace nada
             // 2 , si la fecha desde es antes de la actual, no hace nada
-            ConexionSQL sqlConexion = ConexionSQL.Instance;
-            String query120 =
-                string.Format("SELECT TOP 1 fecha_fecha FROM PROYECTO_W.Fecha JOIN PROYECTO_W.AgendaProfesional ON agen_cod = fecha_agen_cod JOIN PROYECTO_W.Profesional ON prof_cod = agen_prof_cod WHERE prof_doc_nro = {0} AND fecha_fecha >= CAST((SELECT TOP 1 * FROM PROYECTO_W.FechaConfig) AS DATE) ORDER BY fecha_fecha ASC",
-                txtProfCod.Text);
-            DataTable diasIni120 = sqlConexion.ejecutarQuery(query120);
-            if (diasIni120.Rows.Count != 0) // es porque habia dias ahi
-            {
-                if(Convert.ToDateTime(dtp_fin.Text).Date > Convert.ToDateTime(diasIni120.Rows[0][0]).Date)
-                {
-                    lblStatus.Text = "La fecha hasta la cual se desea programar supera el rango de 120 días";
-                    return;
-                }
-            }
-            
 
-            //
+           //DateTime fechaCheck;// = (Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxLun_ini.Text));
             if (((cbxLun_ini.Text == "" | cbxLun_fin.Text == "") & checkLunes.Checked)
                 | ((cbxMa_ini.Text == "" | cbxMa_fin.Text == "") & checkMartes.Checked)
                 | ((cbxMi_ini.Text == "" | cbxMi_fin.Text == "") & checkMie.Checked)
@@ -107,6 +93,26 @@ namespace proyecto_w.Registrar_Agenda
                 lblStatus.Text = "Debe seleccionar horarios para los días chequeados";
                 return;
             }
+
+            if ((checkLunes.Checked &
+                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxLun_ini.Text).ToString()), arch_config.Default.fecha))
+                | (checkMartes.Checked &
+                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxMa_ini.Text).ToString()), arch_config.Default.fecha))
+                | (checkMie.Checked &
+                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxMi_ini.Text).ToString()), arch_config.Default.fecha))
+                | (checkJue.Checked &
+                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxJu_ini.Text).ToString()), arch_config.Default.fecha))
+                | (checkVie.Checked &
+                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxVi_ini.Text).ToString()), arch_config.Default.fecha))
+                | (checkSa.Checked &
+                CompareStringAscii((Convert.ToDateTime(dtp_ini.Text).Date + TimeSpan.Parse(cbxSa_ini.Text).ToString()), arch_config.Default.fecha))
+                )
+            {
+                lblStatus.Text =
+                    String.Format("Debe elegir una fecha y hora no menor a: {0}", arch_config.Default.fecha);
+                return;
+            }
+
             
             Boolean noErrorFlag = true;
             if (txtProfCod.Text == "")
@@ -151,6 +157,20 @@ namespace proyecto_w.Registrar_Agenda
                 return;
             }
 
+            ConexionSQL sqlConexion = ConexionSQL.Instance;
+            String query120 =
+                string.Format("SELECT TOP 1 fecha_fecha FROM PROYECTO_W.Fecha JOIN PROYECTO_W.AgendaProfesional ON agen_cod = fecha_agen_cod JOIN PROYECTO_W.Profesional ON prof_cod = agen_prof_cod WHERE prof_doc_nro = {0} AND fecha_fecha >= CAST((SELECT TOP 1 * FROM PROYECTO_W.FechaConfig) AS DATE) ORDER BY fecha_fecha ASC",
+                txtProfCod.Text);
+            DataTable diasIni120 = sqlConexion.ejecutarQuery(query120);
+            if (diasIni120.Rows.Count != 0) // es porque habia dias ahi
+            {
+                if (Convert.ToDateTime(dtp_fin.Text).Date > Convert.ToDateTime(diasIni120.Rows[0][0]).Date)
+                {
+                    lblStatus.Text = "La fecha hasta la cual se desea programar supera el rango de 120 días";
+                    return;
+                }
+            }
+            
             
             lblStatus.Text = "EJECUTANDO";
             SqlCommand cmd = new SqlCommand();
@@ -331,6 +351,11 @@ namespace proyecto_w.Registrar_Agenda
             {
                 checkedListEx.Items.Remove(item);
             }
+        }
+
+        private void txtProfCod_TextChanged(object sender, EventArgs e)
+        {
+            if (!Regex.IsMatch(txtProfCod.Text, @"^\d+$")) { txtProfCod.Text = "0"; }
         }
    
     }

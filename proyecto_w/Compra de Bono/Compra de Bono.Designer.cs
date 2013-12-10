@@ -136,6 +136,7 @@
             this.Controls.Add(this.cmbCDB_Tipo);
             this.Name = "frmCompra_de_Bono";
             this.Text = "Compra_de_Bono";
+            this.Load += new System.EventHandler(this.frmCompra_de_Bono_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

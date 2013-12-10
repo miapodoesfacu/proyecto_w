@@ -66,6 +66,7 @@
             this.txtProfCod.Name = "txtProfCod";
             this.txtProfCod.Size = new System.Drawing.Size(100, 20);
             this.txtProfCod.TabIndex = 0;
+            this.txtProfCod.TextChanged += new System.EventHandler(this.txtProfCod_TextChanged);
             // 
             // checkLunes
             // 

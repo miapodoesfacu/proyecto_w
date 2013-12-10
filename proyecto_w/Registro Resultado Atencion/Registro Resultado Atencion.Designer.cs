@@ -147,6 +147,7 @@
             this.Controls.Add(this.txtTurnoNro);
             this.Name = "Registro_Resultado_Atencion_Form";
             this.Text = "Registro_Resultado_Atencion";
+            this.Load += new System.EventHandler(this.Registro_Resultado_Atencion_Form_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

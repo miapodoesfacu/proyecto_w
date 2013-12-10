@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using proyecto_w.Utilities.Conexion;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace proyecto_w.Compra_de_Bono
 {
@@ -96,11 +97,18 @@ namespace proyecto_w.Compra_de_Bono
         private void txtCDB_AfilNro_TextChanged(object sender, EventArgs e)
         {
             lblCDB_Status.Text = "Ingreso de datos";
+            if (!Regex.IsMatch(txtCDB_AfilNro.Text, @"^\d+$")) { txtCDB_AfilNro.Text = "0"; }
         }
 
         private void txtCDB_Cantidad_TextChanged(object sender, EventArgs e)
         {
             lblCDB_Status.Text = "Ingreso de datos";
+            if (!Regex.IsMatch(txtCDB_Cantidad.Text, @"^\d+$")) { txtCDB_Cantidad.Text = "0"; }
+        }
+
+        private void frmCompra_de_Bono_Load(object sender, EventArgs e)
+        {
+
         }
 
                         

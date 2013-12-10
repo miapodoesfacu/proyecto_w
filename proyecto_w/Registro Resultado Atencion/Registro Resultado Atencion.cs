@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using proyecto_w.Utilities.Conexion;
 using System.Data.SqlClient;
 using proyecto_w.Generar_Receta;
+using System.Text.RegularExpressions;
 
 namespace proyecto_w.Registro_Resultado_Atencion
 {
@@ -65,6 +66,12 @@ namespace proyecto_w.Registro_Resultado_Atencion
         private void txtTurnoNro_TextChanged(object sender, EventArgs e)
         {
             lblStatus.Text = "Ingresando Datos";
+            if (!Regex.IsMatch(txtTurnoNro.Text, @"^\d+$")) { txtTurnoNro.Text = "0"; }
+        }
+
+        private void Registro_Resultado_Atencion_Form_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
