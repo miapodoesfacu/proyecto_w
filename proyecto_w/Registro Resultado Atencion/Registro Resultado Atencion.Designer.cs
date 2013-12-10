@@ -130,6 +130,7 @@
             this.txtTurnoNro.Name = "txtTurnoNro";
             this.txtTurnoNro.Size = new System.Drawing.Size(121, 21);
             this.txtTurnoNro.TabIndex = 11;
+            this.txtTurnoNro.SelectedIndexChanged += new System.EventHandler(this.txtTurnoNro_SelectedIndexChanged);
             // 
             // Registro_Resultado_Atencion_Form
             // 

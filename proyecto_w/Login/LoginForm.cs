@@ -117,10 +117,12 @@ namespace proyecto_w
                         mainWindow.setFunctions(functionsStrings);
                         mainWindow.Show();
                     }
+                    
                     else
                     {
                         MessageBox.Show("No tiene ningun Rol asignado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
+                    return;
                 }
             }
             else

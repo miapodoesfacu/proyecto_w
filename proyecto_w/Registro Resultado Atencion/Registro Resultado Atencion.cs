@@ -22,7 +22,7 @@ namespace proyecto_w.Registro_Resultado_Atencion
             ConexionSQL conn = new ConexionSQL();
             if (frmLogin.user.Contains("prof"))
             {
-                llena = string.Format("select turno_nro from PROYECTO_W.Turno join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro join PROYECTO_W.Profesional on turno_prof_cod = prof_cod where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H' and prof_username = '{0}'", frmLogin.user);
+                llena = string.Format("select turno_nro from PROYECTO_W.Turno join PROYECTO_W.TurnoLlegada on turlle_turno_nro = turno_nro join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro join PROYECTO_W.Profesional on turno_prof_cod = prof_cod where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H' and prof_username = '{0}'", frmLogin.user);
             }
             else
             {
@@ -95,6 +95,11 @@ namespace proyecto_w.Registro_Resultado_Atencion
         }
 
         private void Registro_Resultado_Atencion_Form_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTurnoNro_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

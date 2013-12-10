@@ -889,7 +889,7 @@ VALUES ('admin','E6B87050BFCB8143FCB8DB0170A4DC9ED00D904DDD3E2A4AD1B1E8DC0FDC9BE
 GO
         -- INSERT DE ROL ADMINISTRADOR PARA USER ADMIN
 INSERT INTO PROYECTO_W.RolPorUsuario (rolxusu_rol_cod,rolxusu_username)
-VALUES (1, 'admin'), (2, 'afil1'), (2, 'afil2'), (2, 'afil3'), (3, 'prof1'), (3, 'prof2'), (3, 'prof3')
+VALUES (1, 'admin'), (2, 'afil1'), (2, 'afil2'), (2, 'afil3'), (3, 'prof1'), (3, 'prof2'), (3, 'prof3'), (2, 'admin')
 --SELECT ROL.rol_cod,USUA.usu_username
 --FROM PROYECTO_W.Rol AS ROL, PROYECTO_W.Usuario AS USUA
 --WHERE ROL.rol_nombre = 'ADMINISTRADOR' AND USUA.usu_username = 'admin'
