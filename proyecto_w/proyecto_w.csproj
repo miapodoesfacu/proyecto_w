@@ -84,6 +84,11 @@
     <Compile Include="ABM Rol\ModificarRolForm.Designer.cs">
       <DependentUpon>ModificarRolForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="arch_config.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>arch_config.settings</DependentUpon>
+    </Compile>
     <Compile Include="Cancelar Atencion\cancelarAtencion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -203,6 +208,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="app.config" />
+    <None Include="arch_config.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>arch_config.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -20,7 +20,7 @@ namespace proyecto_w.Pedido_Turno
             InitializeComponent();
 
             ConexionSQL conn = new ConexionSQL();
-            string query = string.Format("SELECT prof_cod, prof_nombre, prof_apellido FROM PROYECTO_W.Profesional");
+            string query = string.Format("SELECT prof_cod, prof_nombre, prof_apellido FROM PROYECTO_W.Profesional WHERE prof_estado = 'H'");
             grdProfesionales.DataSource = conn.ejecutarQuery(query);
             query = string.Format("SELECT esp_descripcion FROM PROYECTO_W.Especialidad");
             DataRowCollection especialidades = conn.ejecutarQuery(query).Rows;
@@ -60,14 +60,19 @@ namespace proyecto_w.Pedido_Turno
                 //conditions.Add();
 
                 if (especialidad != "Vacio")
-                    query = string.Format("SELECT P.prof_cod, P.prof_nombre, P.prof_apellido FROM PROYECTO_W.Profesional AS P JOIN PROYECTO_W.EspecialidadPorProfesional AS EP ON EP.espxprof_prof_cod=P.prof_cod JOIN PROYECTO_W.Especialidad AS E ON E.esp_cod=EP.espxprof_esp_cod WHERE E.esp_descripcion='{0}'", especialidad);
+                    query = string.Format("SELECT P.prof_cod, P.prof_nombre, P.prof_apellido FROM PROYECTO_W.Profesional AS P JOIN PROYECTO_W.EspecialidadPorProfesional AS EP ON EP.espxprof_prof_cod=P.prof_cod JOIN PROYECTO_W.Especialidad AS E ON E.esp_cod=EP.espxprof_esp_cod WHERE E.esp_descripcion='{0}' AND prof_estado = 'H'", especialidad);
 
                 if (conditions.Count > 0)
                 {
                     if (query.Contains("WHERE"))
+                    {
                         query += string.Format(" AND {0}", string.Join(" AND ", conditions.ToArray()));
+                    }
                     else
+                    {
                         query += string.Format(" WHERE {0}", string.Join(" AND ", conditions.ToArray()));
+                    }
+                    query += string.Format(" AND prof_estado = 'H'");
                 }
 
 
@@ -275,12 +280,12 @@ namespace proyecto_w.Pedido_Turno
                 MessageBox.Show("Debe seleccionar la especialidad del Profesional", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
-            string query = string.Format("SELECT afil_nro FROM PROYECTO_W.Afiliado WHERE afil_nro = {0}", txtNro_Afil.Text);
+            string query = string.Format("SELECT afil_nro FROM PROYECTO_W.Afiliado WHERE afil_nro = {0} AND afil_estado = 'H'", txtNro_Afil.Text);
             ConexionSQL conn = new ConexionSQL();
             DataRowCollection filas = conn.ejecutarQuery(query).Rows;
             if (filas.Count == 0)
             {
-                MessageBox.Show("No se encontro el Nro de Afiliado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("No se encontro el Nro de Afiliado o el usuario esta Deshabilitado", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return false;
             }
             else return true;

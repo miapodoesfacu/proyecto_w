@@ -27,12 +27,13 @@ namespace proyecto_w.Utilities.Conexion
 
         public ConexionSQL()
         {
-            string strConn = "user id=gd;" +
-                                "password=gd2013;" +
-                                "server=.\\SQLSERVER2008;" +
-                                "Trusted_Connection=yes;" +
-                                "database=GD2C2013;";
-            this.Conn = new SqlConnection(strConn);
+            //string strConn = "user id=gd;" +
+            //                    "password=gd2013;" +
+            //                    "server=.\\SQLSERVER2008;" +
+            //                    "Trusted_Connection=yes;" +
+            //                    "database=GD2C2013;";
+
+            this.Conn = new SqlConnection(arch_config.Default.strConn);
             this.Conn.Open();
         }
 

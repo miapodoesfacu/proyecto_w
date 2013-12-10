@@ -459,9 +459,25 @@ CREATE TABLE [PROYECTO_W].[FechaConfig]
 GO
 
 --###################################INSERT-FECHA-CONFIG(DESPUES SACAR)###########################
-INSERT INTO PROYECTO_W.FechaConfig (fechaconfig)
-VALUES ('2014-01-01 00:00:00.00')
-GO
+--INSERT INTO PROYECTO_W.FechaConfig (fechaconfig) VALUES ('2014-01-01 00:00:00.00')
+--GO
+
+--###################################CARGAR-FECHA-CONFIG##########################################
+CREATE PROCEDURE PROYECTO_W.SP_CARGAR_FECHA
+@FECHA_CARG DATETIME
+AS
+BEGIN
+	IF ((SELECT COUNT(*) FROM PROYECTO_W.FechaConfig) > 0)
+	BEGIN
+		DELETE PROYECTO_W.FechaConfig
+		INSERT INTO PROYECTO_W.FechaConfig (fechaconfig) VALUES (@FECHA_CARG)
+	END
+	ELSE
+	BEGIN
+		INSERT INTO PROYECTO_W.FechaConfig (fechaconfig) VALUES (@FECHA_CARG)
+	END
+END
+		
 
 --###################################FUNCION-FECHA-CONFIG#########################################
 CREATE FUNCTION [PROYECTO_W].[F_FECHA_CONFIG]()
