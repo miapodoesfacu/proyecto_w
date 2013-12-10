@@ -17,7 +17,15 @@ namespace proyecto_w.Cancelar_Atencion
         private void recargarComboTurno(ComboBox cbX)
         {
             ConexionSQL sqlConn = ConexionSQL.Instance;
-            String llena = "select turno_nro from PROYECTO_W.Turno join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H'";
+            String llena;
+            if (frmLogin.user.Contains("afil"))
+            {
+                llena = string.Format("select turno_nro from PROYECTO_W.Turno join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H' and afil_username = '{0}'", frmLogin.user);
+            }
+            else
+            {
+                llena = "select turno_nro from PROYECTO_W.Turno join PROYECTO_W.Afiliado on turno_afil_nro = afil_nro where turno_estado = 'P' and turno_fecha >= (select PROYECTO_W.F_FECHA_CONFIG()) and afil_estado = 'H'";
+            }
             cbX.Items.Clear();
             DataTable turnos = sqlConn.ejecutarQuery(llena);
             uint i = 0;
@@ -32,11 +40,11 @@ namespace proyecto_w.Cancelar_Atencion
         {
             InitializeComponent();
 
-            if (frmLogin.user == "profesional")
+            if (frmLogin.user.Contains("prof"))
             {
                 cbxCancel_quien.Items.Add("Profesional");
             }
-            else if (frmLogin.user == "afiliado")
+            else if (frmLogin.user.Contains("afil"))
             {
                 cbxCancel_quien.Items.Add("Afiliado");
             }

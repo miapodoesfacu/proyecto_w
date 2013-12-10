@@ -35,6 +35,13 @@ namespace proyecto_w.Pedido_Turno
             cbTurnos.SelectedIndex = 0;
             cbxEspecialidad.Items.Add("Especialidad del Profesional");
             cbxEspecialidad.SelectedIndex = 0;
+            if (frmLogin.user.Contains("afil"))
+            {
+                string query2 = string.Format("SELECT afil_nro FROM PROYECTO_W.Afiliado WHERE afil_username = '{0}'", frmLogin.user);
+                ConexionSQL conn2 = new ConexionSQL();
+                txtNro_Afil.Text = conn2.ejecutarQuery(query2).Rows[0][0].ToString();
+                txtNro_Afil.Enabled = false;
+            }
         }
 
         private void btnFiltrar_Click(object sender, EventArgs e)

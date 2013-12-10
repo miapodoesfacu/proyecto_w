@@ -20,6 +20,13 @@ namespace proyecto_w.Compra_de_Bono
 
             cmbCDB_Tipo.Items.Add("Farmacia");
             cmbCDB_Tipo.Items.Add("Consulta");
+            if (frmLogin.user.Contains("afil"))
+            {
+                string query = string.Format("SELECT afil_nro FROM PROYECTO_W.Afiliado WHERE afil_username = '{0}'", frmLogin.user);
+                ConexionSQL conn = new ConexionSQL();
+                txtCDB_AfilNro.Text = conn.ejecutarQuery(query).Rows[0][0].ToString();
+                txtCDB_AfilNro.Enabled = false;
+            }
         }
 
         private void cmbCDB_Tipo_SelectedIndexChanged(object sender, EventArgs e)
